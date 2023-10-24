@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>FreshMvvm</id>
+    <version>3.0.0</version>
+    <title>FreshMvvm</title>
+    <authors>Michael Ridland</authors>
+    <owners>rid00z</owners>
+    <projectUrl>https://github.com/rid00z/FreshMvvm</projectUrl>
+    <license type="expression">Apache-2.0</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+      <dependency id="System.Reactive" version="4.0.0"/>
+      <dependency id="Xamarin.Forms" version="3.4.0.1009999"/>
+    </dependencies>
+    <description>FreshMvvm is a super light Mvvm Framework designed specifically for Xamarin.Forms. Its designed to be Easy, Simple and Flexible.</description>    
+    <tags>Mvvm, Xamarin.Forms, FreshMvvm</tags>
+    <releaseNotes>
+    3.0.0
+    Using the latest Xamarin forms nuget 3.4.0, updated the solution to be .net standard, fixed all the unit test errors.
+    
+    2.2.4
+    New method on FreshMasterDetailNavigationContainer, a none generic version of AddPage which adds ability for dynamically built menu's
+    FreshAwaitCommand now supports canExecute Function
+
+    2.2.3
+    Support for .net standard
+
+    2.2.2
+    Resolve memory leak
+    Remove dependancy on rx.net
+
+    2.2.0
+    Better debug messages displayed
+    Ability to remove a page from Navigation
+    Add ability to SwitchSelectedRoot page in Tabs and MasterDetail
+
+    2.1.0
+    Adds ability to control pagemodel mapping via PageModelMapper
+    Adds ability to navigate without animation
+    Better cleanup of objects
+    IOC now has unregister feature
+    Add First Only Tabbed Navigation Container
+
+    2.0.1
+    Support for Xamarin.Forms 2.2.
+
+    2.0
+    IOC Container Lifetime Registration Options
+    Switching out NavigationStacks on the Xamarin.Forms MainPage
+    Multiple Navigation Services
+    Custom IOC Containers
+    WhenAny
+    Control over which Models and Views are linked
+    Events when page is popped (for disposal)
+    </releaseNotes>
+  </metadata>
+  <files>
+        <file src="bin/Release/netstandard2.0/FreshMvvm.dll" target="lib/netstandard2.0" />
+        <file src="bin/Release/netstandard2.0/FreshIOC.dll" target="lib/netstandard2.0" />
+        <file src="bin/Release/netstandard2.0/FreshMvvm.pdb" target="lib/netstandard2.0" />
+        <file src="bin/Release/netstandard2.0/FreshIOC.pdb" target="lib/netstandard2.0" />
+    </files>
+</package>
