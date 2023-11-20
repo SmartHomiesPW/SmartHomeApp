@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartHome.Pages.AllDevicesPage"
+             xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+             xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+             xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+             xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+             xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
+             x:Name="AllDevicesView"
+             x:DataType="pageModels:AllDevicesPageModel">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="UnknownDeviceDataTemplate">
+            <viewCells:UnknownDeviceViewCell />
+        </DataTemplate>
+        <DataTemplate x:Key="SensorDataTemplate">
+            <viewCells:SensorViewCell  />            
+        </DataTemplate>
+        <DataTemplate x:Key="LightSwitchDataTemplate">
+            <viewCells:LightSwitchViewCell />
+        </DataTemplate>
+        <converters:DeviceTypeDataTemplateSelector x:Key="DeviceTypeDataTemplateSelector"
+                                                   UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}"
+                                                   SensorTemplate="{StaticResource SensorDataTemplate}"
+                                                   LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Niggers" />
+            <CollectionView x:Name="DevicesList"
+                            ItemsSource="{Binding Devices}"
+                            ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}">
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
