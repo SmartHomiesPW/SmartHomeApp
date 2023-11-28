@@ -33,7 +33,7 @@
                    Grid.Column="0"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
-                   FontSize="Large"
+                   FontSize="Subtitle"
                    Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}" />
 
             <Grid Grid.Row="0"

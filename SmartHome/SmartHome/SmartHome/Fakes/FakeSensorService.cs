@@ -73,6 +73,11 @@ namespace SmartHome.Fakes
                     Name = "TestHumiditySensor",
                 },};
 
+            foreach (var sensor in sensorList)
+            {
+                sensor.Logs = await GetSensorLogs(sensor.Id);
+            }
+
             return await Task.FromResult(sensorList);
         }
     }

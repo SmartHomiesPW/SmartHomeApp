@@ -26,8 +26,10 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Niggers" />
             <CollectionView x:Name="DevicesList"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedDevice}"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"                            
                             ItemsSource="{Binding Devices}"
                             ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}">
             </CollectionView>

@@ -17,7 +17,10 @@ namespace SmartHome
             InitializeComponent();
 
             // load fakes for now
+            FreshIOC.Container.Register<ISensorService, FakeSensorService>();
+            FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
+
 
             //_mainNavigation = InitializeMainAppNavigation();
             //FreshIOC.Container.Register<IFreshNavigationService>(_mainNavigation, NavigationStacks.MainAppStack);

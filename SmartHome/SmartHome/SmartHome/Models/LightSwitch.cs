@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace SmartHome.Models
 {
@@ -12,6 +11,6 @@ namespace SmartHome.Models
 
         public string Name { get; set; }
 
-        public ICommand Command { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ICommand Command { get; set; }
     }
 }

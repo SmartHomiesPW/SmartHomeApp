@@ -7,19 +7,19 @@ namespace SmartHome.Fakes
 {
     class FakeBoardService : IBoardService
     {
-        private FakeSensorService _fakeSensorService { get; set; }
-        private FakeLightSwitchService _fakeLightSwitchService { get; set; }
+        private ISensorService _sensorService { get; set; }
+        private ILightSwitchService _lightSwitchService { get; set; }
 
-        public FakeBoardService()
+        public FakeBoardService(ISensorService sensorService, ILightSwitchService lightSwitchService)
         {
-            _fakeSensorService = new FakeSensorService();
-            _fakeLightSwitchService = new FakeLightSwitchService();
+            _sensorService = sensorService;
+            _lightSwitchService = lightSwitchService;
         }
 
         public async Task<List<IBoardDevice>> GetDevices(string machineId)
         {
-            var sensors = await _fakeSensorService.GetSensors();
-            var lightSwitches = await _fakeLightSwitchService.GetLightSwitches();
+            var sensors = await _sensorService.GetSensors();
+            var lightSwitches = await _lightSwitchService.GetLightSwitches();
 
             List<IBoardDevice> devices = new List<IBoardDevice>();
 
