@@ -1,5 +1,6 @@
 ﻿using SmartHome.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace SmartHome.Services
@@ -7,6 +8,6 @@ namespace SmartHome.Services
     public interface ISensorService
     {
         Task<List<Sensor>> GetSensors();
-        Task<List<SensorLog>> GetSensorLogs(string sensorId);
+        Task<ObservableCollection<SensorLog>> GetSensorLogs(string sensorId);
     }
 }

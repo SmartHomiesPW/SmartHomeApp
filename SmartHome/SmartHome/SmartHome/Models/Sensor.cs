@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MvvmHelpers;
+using System;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace SmartHome.Models
 {
-    public class Sensor : IBoardDevice
+    public class Sensor : ObservableObject, IBoardDevice
     {
+        private string _name;
+        private DeviceStatus _status;
+
         public string Id { get; set; }
         public string BoardId { get; set; }
-        public string Name { get; set; }
         public BoardDeviceType DeviceType { get => BoardDeviceType.Sensor; }
-        public DeviceStatus Status { get; set; }
         public SensorType SensorType { get; set; }
 
-        public List<SensorLog> Logs { get; set; }
+        public DeviceStatus Status { get => _status; set => SetProperty(ref _status, value); }
+        public string Name { get => _name; set => SetProperty(ref _name, value); }
+
+        public ObservableCollection<SensorLog> Logs { get; set; }
 
         public double SensorValue
         {
@@ -30,6 +35,6 @@ namespace SmartHome.Models
             }
         }
 
-        public ICommand Command { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Func<object, Task<bool>> Command { get; set; }
     }
 }

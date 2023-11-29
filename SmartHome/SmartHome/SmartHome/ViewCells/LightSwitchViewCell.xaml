@@ -1,13 +1,14 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid xmlns="http://xamarin.com/schemas/2014/forms"
-      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
-      xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
-      xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
-      xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
-      x:Name="LightSwitchViewCellView"
-      x:Class="SmartHome.ViewCells.LightSwitchViewCell"
-      x:DataType="models:LightSwitch">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="SmartHome.ViewCells.LightSwitchViewCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+    xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+    xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+    xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+    x:Name="LightSwitchViewCellView"
+    x:DataType="models:LightSwitch">
     <Grid.Resources>
         <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
         <converters:LightSwitchValueToStringConverter x:Key="LightSwitchValueToStringConverter" />
@@ -16,11 +17,11 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="1" />
     </Grid.RowDefinitions>
-    <SwipeView x:Name="ImageSwipeView"
-               Grid.Row="0"
-               BackgroundColor="Transparent">
-        <Grid Padding="0,0,20,0"
-              BackgroundColor="Transparent">
+    <SwipeView
+        x:Name="ImageSwipeView"
+        Grid.Row="0"
+        BackgroundColor="Transparent">
+        <Grid Padding="0,0,20,0" BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120" />
                 <ColumnDefinition Width="*" />
@@ -29,24 +30,25 @@
                 <RowDefinition Height="120" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0"
-                   Grid.Column="0"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   FontSize="Subtitle"
-                   Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="Subtitle"
+                HorizontalOptions="Center"
+                Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
+                VerticalOptions="Center" />
 
-            <Grid Grid.Row="0"
-                  Grid.Column="1">
+            <Grid Grid.Row="0" Grid.Column="1">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       Text="{Binding Name}" />
+                <Label
+                    Grid.Row="0"
+                    HorizontalOptions="Start"
+                    Text="{Binding Name}"
+                    VerticalOptions="Center" />
 
                 <Label Grid.Row="1"
                        VerticalOptions="Center"
@@ -56,6 +58,5 @@
         </Grid>
     </SwipeView>
 
-    <BoxView Grid.Row="1"
-             Style="{StaticResource Separator}" />
+    <BoxView Grid.Row="1" Style="{StaticResource Separator}" />
 </Grid>

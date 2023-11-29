@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace SmartHome.PageModels
 {
-    public class AllDevicesPageModel : FreshBasePageModel
+    public class AllDevicesPageModel : BasePageModel
     {
         private IBoardService _boardService;
         private IBoardDevice _selectedDevice = null;
@@ -17,8 +17,7 @@ namespace SmartHome.PageModels
             get => _devices;
             set
             {
-                _devices = value;
-                RaisePropertyChanged(nameof(Devices));
+                SetProperty(ref _devices, value);
             }
         }
 
@@ -27,8 +26,7 @@ namespace SmartHome.PageModels
             get => _selectedDevice;
             set
             {
-                _selectedDevice = value;
-                RaisePropertyChanged(nameof(SelectedDevice));
+                SetProperty(ref _selectedDevice, value);
             }
         }
 
@@ -50,13 +48,13 @@ namespace SmartHome.PageModels
         public AllDevicesPageModel(IBoardService boardService)
         {
             _boardService = boardService;
-            //Devices = new ObservableRangeCollection<IBoardDevice>();
 
-            SelectionChangedCommand = new FreshAwaitCommand((param, task) =>
+            SelectionChangedCommand = new FreshAwaitCommand(async (param, task) =>
             {
                 if (SelectedDevice != null)
                 {
-                    _selectedDevice.Command.Execute(this);
+                    await _selectedDevice.Command.Invoke(SelectedDevice);
+                    SelectedDevice = null;
                 }
                 task.SetResult(true);
             });

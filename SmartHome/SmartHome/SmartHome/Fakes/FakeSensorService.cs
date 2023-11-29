@@ -2,20 +2,21 @@
 using SmartHome.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace SmartHome.Fakes
 {
     class FakeSensorService : ISensorService
     {
-        public async Task<List<SensorLog>> GetSensorLogs(string sensorId)
+        public async Task<ObservableCollection<SensorLog>> GetSensorLogs(string sensorId)
         {
-            List<SensorLog> sensorLogs = null;
+            ObservableCollection<SensorLog> sensorLogs = null;
 
             switch (sensorId)
             {
                 case "1":
-                    sensorLogs = new List<SensorLog>() {
+                    sensorLogs = new ObservableCollection<SensorLog>() {
                                     new SensorLog
                                     {
                                         SensorId = "1",
@@ -31,7 +32,7 @@ namespace SmartHome.Fakes
                     };
                     break;
                 case "2":
-                    sensorLogs = new List<SensorLog>() {
+                    sensorLogs = new ObservableCollection<SensorLog>() {
                                     new SensorLog
                                     {
                                         SensorId = "2",
@@ -55,6 +56,23 @@ namespace SmartHome.Fakes
 
         public async Task<List<Sensor>> GetSensors()
         {
+            Func<object, Task<bool>> sensorCommand = new Func<object, Task<bool>>(async (param) =>
+            {
+                bool result = false;
+                if (param is Sensor sensor)
+                {
+                    var newLog = new SensorLog()
+                    {
+                        SensorId = sensor.Id,
+                        Value = sensor.SensorValue + 1,
+                        Time = DateTime.Now,
+                    };
+                    sensor.Logs.Add(newLog);
+                    result = true;
+                }
+                return result;
+            });
+
             List<Sensor> sensorList = new List<Sensor> {
                 new Sensor()
                 {
@@ -63,6 +81,7 @@ namespace SmartHome.Fakes
                     SensorType = SensorType.Temperature,
                     Status = DeviceStatus.On,
                     Name = "TestTemperatureSensor",
+                    Command = sensorCommand,
                 },
                 new Sensor()
                 {
@@ -71,6 +90,7 @@ namespace SmartHome.Fakes
                     SensorType = SensorType.Humidity,
                     Status = DeviceStatus.On,
                     Name = "TestHumiditySensor",
+                    Command = sensorCommand,
                 },};
 
             foreach (var sensor in sensorList)

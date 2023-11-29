@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace SmartHome.Converters
 {
-    class SensorValueToStringConverter : IValueConverter
+    public class SensorValueToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

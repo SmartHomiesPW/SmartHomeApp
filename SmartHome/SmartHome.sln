@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHome.Android", "SmartH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHome.iOS", "SmartHome\SmartHome.iOS\SmartHome.iOS.csproj", "{E1A474B5-67D5-49A9-B427-81F328F5931B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHome", "SmartHome\SmartHome\SmartHome.csproj", "{B45134A5-DA59-43DD-BA33-D12CB948DD9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartHome", "SmartHome\SmartHome\SmartHome.csproj", "{B45134A5-DA59-43DD-BA33-D12CB948DD9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHome.Tests", "SmartHome.Tests\SmartHome.Tests.csproj", "{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8501323F-17A6-4B5E-B635-140240E55EF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B600F28D-66DE-4226-A390-6EBA0FB5E5D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,9 +79,27 @@ Global
 		{B45134A5-DA59-43DD-BA33-D12CB948DD9F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{B45134A5-DA59-43DD-BA33-D12CB948DD9F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{B45134A5-DA59-43DD-BA33-D12CB948DD9F}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Release|iPhone.Build.0 = Release|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79EA1AFF-45EF-4E1C-B779-C4D35FB7DA45} = {8501323F-17A6-4B5E-B635-140240E55EF4}
+		{E1A474B5-67D5-49A9-B427-81F328F5931B} = {8501323F-17A6-4B5E-B635-140240E55EF4}
+		{B45134A5-DA59-43DD-BA33-D12CB948DD9F} = {8501323F-17A6-4B5E-B635-140240E55EF4}
+		{9ADD00DB-0605-4B38-A5DB-2E499B5DE04D} = {B600F28D-66DE-4226-A390-6EBA0FB5E5D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70913F0D-1E18-4375-8112-A0A52BE809ED}

@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace SmartHome.Models
 {
@@ -9,6 +10,6 @@ namespace SmartHome.Models
         string Name { get; set; }
         BoardDeviceType DeviceType { get; }
         DeviceStatus Status { get; set; }
-        ICommand Command { get; set; }
+        Func<object, Task<bool>> Command { get; set; }
     }
 }

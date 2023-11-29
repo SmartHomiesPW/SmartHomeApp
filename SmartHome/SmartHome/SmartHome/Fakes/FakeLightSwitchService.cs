@@ -1,9 +1,8 @@
-﻿using FreshMvvm;
-using SmartHome.Models;
+﻿using SmartHome.Models;
 using SmartHome.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace SmartHome.Fakes
 {
@@ -11,14 +10,14 @@ namespace SmartHome.Fakes
     {
         public async Task<List<LightSwitch>> GetLightSwitches()
         {
-            ICommand lightSwitchCommand = new FreshAwaitCommand(async (param, task) =>
+            Func<object, Task<bool>> lightSwitchCommand = new Func<object, Task<bool>>(async (param) =>
             {
                 bool result = false;
                 if (param is LightSwitch lightSwitch)
                 {
                     result = (lightSwitch.Status == DeviceStatus.On) ? await LightTurnOff(lightSwitch) : await LightTurnOn(lightSwitch);
                 }
-                task.SetResult(result);
+                return result;
             });
 
             var lightSwitchList = new List<LightSwitch>()
@@ -53,7 +52,7 @@ namespace SmartHome.Fakes
 
         public async Task<bool> LightTurnOn(LightSwitch lightSwitch)
         {
-            lightSwitch.Status |= DeviceStatus.On;
+            lightSwitch.Status = DeviceStatus.On;
 
             return await Task.FromResult(true);
         }
