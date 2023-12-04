@@ -3,6 +3,18 @@
                     xmlns:theme="clr-namespace:Mobile.Xamarin.Infrastructure.AppColors;assembly=Mobile.Xamarin"
                     xmlns:views="http://xamarin.com/schemas/2020/toolkit">
 
+    <!--Colors-->
+    <Color x:Key="Primary">#238927</Color>
+    <Color x:Key="PrimaryDark">#285729</Color>
+    <Color x:Key="BarBackgroundColor">#238927</Color>
+
+    <Color x:Key="AppBackgroundColor">AliceBlue</Color>
+    <Color x:Key="NavigationBarColor">#238927</Color>
+    <Color x:Key="NavigationBarTextColor">White</Color>
+    <Color x:Key="NormalTextColor">Black</Color>
+
+    
+    <!--Element Styles-->
     <Style x:Key="BottomSheetItem"
            TargetType="Label">
         <Setter Property="FontFamily"
@@ -27,12 +39,24 @@
                 Value="FillAndExpand" />
     </Style>
 
+    <Style x:Key="LabelDeviceType"
+           TargetType="Label">
+        <Setter Property="FontFamily"
+                Value="RobotoMedium" />
+        <Setter Property="FontSize"
+                Value="Title" />
+        <Setter Property="LineBreakMode"
+                Value="TailTruncation" />
+    </Style>
+
     <Style x:Key="LabelPrimary"
            TargetType="Label">
         <Setter Property="TextColor"
                 Value="Black" />
         <Setter Property="FontFamily"
                 Value="RobotoMedium" />
+        <Setter Property="FontSize"
+                Value="Title" />
         <Setter Property="LineBreakMode"
                 Value="TailTruncation" />
     </Style>
@@ -43,6 +67,8 @@
                 Value="Gray" />
         <Setter Property="FontFamily"
                 Value="Roboto" />
+        <Setter Property="FontSize"
+                Value="Subtitle" />
         <Setter Property="LineBreakMode"
                 Value="TailTruncation" />
     </Style>
@@ -61,6 +87,26 @@
                 Value="20" />
         <Setter Property="FontFamily"
                 Value="RobotoBold" />
+    </Style>
+
+    <Style TargetType="{x:Type NavigationPage}"
+           ApplyToDerivedTypes="True">
+        <Setter Property="BarBackgroundColor"
+                Value="{StaticResource Primary}" />
+        <Setter Property="BarTextColor"
+                Value="{StaticResource NavigationBarTextColor}" />
+    </Style>
+
+    <Style TargetType="{x:Type TabbedPage}"
+           ApplyToDerivedTypes="True">
+        <Setter Property="BarBackgroundColor"
+                Value="{StaticResource Primary}" />
+        <Setter Property="SelectedTabColor"
+                Value="{StaticResource Primary}" />
+        <Setter Property="UnselectedTabColor"
+                Value="{StaticResource PrimaryDark}" />
+        <Setter Property="BarTextColor"
+                Value="{StaticResource NavigationBarTextColor}" />
     </Style>
 
 </ResourceDictionary>

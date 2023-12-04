@@ -8,6 +8,7 @@ namespace SmartHome.Converters
         public DataTemplate UnknownDeviceTemplate { get; set; }
         public DataTemplate SensorTemplate { get; set; }
         public DataTemplate LightSwitchTemplate { get; set; }
+        public DataTemplate AlarmSensorTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
@@ -20,6 +21,8 @@ namespace SmartHome.Converters
                         return SensorTemplate;
                     case BoardDeviceType.LightSwitch:
                         return LightSwitchTemplate;
+                    case BoardDeviceType.AlarmSensor:
+                        return AlarmSensorTemplate;
                     default:
                         break;
                 }

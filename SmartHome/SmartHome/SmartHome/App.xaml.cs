@@ -28,10 +28,16 @@ namespace SmartHome
 
             var devicesPage = FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>();
             _devicesNavigation = new FreshNavigationContainer(devicesPage);
+
+            var tabbedNavigation = new FreshTabbedNavigationContainer();
+            tabbedNavigation.AddTab<AllDevicesPageModel>("All Devices", null);
+            tabbedNavigation.AddTab<SensorsPageModel>("Sensors", null);
+            tabbedNavigation.AddTab<LightSwitchesPageModel>("Light Switches", null);
+
             //_devicesNavigation = new FreshNavigationContainer(devicesPage, NavigationStacks.MainAppStack);
             //FreshIOC.Container.Unregister<IFreshNavigationService>(NavigationStacks.MainAppStack);
             //FreshIOC.Container.Register<IFreshNavigationService>(_devicesNavigation, NavigationStacks.MainAppStack);
-            MainPage = _devicesNavigation;
+            MainPage = tabbedNavigation;
 
             //MainPage = FreshPageModelResolver.ResolvePageModel<DevicesPageModel>();
         }

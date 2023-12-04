@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid x:Class="SmartHome.ViewCells.AlarmSensorViewCell"
+      xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+      xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+      xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+      xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+      x:Name="AlarmSensorViewCellView"
+      x:DataType="models:AlarmSensor">
+    <Grid.Resources>
+        <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
+        <converters:AlarmSensorStatusConverter x:Key="AlarmSensorStatusConverter" />
+    </Grid.Resources>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="1" />
+    </Grid.RowDefinitions>
+    <SwipeView x:Name="ImageSwipeView"
+               Grid.Row="0"
+               BackgroundColor="Transparent">
+        <Grid Padding="0,0,20,0"
+              BackgroundColor="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource LabelDeviceType}"
+                   HorizontalOptions="Center"
+                   Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
+                   VerticalOptions="Center" />
+
+            <Grid Grid.Row="0"
+                  Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                       HorizontalOptions="Start"
+                       Style="{StaticResource LabelSecondary}"
+                       Text="{Binding Name}"
+                       VerticalOptions="Center" />
+
+                <Label Grid.Row="1"
+                       HorizontalOptions="End"
+                       Style="{StaticResource LabelPrimary}"
+                       Text="{Binding ., Converter={StaticResource AlarmSensorStatusConverter}}"
+                       VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </SwipeView>
+
+    <BoxView Grid.Row="1"
+             Style="{StaticResource Separator}" />
+</Grid>

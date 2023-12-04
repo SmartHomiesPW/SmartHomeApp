@@ -9,7 +9,8 @@
     xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
     xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
     x:Name="AllDevicesView"
-    x:DataType="pageModels:AllDevicesPageModel">
+    x:DataType="pageModels:AllDevicesPageModel"
+    Title="All Devices">
     <ContentPage.Resources>
         <DataTemplate x:Key="UnknownDeviceDataTemplate">
             <viewCells:UnknownDeviceViewCell />
@@ -20,21 +21,24 @@
         <DataTemplate x:Key="LightSwitchDataTemplate">
             <viewCells:LightSwitchViewCell />
         </DataTemplate>
+        <DataTemplate x:Key="AlarmSensorDataTemplate">
+            <viewCells:AlarmSensorViewCell />
+        </DataTemplate>
         <converters:DeviceTypeDataTemplateSelector
             x:Key="DeviceTypeDataTemplateSelector"
-            LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
             SensorTemplate="{StaticResource SensorDataTemplate}"
+            LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
+            AlarmSensorTemplate="{StaticResource AlarmSensorDataTemplate}"                                       
             UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView
-                x:Name="Devices"
-                ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}"
-                ItemsSource="{Binding Devices}"
-                SelectedItem="{Binding SelectedDevice}"
-                SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                SelectionMode="Single" />
+            <CollectionView x:Name="Devices"
+                            ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}"
+                            ItemsSource="{Binding Devices}"
+                            SelectedItem="{Binding SelectedDevice}"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                            SelectionMode="Single" />
         </StackLayout>
 
     </ContentPage.Content>

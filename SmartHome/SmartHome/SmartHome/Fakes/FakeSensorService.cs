@@ -58,19 +58,7 @@ namespace SmartHome.Fakes
         {
             Func<object, Task<bool>> sensorCommand = new Func<object, Task<bool>>(async (param) =>
             {
-                bool result = false;
-                if (param is Sensor sensor)
-                {
-                    var newLog = new SensorLog()
-                    {
-                        SensorId = sensor.Id,
-                        Value = sensor.SensorValue + 1,
-                        Time = DateTime.Now,
-                    };
-                    sensor.Logs.Add(newLog);
-                    result = true;
-                }
-                return result;
+                return await Task.FromResult(true);
             });
 
             List<Sensor> sensorList = new List<Sensor> {

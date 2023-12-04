@@ -33,8 +33,8 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                FontSize="Subtitle"
-                HorizontalOptions="Center"
+                   Style="{StaticResource LabelDeviceType}"
+                   HorizontalOptions="Center"
                 Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
                 VerticalOptions="Center" />
 
@@ -47,13 +47,15 @@
                 <Label
                     Grid.Row="0"
                     HorizontalOptions="Start"
-                    Text="{Binding Name}"
+                       Style="{StaticResource LabelSecondary}"
+                       Text="{Binding Name}"
                     VerticalOptions="Center" />
 
                 <Label Grid.Row="1"
-                       VerticalOptions="Center"
                        HorizontalOptions="End"
-                       Text="{Binding ., Converter={StaticResource LightSwitchValueToStringConverter}}" />
+                       Style="{StaticResource LabelPrimary}"
+                       Text="{Binding Status}"
+                       VerticalOptions="Center" />
             </Grid>
         </Grid>
     </SwipeView>

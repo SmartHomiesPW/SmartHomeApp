@@ -30,13 +30,12 @@
                 <RowDefinition Height="120" />
             </Grid.RowDefinitions>
 
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                FontSize="Subtitle"
-                HorizontalOptions="Center"
-                Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
-                VerticalOptions="Center" />
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource LabelDeviceType}"
+                   HorizontalOptions="Center"
+                   Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
+                   VerticalOptions="Center" />
 
             <Grid Grid.Row="0" Grid.Column="1">
 
@@ -47,7 +46,8 @@
                 <Label
                     Grid.Row="0"
                     HorizontalOptions="Start"
-                    Text="{Binding Name}"
+                       Style="{StaticResource LabelSecondary}"
+                       Text="{Binding Name}"
                     VerticalOptions="Center" />
 
                 <!--<Label
@@ -59,6 +59,7 @@
                 <Label
                     Grid.Row="1"
                     HorizontalOptions="End"
+                    Style="{StaticResource LabelPrimary}"
                     Text="{Binding ., Converter={StaticResource SensorValueToStringConverter}}"
                     VerticalOptions="Center" />
             </Grid>
