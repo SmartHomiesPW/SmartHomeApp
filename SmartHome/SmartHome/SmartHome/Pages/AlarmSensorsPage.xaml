@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="SmartHome.Pages.LightSwitchesPage"
+    x:Class="SmartHome.Pages.AlarmSensorsPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
@@ -8,19 +8,19 @@
     xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
     xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
     xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
-    x:Name="LightSwitchesView"
-    Title="Light Switches"
-    x:DataType="pageModels:LightSwitchesPageModel">
+    x:Name="AlarmSensorsView"
+    Title="Alarm Sensors"
+    x:DataType="pageModels:AlarmSensorsPageModel">
     <ContentPage.Resources>
-        <DataTemplate x:Key="LightSwitchDataTemplate">
-            <viewCells:LightSwitchViewCell />
+        <DataTemplate x:Key="AlarmSensorDataTemplate">
+            <viewCells:AlarmSensorViewCell />
         </DataTemplate>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <CollectionView
-                x:Name="LightSwitches"
-                ItemTemplate="{StaticResource LightSwitchDataTemplate}"
+                x:Name="AlarmSensors"
+                ItemTemplate="{StaticResource AlarmSensorDataTemplate}"
                 ItemsSource="{Binding Devices}"
                 SelectedItem="{Binding SelectedDevice}"
                 SelectionChangedCommand="{Binding SelectionChangedCommand}"

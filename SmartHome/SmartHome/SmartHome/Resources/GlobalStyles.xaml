@@ -1,9 +1,10 @@
-﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:theme="clr-namespace:Mobile.Xamarin.Infrastructure.AppColors;assembly=Mobile.Xamarin"
-                    xmlns:views="http://xamarin.com/schemas/2020/toolkit">
+﻿<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:theme="clr-namespace:Mobile.Xamarin.Infrastructure.AppColors;assembly=Mobile.Xamarin"
+    xmlns:views="http://xamarin.com/schemas/2020/toolkit">
 
-    <!--Colors-->
+    <!--  Colors  -->
     <Color x:Key="Primary">#238927</Color>
     <Color x:Key="PrimaryDark">#285729</Color>
     <Color x:Key="BarBackgroundColor">#238927</Color>
@@ -13,100 +14,62 @@
     <Color x:Key="NavigationBarTextColor">White</Color>
     <Color x:Key="NormalTextColor">Black</Color>
 
-    
-    <!--Element Styles-->
-    <Style x:Key="BottomSheetItem"
-           TargetType="Label">
-        <Setter Property="FontFamily"
-                Value="RobotoMedium" />
-        <Setter Property="FontSize"
-                Value="14" />
-        <Setter Property="VerticalOptions"
-                Value="Center" />
-        <Setter Property="VerticalTextAlignment"
-                Value="Center" />
+
+    <!--  Element Styles  -->
+    <Style x:Key="BottomSheetItem" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoMedium" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="Separator"
-           TargetType="BoxView">
-        <Setter Property="Color"
-                Value="Black" />
-        <Setter Property="BackgroundColor"
-                Value="Black" />
-        <Setter Property="VerticalOptions"
-                Value="FillAndExpand" />
-        <Setter Property="HorizontalOptions"
-                Value="FillAndExpand" />
+    <Style x:Key="Separator" TargetType="BoxView">
+        <Setter Property="Color" Value="Black" />
+        <Setter Property="BackgroundColor" Value="Black" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
     </Style>
 
-    <Style x:Key="LabelDeviceType"
-           TargetType="Label">
-        <Setter Property="FontFamily"
-                Value="RobotoMedium" />
-        <Setter Property="FontSize"
-                Value="Title" />
-        <Setter Property="LineBreakMode"
-                Value="TailTruncation" />
+    <Style x:Key="LabelDeviceType" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoMedium" />
+        <Setter Property="FontSize" Value="Title" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
     </Style>
 
-    <Style x:Key="LabelPrimary"
-           TargetType="Label">
-        <Setter Property="TextColor"
-                Value="Black" />
-        <Setter Property="FontFamily"
-                Value="RobotoMedium" />
-        <Setter Property="FontSize"
-                Value="Title" />
-        <Setter Property="LineBreakMode"
-                Value="TailTruncation" />
+    <Style x:Key="LabelPrimary" TargetType="Label">
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontFamily" Value="RobotoMedium" />
+        <Setter Property="FontSize" Value="Title" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
     </Style>
 
-    <Style x:Key="LabelSecondary"
-           TargetType="Label">
-        <Setter Property="TextColor"
-                Value="Gray" />
-        <Setter Property="FontFamily"
-                Value="Roboto" />
-        <Setter Property="FontSize"
-                Value="Subtitle" />
-        <Setter Property="LineBreakMode"
-                Value="TailTruncation" />
+    <Style x:Key="LabelSecondary" TargetType="Label">
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontFamily" Value="Roboto" />
+        <Setter Property="FontSize" Value="Subtitle" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
     </Style>
 
-    <Style x:Key="Row"
-           TargetType="Grid">
-        <Setter Property="VerticalOptions"
-                Value="Center" />
-        <Setter Property="RowSpacing"
-                Value="0" />
+    <Style x:Key="Row" TargetType="Grid">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="RowSpacing" Value="0" />
     </Style>
 
-    <Style x:Key="MainHeader"
-           TargetType="Label">
-        <Setter Property="FontSize"
-                Value="20" />
-        <Setter Property="FontFamily"
-                Value="RobotoBold" />
+    <Style x:Key="MainHeader" TargetType="Label">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontFamily" Value="RobotoBold" />
     </Style>
 
-    <Style TargetType="{x:Type NavigationPage}"
-           ApplyToDerivedTypes="True">
-        <Setter Property="BarBackgroundColor"
-                Value="{StaticResource Primary}" />
-        <Setter Property="BarTextColor"
-                Value="{StaticResource NavigationBarTextColor}" />
+    <Style ApplyToDerivedTypes="True" TargetType="{x:Type NavigationPage}">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="BarTextColor" Value="{StaticResource NavigationBarTextColor}" />
     </Style>
 
-    <Style TargetType="{x:Type TabbedPage}"
-           ApplyToDerivedTypes="True">
-        <Setter Property="BarBackgroundColor"
-                Value="{StaticResource Primary}" />
-        <Setter Property="SelectedTabColor"
-                Value="{StaticResource Primary}" />
-        <Setter Property="UnselectedTabColor"
-                Value="{StaticResource PrimaryDark}" />
-        <Setter Property="BarTextColor"
-                Value="{StaticResource NavigationBarTextColor}" />
+    <Style ApplyToDerivedTypes="True" TargetType="{x:Type TabbedPage}">
+        <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="SelectedTabColor" Value="{StaticResource Primary}" />
+        <Setter Property="UnselectedTabColor" Value="{StaticResource PrimaryDark}" />
+        <Setter Property="BarTextColor" Value="{StaticResource NavigationBarTextColor}" />
     </Style>
 
 </ResourceDictionary>

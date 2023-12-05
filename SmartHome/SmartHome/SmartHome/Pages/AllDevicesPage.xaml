@@ -9,8 +9,8 @@
     xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
     xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
     x:Name="AllDevicesView"
-    x:DataType="pageModels:AllDevicesPageModel"
-    Title="All Devices">
+    Title="All Devices"
+    x:DataType="pageModels:AllDevicesPageModel">
     <ContentPage.Resources>
         <DataTemplate x:Key="UnknownDeviceDataTemplate">
             <viewCells:UnknownDeviceViewCell />
@@ -26,19 +26,20 @@
         </DataTemplate>
         <converters:DeviceTypeDataTemplateSelector
             x:Key="DeviceTypeDataTemplateSelector"
-            SensorTemplate="{StaticResource SensorDataTemplate}"
+            AlarmSensorTemplate="{StaticResource AlarmSensorDataTemplate}"
             LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
-            AlarmSensorTemplate="{StaticResource AlarmSensorDataTemplate}"                                       
+            SensorTemplate="{StaticResource SensorDataTemplate}"
             UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView x:Name="Devices"
-                            ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}"
-                            ItemsSource="{Binding Devices}"
-                            SelectedItem="{Binding SelectedDevice}"
-                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                            SelectionMode="Single" />
+            <CollectionView
+                x:Name="Devices"
+                ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}"
+                ItemsSource="{Binding Devices}"
+                SelectedItem="{Binding SelectedDevice}"
+                SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                SelectionMode="Single" />
         </StackLayout>
 
     </ContentPage.Content>

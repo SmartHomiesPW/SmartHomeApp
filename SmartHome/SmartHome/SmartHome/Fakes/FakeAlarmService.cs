@@ -24,7 +24,7 @@ namespace SmartHome.Fakes
             {
                 new AlarmSensor()
                 {
-                    Id= "3",
+                    Id= "53",
                     BoardId = "2",
                     Name = "Kitchen Movement Sensor",
                     Status = DeviceStatus.On,
@@ -32,7 +32,7 @@ namespace SmartHome.Fakes
                 },
                 new AlarmSensor()
                 {
-                    Id= "4",
+                    Id= "82",
                     BoardId = "1",
                     Name = "Living Room Movement Sensor",
                     Status = DeviceStatus.Off,
