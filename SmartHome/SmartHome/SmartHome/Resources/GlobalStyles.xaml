@@ -14,6 +14,9 @@
     <Color x:Key="NavigationBarTextColor">White</Color>
     <Color x:Key="NormalTextColor">Black</Color>
 
+    <Color x:Key="DeviceOnBackgroundColor">AliceBlue</Color>
+    <Color x:Key="DeviceOffBackgroundColor">LightGray</Color>
+    <Color x:Key="AlarmMovementBackgroundColor">OrangeRed</Color>
 
     <!--  Element Styles  -->
     <Style x:Key="BottomSheetItem" TargetType="Label">
@@ -26,7 +29,7 @@
     <Style x:Key="Separator" TargetType="BoxView">
         <Setter Property="Color" Value="Black" />
         <Setter Property="BackgroundColor" Value="Black" />
-        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="Fill" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
     </Style>
 

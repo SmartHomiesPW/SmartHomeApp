@@ -37,6 +37,23 @@ namespace SmartHome.Fakes
                     Name = "Living Room Movement Sensor",
                     Status = DeviceStatus.Off,
                     Command = alarmSensorCommand,
+                },
+                                new AlarmSensor()
+                {
+                    Id= "83",
+                    BoardId = "1",
+                    Name = "Living Room Movement Sensor",
+                    Status = DeviceStatus.Off,
+                    Command = alarmSensorCommand,
+                },
+                                                new AlarmSensor()
+                {
+                    Id= "43",
+                    BoardId = "2",
+                    Name = "Living Room Movement Sensor",
+                    Status = DeviceStatus.On,
+                    MovementDetected = true,
+                    Command = alarmSensorCommand,
                 }
             };
 
@@ -53,6 +70,7 @@ namespace SmartHome.Fakes
         public async Task<bool> AlarmSensorTurnOff(AlarmSensor alarmSensor)
         {
             alarmSensor.Status = DeviceStatus.Off;
+            alarmSensor.MovementDetected = false;
 
             return await Task.FromResult(true);
         }
