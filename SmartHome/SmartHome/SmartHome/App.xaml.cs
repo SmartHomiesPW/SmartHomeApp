@@ -23,11 +23,13 @@ namespace SmartHome
             FreshIOC.Container.Register<ISensorService, FakeSensorService>();
             FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
             FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
+            FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
 #else
             FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
             FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
             FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
+            FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
 #endif
 
@@ -40,9 +42,10 @@ namespace SmartHome
 
             var tabbedNavigation = new FreshTabbedNavigationContainer();
             tabbedNavigation.AddTab<AllDevicesPageModel>("All Devices", null);
-            tabbedNavigation.AddTab<SensorsPageModel>("Sensors", null);
+            tabbedNavigation.AddTab<SensorsPageModel>("Sensors", "🌡💧☀️");
             tabbedNavigation.AddTab<LightSwitchesPageModel>("Light Switches", null);
             tabbedNavigation.AddTab<AlarmSensorsPageModel>("Alarm Sensors", null);
+            tabbedNavigation.AddTab<CamerasPageModel>("Cameras", null);
 
             //_devicesNavigation = new FreshNavigationContainer(devicesPage, NavigationStacks.MainAppStack);
             //FreshIOC.Container.Unregister<IFreshNavigationService>(NavigationStacks.MainAppStack);

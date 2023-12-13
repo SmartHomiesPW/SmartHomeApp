@@ -9,7 +9,8 @@
     xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
     xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
     x:Name="AlarmSensorViewCellView"
-    x:DataType="models:AlarmSensor">
+    x:DataType="models:AlarmSensor"
+    RowSpacing="0">
     <Grid.Resources>
         <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
         <behaviors:AlarmSensorLabelBehaviour x:Key="AlarmSensorsStatusBehavior" />

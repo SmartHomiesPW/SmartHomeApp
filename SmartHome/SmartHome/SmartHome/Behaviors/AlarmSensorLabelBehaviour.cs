@@ -1,10 +1,6 @@
 ﻿using SmartHome.Models;
-using SmartHome.PageModels;
-using SmartHome.Pages;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace SmartHome.Behaviors
@@ -54,7 +50,7 @@ namespace SmartHome.Behaviors
                 _associatedLabel.Text = "Movement";
                 object backgroundColor = Color.Transparent;
                 Application.Current.Resources.TryGetValue("AlarmMovementBackgroundColor", out backgroundColor);
-                backgroundColor = ((Color)backgroundColor).WithLuminosity(0.5);
+                backgroundColor = ((Color)backgroundColor).WithLuminosity(0.7).WithSaturation(0.9);
                 ((Grid)_associatedLabel.Parent.Parent).BackgroundColor = (Color)backgroundColor;
             }
             else
