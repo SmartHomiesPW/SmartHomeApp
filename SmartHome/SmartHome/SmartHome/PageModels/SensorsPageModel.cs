@@ -1,6 +1,6 @@
 ﻿using MvvmHelpers;
 using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.SensorService;
 using System;
 
 namespace SmartHome.PageModels

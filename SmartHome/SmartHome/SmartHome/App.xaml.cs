@@ -1,8 +1,11 @@
-﻿using FreshMvvm;
+﻿#define FAKES
+
+using FreshMvvm;
 using SmartHome.Fakes;
 using SmartHome.Infrastructure;
 using SmartHome.PageModels;
 using SmartHome.Services;
+using SmartHome.Services.SensorService;
 using Xamarin.Forms;
 
 namespace SmartHome
@@ -16,12 +19,17 @@ namespace SmartHome
         {
             InitializeComponent();
 
-            // load fakes for now
+#if FAKES           
             FreshIOC.Container.Register<ISensorService, FakeSensorService>();
             FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
             FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
-
+#else
+            FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
+            FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
+            FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
+            FreshIOC.Container.Register<IBoardService, FakeBoardService>();
+#endif
 
             //_mainNavigation = InitializeMainAppNavigation();
             //FreshIOC.Container.Register<IFreshNavigationService>(_mainNavigation, NavigationStacks.MainAppStack);

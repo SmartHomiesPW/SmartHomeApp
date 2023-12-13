@@ -12,7 +12,6 @@
     x:DataType="models:AlarmSensor">
     <Grid.Resources>
         <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
-        <converters:AlarmSensorStatusConverter x:Key="AlarmSensorStatusConverter" />
         <behaviors:AlarmSensorLabelBehaviour x:Key="AlarmSensorsStatusBehavior" />
     </Grid.Resources>
     <Grid.RowDefinitions>

@@ -3,6 +3,7 @@
     x:Class="SmartHome.ViewCells.LightSwitchViewCell"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:SmartHome.Behaviors;assembly=SmartHome"
     xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
     xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
     xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
@@ -12,6 +13,7 @@
     <Grid.Resources>
         <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
         <converters:LightSwitchValueToStringConverter x:Key="LightSwitchValueToStringConverter" />
+        <behaviors:LightSwitchLabelBehavior x:Key="LightSwitchLabelBehavior" />
     </Grid.Resources>
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -33,13 +35,12 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                   Style="{StaticResource LabelDeviceType}"
-                   HorizontalOptions="Center"
+                HorizontalOptions="Center"
+                Style="{StaticResource LabelDeviceType}"
                 Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
                 VerticalOptions="Center" />
 
             <Grid Grid.Row="0" Grid.Column="1">
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
                     <RowDefinition Height="60" />
@@ -47,15 +48,19 @@
                 <Label
                     Grid.Row="0"
                     HorizontalOptions="Start"
-                       Style="{StaticResource LabelSecondary}"
-                       Text="{Binding Name}"
+                    Style="{StaticResource LabelSecondary}"
+                    Text="{Binding Name}"
                     VerticalOptions="Center" />
 
-                <Label Grid.Row="1"
-                       HorizontalOptions="End"
-                       Style="{StaticResource LabelPrimary}"
-                       Text="{Binding Status}"
-                       VerticalOptions="Center" />
+                <Label
+                    Grid.Row="1"
+                    HorizontalOptions="End"
+                    Style="{StaticResource LabelPrimary}"
+                    VerticalOptions="Center">
+                    <Label.Behaviors>
+                        <behaviors:LightSwitchLabelBehavior />
+                    </Label.Behaviors>
+                </Label>
             </Grid>
         </Grid>
     </SwipeView>
