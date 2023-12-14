@@ -21,7 +21,7 @@ namespace SmartHome.Converters
                             return "🌡️";
                         case SensorType.Humidity:
                             return "💧";
-                        case SensorType.Light:
+                        case SensorType.Sunlight:
                             return "☀️";
                     }
                     break;

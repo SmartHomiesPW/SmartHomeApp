@@ -1,10 +1,9 @@
 ﻿using RestSharp;
+using SmartHome.Infrastructure.AppState;
 using SmartHome.Models;
-using System;
+using SmartHome.Models.BackendModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SmartHome.Services.SensorService
@@ -14,11 +13,14 @@ namespace SmartHome.Services.SensorService
         private RestClient _restClient;
         private RestClientOptions _restClientOptions;
 
-        public SensorServiceClient()
+        public SensorServiceClient(IAppState appState)
         {
-            // https://localhost:7239/
+            // https://localhost:5239/
+            // Disable UseHttpsRedirection(); in backend first
 
-            _restClientOptions = new RestClientOptions("https://10.0.2.2:7239/api/system")
+            var sensorServiceUri = appState.Configuration["endpoints:sensorService"];
+
+            _restClientOptions = new RestClientOptions(sensorServiceUri)
             {
                 ThrowOnAnyError = true,
                 MaxTimeout = 1000,
@@ -34,7 +36,16 @@ namespace SmartHome.Services.SensorService
         public async Task<List<Sensor>> GetSensors()
         {
             //var request = new RestRequest("1/board/1/devices/sensors");
-            var response = await _restClient.GetJsonAsync<List<Sensor>>("1/board/1/devices/sensors");
+            //var httpClient = new HttpClient();
+            //var response = await httpClient.GetAsync("http://10.0.2.2:5239/api/system/1/board/1/devices/sensors/temperature");
+            var request = new RestRequest("1/board/1/devices/sensors/temperature");
+            //var response = await _restClient.GetAsync(request);
+
+            var baseSensorString = "1/board/1/devices/sensors/";
+
+            var response1 = await _restClient.GetAsync(request);
+
+            var response = await _restClient.GetJsonAsync<List<SunlightSensorBackend>>(baseSensorString + "temperature");
 
             var result = new List<Sensor>();
             return await Task.FromResult(result);

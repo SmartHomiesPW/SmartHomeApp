@@ -1,11 +1,15 @@
-﻿#define FAKES
+﻿//#define FAKES
 
 using FreshMvvm;
+using Microsoft.Extensions.Configuration;
 using SmartHome.Fakes;
 using SmartHome.Infrastructure;
+using SmartHome.Infrastructure.AppState;
 using SmartHome.PageModels;
 using SmartHome.Services;
 using SmartHome.Services.SensorService;
+using System.IO;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace SmartHome
@@ -19,7 +23,10 @@ namespace SmartHome
         {
             InitializeComponent();
 
-#if FAKES           
+            FreshIOC.Container.Register<IAppState, AppState>().AsSingleton();
+            InitializeConfiguration();
+
+#if FAKES
             FreshIOC.Container.Register<ISensorService, FakeSensorService>();
             FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
             FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
@@ -65,6 +72,27 @@ namespace SmartHome
             //var mainPageStack = new FreshNavigationContainer(mainPage, NavigationStacks.MainAppStack);
             //return mainPageStack;
         }
+
+        private void InitializeConfiguration()
+        {
+            Stream resourceStream = GetType().GetTypeInfo()
+                .Assembly.GetManifestResourceStream("SmartHome.appsettings.json");
+
+            var appSettings = new ConfigurationBuilder()
+                .AddJsonStream(resourceStream).Build();
+            var appState = FreshIOC.Container.Resolve<IAppState>();
+            appState.Configuration = appSettings;
+        }
+
+        //private void UnregisterDependencies()
+        //{
+        //    FreshIOC.Container.Unregister<IBoardService>();
+        //    FreshIOC.Container.Unregister<ICameraService>();
+        //    FreshIOC.Container.Unregister<IAlarmService>();
+        //    FreshIOC.Container.Unregister<ILightSwitchService>();
+        //    FreshIOC.Container.Unregister<ISensorService>();
+        //    FreshIOC.Container.Unregister<IAppState>();
+        //}
 
         protected override void OnStart()
         {

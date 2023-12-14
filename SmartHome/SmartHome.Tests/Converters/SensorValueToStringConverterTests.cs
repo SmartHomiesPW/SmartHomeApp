@@ -80,7 +80,7 @@ namespace SmartHome.Tests.Converters
 
             var sensor = new Sensor()
             {
-                SensorType = SensorType.Light,
+                SensorType = SensorType.Sunlight,
                 Logs = sensorLogs
             };
 
