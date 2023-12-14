@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage     x:Class="SmartHome.Pages.CamerasPage"
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+                 xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+                 xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+                 xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+                 xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
+                 x:Name="CamerasView"
+                 Title="Cameras"
+                 x:DataType="pageModels:CamerasPageModel">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="CameraDataTemplate">
+            <viewCells:CameraViewCell />
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView x:Name="AlarmSensors"
+                            ItemTemplate="{StaticResource CameraDataTemplate}"
+                            ItemsSource="{Binding Devices}"
+                            SelectedItem="{Binding SelectedDevice}"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                            SelectionMode="Single" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
