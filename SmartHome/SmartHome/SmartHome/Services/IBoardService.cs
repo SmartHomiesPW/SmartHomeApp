@@ -1,11 +1,9 @@
-﻿using SmartHome.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace SmartHome.Services
+﻿namespace SmartHome.Services
 {
     public interface IBoardService
     {
-        Task<List<IBoardDevice>> GetDevices(string machineId);
+        // This should be used to get the Boards available to the User
+
+        //Task<List<IBoardDevice>> GetDevices(string machineId);
     }
 }

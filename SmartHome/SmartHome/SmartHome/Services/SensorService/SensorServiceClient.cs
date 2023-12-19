@@ -12,11 +12,12 @@ namespace SmartHome.Services.SensorService
     {
         private RestClient _restClient;
         private RestClientOptions _restClientOptions;
+        private bool _isGetSensorsInProgress = false;
 
         public SensorServiceClient(IAppState appState)
         {
-            // https://localhost:5239/
-            // Disable UseHttpsRedirection(); in backend first
+            // https://localhost:5239/ for local backend connection
+            // need to disable UseHttpsRedirection(); there first
 
             var sensorServiceUri = appState.Configuration["endpoints:sensorService"];
 
@@ -28,26 +29,46 @@ namespace SmartHome.Services.SensorService
             _restClient = new RestClient(_restClientOptions);
         }
 
-        public async Task<ObservableCollection<SensorLog>> GetSensorLogs(string sensorId)
+        public async Task<ObservableCollection<SensorLog>> GetSensorLogs(Sensor sensor)
         {
+            var baseSensorString = "1/board/1/devices/sensors/";
+            var sensorLogs = await _restClient.GetJsonAsync<List<SensorLog>>(baseSensorString + sensor.SensorType.ToString());
+            // doesn't work, missing backend endpoints
+
             return await Task.FromResult(new ObservableCollection<SensorLog>());
         }
 
         public async Task<List<Sensor>> GetSensors()
         {
-            //var request = new RestRequest("1/board/1/devices/sensors");
-            //var httpClient = new HttpClient();
-            //var response = await httpClient.GetAsync("http://10.0.2.2:5239/api/system/1/board/1/devices/sensors/temperature");
-            var request = new RestRequest("1/board/1/devices/sensors/temperature");
-            //var response = await _restClient.GetAsync(request);
+            while (_isGetSensorsInProgress)
+            {
+                await Task.Delay(100);
+            }
 
+            _isGetSensorsInProgress = true;
+
+            // the '1's should be taken from the user data. Hardcoded for now
             var baseSensorString = "1/board/1/devices/sensors/";
 
-            var response1 = await _restClient.GetAsync(request);
-
-            var response = await _restClient.GetJsonAsync<List<SunlightSensorBackend>>(baseSensorString + "temperature");
+            var temperatureSensors = await _restClient.GetJsonAsync<List<TemperatureSensorBackend>>(baseSensorString + "temperature");
+            var humiditySensors = await _restClient.GetJsonAsync<List<HumiditySensorBackend>>(baseSensorString + "humidity");
+            var sunlightSensors = await _restClient.GetJsonAsync<List<SunlightSensorBackend>>(baseSensorString + "sunlight");
 
             var result = new List<Sensor>();
+            foreach (var temperatureSensor in temperatureSensors)
+            {
+                result.Add(new Sensor(temperatureSensor));
+            }
+            foreach (var humiditySensor in humiditySensors)
+            {
+                result.Add(new Sensor(humiditySensor));
+            }
+            foreach (var sunlightSensor in sunlightSensors)
+            {
+                result.Add(new Sensor(sunlightSensor));
+            }
+
+            _isGetSensorsInProgress = false;
             return await Task.FromResult(result);
         }
     }

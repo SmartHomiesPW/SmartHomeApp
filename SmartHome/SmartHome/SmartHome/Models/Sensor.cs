@@ -80,8 +80,10 @@ namespace SmartHome.Models
             sensor.SensorType = this.SensorType;
             sensor.Status = this.Status;
             sensor.Name = this.Name;
-            sensor.Logs = new ObservableCollection<SensorLog>(this.Logs);
             sensor.Command = this.Command;
+            sensor.Logs = (this.Logs != null)
+                ? new ObservableCollection<SensorLog>(this.Logs)
+                : new ObservableCollection<SensorLog>();
         }
     }
 }

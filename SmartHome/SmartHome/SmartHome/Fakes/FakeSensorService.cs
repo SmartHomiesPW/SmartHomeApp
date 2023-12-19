@@ -9,11 +9,11 @@ namespace SmartHome.Fakes
 {
     class FakeSensorService : ISensorService
     {
-        public async Task<ObservableCollection<SensorLog>> GetSensorLogs(string sensorId)
+        public async Task<ObservableCollection<SensorLog>> GetSensorLogs(Sensor sensor)
         {
             ObservableCollection<SensorLog> sensorLogs = null;
 
-            switch (sensorId)
+            switch (sensor.Id)
             {
                 case "1":
                     sensorLogs = new ObservableCollection<SensorLog>() {
@@ -83,7 +83,7 @@ namespace SmartHome.Fakes
 
             foreach (var sensor in sensorList)
             {
-                sensor.Logs = await GetSensorLogs(sensor.Id);
+                sensor.Logs = await GetSensorLogs(sensor);
             }
 
             return await Task.FromResult(sensorList);

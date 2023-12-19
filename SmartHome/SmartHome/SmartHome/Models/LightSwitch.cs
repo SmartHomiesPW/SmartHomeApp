@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using SmartHome.Models.BackendModels;
 using System;
 using System.Threading.Tasks;
 
@@ -17,5 +18,16 @@ namespace SmartHome.Models
         public string Name { get => _name; set => SetProperty(ref _name, value); }
 
         public Func<object, Task<bool>> Command { get; set; }
+
+        public static LightSwitch FromLightSwitchBackend(LightSwitchBackend lightSwitch)
+        {
+            return new LightSwitch()
+            {
+                Id = lightSwitch.switchable_light_id,
+                BoardId = lightSwitch.system_id,
+                Status = lightSwitch.value == 1 ? DeviceStatus.On : DeviceStatus.Off,
+                Name = "Missing Name",
+            };
+        }
     }
 }
