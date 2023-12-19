@@ -18,7 +18,7 @@ namespace SmartHome.Services.LightSwitchService
             // https://localhost:5239/ for local backend connection
             // need to disable UseHttpsRedirection(); there first
 
-            var sensorServiceUri = appState.Configuration["endpoints:sensorService"];
+            var sensorServiceUri = appState.Configuration["endpoints:baseUrl"];
 
             _restClientOptions = new RestClientOptions(sensorServiceUri)
             {
