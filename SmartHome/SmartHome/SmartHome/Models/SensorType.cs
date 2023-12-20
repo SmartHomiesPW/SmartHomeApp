@@ -2,8 +2,9 @@
 {
     public enum SensorType
     {
+        Unknown,
         Temperature,
         Humidity,
-        Light,
+        Sunlight,
     }
 }

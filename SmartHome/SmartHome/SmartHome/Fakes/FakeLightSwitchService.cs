@@ -1,5 +1,5 @@
 ﻿using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.LightSwitchService;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

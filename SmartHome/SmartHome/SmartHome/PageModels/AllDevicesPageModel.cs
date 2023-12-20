@@ -2,14 +2,22 @@
 using MvvmHelpers;
 using SmartHome.Models;
 using SmartHome.Services;
+using SmartHome.Services.LightSwitchService;
+using SmartHome.Services.SensorService;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SmartHome.PageModels
 {
     public class AllDevicesPageModel : BasePageModel
     {
-        private IBoardService _boardService;
+        private ISensorService _sensorService;
+        private ILightSwitchService _lightSwitchService;
+        private IAlarmService _alarmService;
+        private ICameraService _cameraService;
+
         private IBoardDevice _selectedDevice = null;
         private ObservableRangeCollection<IBoardDevice> _devices = new ObservableRangeCollection<IBoardDevice>();
         public ObservableRangeCollection<IBoardDevice> Devices
@@ -39,15 +47,39 @@ namespace SmartHome.PageModels
             UpdateDevices();
         }
 
+        private async Task<List<IBoardDevice>> GetDevices()
+        {
+            var sensors = await _sensorService.GetSensors();
+            var lightSwitches = await _lightSwitchService.GetLightSwitches();
+            var alarmSensors = await _alarmService.GetAlarmSensors();
+            var cameras = await _cameraService.GetCameras();
+
+            List<IBoardDevice> devices = new List<IBoardDevice>();
+
+            devices.AddRange(sensors);
+            devices.AddRange(lightSwitches);
+            devices.AddRange(alarmSensors);
+            devices.AddRange(cameras);
+
+            return devices;
+        }
+
         private async void UpdateDevices()
         {
-            var devices = await _boardService.GetDevices("");
+            var devices = await GetDevices();
             Devices.ReplaceRange(devices);
         }
 
-        public AllDevicesPageModel(IBoardService boardService)
+        public AllDevicesPageModel(
+            ISensorService sensorService,
+            ILightSwitchService lightSwitchService,
+            IAlarmService alarmService,
+            ICameraService cameraService)
         {
-            _boardService = boardService;
+            _sensorService = sensorService;
+            _lightSwitchService = lightSwitchService;
+            _alarmService = alarmService;
+            _cameraService = cameraService;
 
             SelectionChangedCommand = new FreshAwaitCommand(async (param, task) =>
             {
