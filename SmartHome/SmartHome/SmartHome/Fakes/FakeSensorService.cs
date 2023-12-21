@@ -47,6 +47,16 @@ namespace SmartHome.Fakes
                                     }
                     };
                     break;
+                case "3":
+                    sensorLogs = new ObservableCollection<SensorLog>() {
+                                    new SensorLog
+                                    {
+                                        SensorId = "3",
+                                        Value = 99,
+                                        Time = DateTime.Now
+                                    },
+                    };
+                    break;
                 default:
                     break;
             };
@@ -78,6 +88,15 @@ namespace SmartHome.Fakes
                     SensorType = SensorType.Humidity,
                     Status = DeviceStatus.On,
                     Name = "TestHumiditySensor",
+                    Command = sensorCommand,
+                },
+                            new Sensor()
+                {
+                    Id = "3",
+                    BoardId = "1",
+                    SensorType = SensorType.Sunlight,
+                    Status = DeviceStatus.On,
+                    Name = "TestSunlightSensor",
                     Command = sensorCommand,
                 },};
 

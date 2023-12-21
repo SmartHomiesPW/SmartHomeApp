@@ -34,10 +34,6 @@ namespace SmartHome
             FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
-
-            var appState = FreshIOC.Container.Resolve<IAppState>();
-            var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
-            authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
 #else
             FreshIOC.Container.Register<IAuthenticationService, FakeAuthenticationService>();
             FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
@@ -50,21 +46,26 @@ namespace SmartHome
             var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
             authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
 #endif
+            var appState = FreshIOC.Container.Resolve<IAppState>();
+            var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
+            authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
+
 
             //_mainNavigation = InitializeMainAppNavigation();
             //FreshIOC.Container.Register<IFreshNavigationService>(_mainNavigation, NavigationStacks.MainAppStack);
             //_mainNavigation.AddPage<AllDevicesPageModel>("DevicesPageModel", "");
 
             var navigationContainer = new CustomFreshMasterDetailNavigationContainer(NavigationStacks.MainAppStack);
-            navigationContainer.Init("Menu");
             _mainNavigation = navigationContainer;
-            _mainNavigation.Master = FreshPageModelResolver.ResolvePageModel<SideMenuPageModel>();
-            _mainNavigation.Detail = new NavigationPage(FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>("AllDevicesPageModel"));
-            _mainNavigation.AddPage<AllDevicesPageModel>("AllDevicesPageModel", "");
-            _mainNavigation.AddPage<SensorsPageModel>("SensorsPageModel", "");
-            _mainNavigation.AddPage<LightSwitchesPageModel>("LightsPageModel", "");
-            _mainNavigation.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "");
-            _mainNavigation.AddPage<CamerasPageModel>("CamerasPageModel", "");
+            _mainNavigation.Init(appState.UserData.Username);
+
+            //_mainNavigation.Master = FreshPageModelResolver.ResolvePageModel<SideMenuPageModel>();
+            //_mainNavigation.Detail = new NavigationPage(FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>("AllDevicesPageModel"));
+            _mainNavigation.AddPage<AllDevicesPageModel>("AllDevicesPageModel", "All Devices");
+            _mainNavigation.AddPage<SensorsPageModel>("SensorsPageModel", "🌡️ Sensors");
+            _mainNavigation.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights");
+            _mainNavigation.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors");
+            _mainNavigation.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras");
             MainPage = _mainNavigation;
 
             //var devicesPage = FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>();
