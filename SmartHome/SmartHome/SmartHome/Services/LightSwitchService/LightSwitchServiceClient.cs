@@ -2,6 +2,7 @@
 using SmartHome.Infrastructure.AppState;
 using SmartHome.Models;
 using SmartHome.Models.BackendModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace SmartHome.Services.LightSwitchService
 
             _restClientOptions = new RestClientOptions(sensorServiceUri)
             {
-                ThrowOnAnyError = true,
+                ThrowOnAnyError = false,
                 MaxTimeout = 1000,
             };
             _restClient = new RestClient(_restClientOptions);
@@ -39,13 +40,29 @@ namespace SmartHome.Services.LightSwitchService
 
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
+            List<LightSwitchBackend> lightSwitchesBackend = new List<LightSwitchBackend>();
+            try
+            {
+                //var response = await _restClient.GetAsync(new RestRequest(baseLightSwitchString));
 
-            var lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
+                lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
+            }
+            catch { }
+
+            Func<object, Task<bool>> lightSwitchCommand = new Func<object, Task<bool>>(async (param) =>
+            {
+                bool commandResult = false;
+                if (param is LightSwitch lightSwitch)
+                {
+                    commandResult = (lightSwitch.Status == DeviceStatus.On) ? await LightTurnOff(lightSwitch) : await LightTurnOn(lightSwitch);
+                }
+                return commandResult;
+            });
 
             var result = new List<LightSwitch>();
             foreach (var lightSwitchBackend in lightSwitchesBackend)
             {
-                result.Add(LightSwitch.FromLightSwitchBackend(lightSwitchBackend));
+                result.Add(LightSwitch.FromLightSwitchBackend(lightSwitchBackend, lightSwitchCommand));
             }
 
             _isGetLightSwitchesInProgress = false;
@@ -56,10 +73,15 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ lightId: {lightSwitch.Id}, isOn: true }} ]";
+            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": false }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             var postResponse = await _restClient.PostAsync(request);
+
+            if (postResponse != null && postResponse.IsSuccessful)
+            {
+                lightSwitch.Status = DeviceStatus.Off;
+            }
 
             return postResponse.IsSuccessful;
         }
@@ -68,10 +90,15 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ lightId: {lightSwitch.Id}, isOn: false }} ]";
+            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": true }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             var postResponse = await _restClient.PostAsync(request);
+
+            if (postResponse != null && postResponse.IsSuccessful)
+            {
+                lightSwitch.Status = DeviceStatus.On;
+            }
 
             return postResponse.IsSuccessful;
         }
