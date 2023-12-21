@@ -2,6 +2,7 @@
 using SmartHome.Models.BackendModels;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SmartHome.Models
 {
@@ -19,14 +20,15 @@ namespace SmartHome.Models
 
         public Func<object, Task<bool>> Command { get; set; }
 
-        public static LightSwitch FromLightSwitchBackend(LightSwitchBackend lightSwitch)
+        public static LightSwitch FromLightSwitchBackend(LightSwitchBackend lightSwitch, Func<object, Task<bool>> command)
         {
             return new LightSwitch()
             {
-                Id = lightSwitch.switchable_light_id,
-                BoardId = lightSwitch.system_id,
-                Status = lightSwitch.value == 1 ? DeviceStatus.On : DeviceStatus.Off,
+                Id = lightSwitch.lightId.ToString(),
+                BoardId = "1",
+                Status = lightSwitch.isOn ? DeviceStatus.On : DeviceStatus.Off,
                 Name = "Missing Name",
+                Command = command
             };
         }
     }

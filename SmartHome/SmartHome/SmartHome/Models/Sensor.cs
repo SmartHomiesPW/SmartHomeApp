@@ -73,6 +73,14 @@ namespace SmartHome.Models
             appSensor.CopyTo(this);
         }
 
+        public Sensor(SensorLog sensorLog)
+        {
+            Id = sensorLog.SensorId;
+            SensorType = SensorType.Temperature;
+            Name = "Missing Name";
+            Logs = new ObservableCollection<SensorLog> { sensorLog };
+        }
+
         public void CopyTo(Sensor sensor)
         {
             sensor.Id = this.Id;
