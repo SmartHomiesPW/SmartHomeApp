@@ -13,8 +13,8 @@
         <Grid Padding="20,10,20,0"
               VerticalOptions="StartAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -56,9 +56,17 @@
                             </Grid.GestureRecognizers>
                             <Label HeightRequest="30"
                                    HorizontalOptions="StartAndExpand"
-                                   Style="{StaticResource LabelPrimary}"
+                                   Style="{StaticResource SidePanelLabelPrimary}"
                                    Text="{Binding DisplayText}"
-                                   VerticalOptions="Center" />
+                                   VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger Binding="{Binding IsMainPage, Mode=OneTime}"
+                                                 TargetType="Label"
+                                                 Value="False">
+                                        <Setter Property="Style" Value="{StaticResource SidePanelLabelSecondary}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
                         </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>

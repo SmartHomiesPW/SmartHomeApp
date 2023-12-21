@@ -20,9 +20,10 @@
     <SwipeView x:Name="ImageSwipeView"
                Grid.Row="0"
                BackgroundColor="Transparent">
-        <Grid Padding="0,0,20,0" BackgroundColor="Transparent">
+        <Grid Padding="0,0,20,0"
+              BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -36,7 +37,8 @@
                    Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
                    VerticalOptions="Center" />
 
-            <Grid Grid.Row="0" Grid.Column="1">
+            <Grid Grid.Row="0"
+                  Grid.Column="1">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
@@ -60,5 +62,6 @@
         </Grid>
     </SwipeView>
 
-    <BoxView Grid.Row="1" Style="{StaticResource Separator}" />
+    <BoxView Grid.Row="1"
+             Style="{StaticResource Separator}" />
 </Grid>

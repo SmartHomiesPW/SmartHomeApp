@@ -62,10 +62,10 @@ namespace SmartHome
             //_mainNavigation.Master = FreshPageModelResolver.ResolvePageModel<SideMenuPageModel>();
             //_mainNavigation.Detail = new NavigationPage(FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>("AllDevicesPageModel"));
             _mainNavigation.AddPage<AllDevicesPageModel>("AllDevicesPageModel", "All Devices");
-            _mainNavigation.AddPage<SensorsPageModel>("SensorsPageModel", "🌡️ Sensors");
-            _mainNavigation.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights");
-            _mainNavigation.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors");
-            _mainNavigation.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras");
+            _mainNavigation.AddPage<SensorsPageModel>("SensorsPageModel", "🌡️ Sensors", isMainPage: false);
+            _mainNavigation.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights", isMainPage: false);
+            _mainNavigation.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors", isMainPage: false);
+            _mainNavigation.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
             MainPage = _mainNavigation;
 
             //var devicesPage = FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>();

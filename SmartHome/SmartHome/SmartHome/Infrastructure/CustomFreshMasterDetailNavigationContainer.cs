@@ -39,7 +39,7 @@ namespace SmartHome.Infrastructure
             base.Master = navigationPage;
         }
 
-        public void AddPage<T>(string title, string displayText, object data = null) where T : FreshBasePageModel
+        public void AddPage<T>(string title, string displayText, object data = null, bool isMainPage = true) where T : FreshBasePageModel
         {
             // If this is the first page added, set it as default detail
             if (_pages.Count == 0)
@@ -61,7 +61,8 @@ namespace SmartHome.Infrastructure
                                 IsPresented = false;
                             }
                         }),
-                        PageModelType = typeof(T)
+                        PageModelType = typeof(T),
+                        IsMainPage = isMainPage,
                     }
                 );
             ((SideMenuPageModel)_menuPage.BindingContext).PageFields.ReplaceRange(_pages.Values);
