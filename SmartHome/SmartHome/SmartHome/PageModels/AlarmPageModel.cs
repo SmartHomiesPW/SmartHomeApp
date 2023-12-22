@@ -54,10 +54,12 @@ namespace SmartHome.PageModels
             AllAlarmSensorsOnCommand = new FreshAwaitCommand(async (param, task) =>
             {
                 await _alarmSensorsService.AlarmSensorTurnOnAll();
+                task.SetResult(true);
             });
             AllAlarmSensorsOffCommand = new FreshAwaitCommand(async (param, task) =>
             {
                 await _alarmSensorsService.AlarmSensorTurnOffAll();
+                task.SetResult(true);
             });
         }
         protected override void ViewIsAppearing(object sender, EventArgs e)
