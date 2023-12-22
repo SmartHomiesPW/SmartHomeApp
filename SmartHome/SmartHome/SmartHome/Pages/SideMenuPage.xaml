@@ -27,13 +27,20 @@
 
                 <Ellipse
                     Grid.Column="0"
-                    Fill="Red"
-                    HeightRequest="50"
-                    HorizontalOptions="Start"
-                    WidthRequest="50" />
+                    HorizontalOptions="Center"
+                    Style="{StaticResource UserInitialsCircle}"
+                    VerticalOptions="Center" />
+
+                <Label
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource SidePanelLabelPrimary}"
+                    Text="{Binding AppState.UserData.Initials}"
+                    VerticalOptions="Center" />
 
                 <Label
                     Grid.Column="1"
+                    Padding="10,0,0,0"
                     Style="{StaticResource LabelPrimary}"
                     Text="{Binding AppState.UserData.Username}"
                     VerticalOptions="Center" />
