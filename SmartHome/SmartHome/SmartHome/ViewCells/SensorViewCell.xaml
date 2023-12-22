@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid
-    x:Class="SmartHome.ViewCells.SensorViewCell"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+<Grid x:Class="SmartHome.ViewCells.SensorViewCell"
+      xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       xmlns:behaviors="clr-namespace:SmartHome.Behaviors;assembly=SmartHome"
+      xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
       xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
       xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
-    xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
-    x:Name="SensorViewCellView"
-    x:DataType="models:Sensor">
+      xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+      x:Name="SensorViewCellView"
+      x:DataType="models:Sensor">
     <Grid.Resources>
         <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
         <behaviors:SensorLabelBehavior x:Key="SensorLabelBehavior" />
@@ -18,13 +17,13 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="1" />
     </Grid.RowDefinitions>
-    <SwipeView
-        x:Name="ImageSwipeView"
-        Grid.Row="0"
-        BackgroundColor="Transparent">
-        <Grid Padding="0,0,20,0" BackgroundColor="Transparent">
+    <SwipeView x:Name="ImageSwipeView"
+               Grid.Row="0"
+               BackgroundColor="Transparent">
+        <Grid Padding="0,0,20,0"
+              BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -33,12 +32,13 @@
 
             <Label Grid.Row="0"
                    Grid.Column="0"
-                   Style="{StaticResource LabelDeviceType}"
                    HorizontalOptions="Center"
+                   Style="{StaticResource LabelDeviceType}"
                    Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
                    VerticalOptions="Center" />
 
-            <Grid Grid.Row="0" Grid.Column="1">
+            <Grid Grid.Row="0"
+                  Grid.Column="1">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60" />
@@ -62,5 +62,6 @@
         </Grid>
     </SwipeView>
 
-    <BoxView Grid.Row="1" Style="{StaticResource Separator}" />
+    <BoxView Grid.Row="1"
+             Style="{StaticResource Separator}" />
 </Grid>
