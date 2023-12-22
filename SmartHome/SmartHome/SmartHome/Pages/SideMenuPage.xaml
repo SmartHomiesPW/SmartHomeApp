@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage x:Class="SmartHome.Pages.SideMenuPage"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:infrastructure="clr-namespace:SmartHome.Infrastructure;assembly=SmartHome"
-             xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
-             xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
-             xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
-             x:Name="SideMenuPageView"
-             Title="Menu"
-             x:DataType="pageModels:SideMenuPageModel">
+<ContentPage
+    x:Class="SmartHome.Pages.SideMenuPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:infrastructure="clr-namespace:SmartHome.Infrastructure;assembly=SmartHome"
+    xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+    xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+    xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+    x:Name="SideMenuPageView"
+    Title="Menu"
+    x:DataType="pageModels:SideMenuPageModel">
     <ContentPage.Content>
-        <Grid Padding="20,10,20,0"
-              VerticalOptions="StartAndExpand">
+        <Grid Padding="20,10,20,0" VerticalOptions="StartAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -25,45 +25,51 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Ellipse Grid.Column="0"
-                         Fill="Red"
-                         HeightRequest="50"
-                         HorizontalOptions="Start"
-                         WidthRequest="50" />
+                <Ellipse
+                    Grid.Column="0"
+                    Fill="Red"
+                    HeightRequest="50"
+                    HorizontalOptions="Start"
+                    WidthRequest="50" />
 
-                <Label Grid.Column="1"
-                       Style="{StaticResource LabelPrimary}"
-                       Text="{Binding AppState.UserData.Username}"
-                       VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    Style="{StaticResource LabelPrimary}"
+                    Text="{Binding AppState.UserData.Username}"
+                    VerticalOptions="Center" />
             </Grid>
 
-            <Grid Grid.Row="1"
-                  Padding="0,10,0,10"
-                  VerticalOptions="Center">
+            <Grid
+                Grid.Row="1"
+                Padding="0,10,0,10"
+                VerticalOptions="Center">
                 <BoxView Style="{StaticResource Separator}" />
             </Grid>
 
 
-            <StackLayout Grid.Row="2"
-                         BindableLayout.ItemsSource="{Binding PageFields}"
-                         Spacing="5">
+            <StackLayout
+                Grid.Row="2"
+                BindableLayout.ItemsSource="{Binding PageFields}"
+                Spacing="5">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="infrastructure:SideMenuFieldModel">
                         <Grid>
                             <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Command, Mode=OneTime}"
-                                                      CommandParameter="{Binding Title}" />
+                                <TapGestureRecognizer Command="{Binding Command, Mode=OneTime}" CommandParameter="{Binding Title}" />
                             </Grid.GestureRecognizers>
-                            <Label HeightRequest="30"
-                                   HorizontalOptions="StartAndExpand"
-                                   Style="{StaticResource SidePanelLabelPrimary}"
-                                   Text="{Binding DisplayText}"
-                                   VerticalOptions="Center">
+                            <Label
+                                HeightRequest="35"
+                                HorizontalOptions="StartAndExpand"
+                                Style="{StaticResource SidePanelLabelPrimary}"
+                                Text="{Binding DisplayText}"
+                                VerticalOptions="Center">
                                 <Label.Triggers>
-                                    <DataTrigger Binding="{Binding IsMainPage, Mode=OneTime}"
-                                                 TargetType="Label"
-                                                 Value="False">
+                                    <DataTrigger
+                                        Binding="{Binding IsMainPage, Mode=OneTime}"
+                                        TargetType="Label"
+                                        Value="False">
                                         <Setter Property="Style" Value="{StaticResource SidePanelLabelSecondary}" />
+                                        <Setter Property="HeightRequest" Value="25" />
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
