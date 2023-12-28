@@ -4,6 +4,7 @@ using SmartHome.Models;
 using SmartHome.Models.BackendModels;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SmartHome.Services.LightSwitchService
@@ -23,6 +24,7 @@ namespace SmartHome.Services.LightSwitchService
 
             _restClientOptions = new RestClientOptions(sensorServiceUri)
             {
+                //RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,
                 ThrowOnAnyError = false,
                 MaxTimeout = 1000,
             };
@@ -41,11 +43,11 @@ namespace SmartHome.Services.LightSwitchService
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
             List<LightSwitchBackend> lightSwitchesBackend = new List<LightSwitchBackend>();
+            lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
             try
             {
                 //var response = await _restClient.GetAsync(new RestRequest(baseLightSwitchString));
 
-                lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
             }
             catch { }
 
@@ -73,7 +75,7 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": false }} ]";
+            string body = $"[ {{ \"lightId\": {int.Parse(lightSwitch.Id)}, \"isOn\": 0 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             var postResponse = await _restClient.PostAsync(request);
@@ -90,7 +92,7 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": true }} ]";
+            string body = $"[ {{ \"lightId\": {int.Parse(lightSwitch.Id)}, \"isOn\": 1 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             var postResponse = await _restClient.PostAsync(request);
