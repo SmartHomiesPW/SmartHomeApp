@@ -24,16 +24,18 @@ namespace SmartHome.Models
 
         public double? SensorValue
         {
-            get
-            {
-                if (Logs.Count > 0)
-                {
-                    Logs.OrderByDescending(o => o.Time).ToList();
-                    return Logs[0].Value;
-                }
+            //get
+            //{
+            //    if (Logs.Count > 0)
+            //    {
+            //        Logs.OrderByDescending(o => o.Time).ToList();
+            //        return Logs[0].Value;
+            //    }
 
-                return null;
-            }
+            //    return null;
+            //}
+            get;
+            set;
         }
 
         public Func<object, Task<bool>> Command { get; set; }
@@ -46,7 +48,7 @@ namespace SmartHome.Models
                 BoardId = sensor.system_Id,
                 Status = DeviceStatus.On,
                 Name = sensor.name,
-                SensorType = SensorType.Unknown
+                SensorType = SensorType.Unknown,
             };
         }
 

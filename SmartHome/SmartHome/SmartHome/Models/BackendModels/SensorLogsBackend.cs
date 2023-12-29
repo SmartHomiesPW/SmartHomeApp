@@ -6,18 +6,15 @@ namespace SmartHome.Models.BackendModels
 {
     public class SensorLogsBackend
     {
-        public interface SensorMeasureDto
+        public class SensorMeasureDto
         {
-            DateTime dateTime { get; set; }
-            int sensorId { get; set; }
+            public int sensor_Id { get; set; }
+            public int system_Id { get; set; }
+            public string name { get; set; }
+            public string details { get; set; }
+            public decimal value { get; set; }
         }
 
-        public class TemperatureSensorMeasureDto : SensorMeasureDto
-        {
-            public double temperature { get; set; }
-            public DateTime dateTime { get; set; }
-            public int sensorId { get; set; }
-        }
         //public class HumiditySensorMeasureDto : SensorMeasureDto
         //{
         //    public double humidity { get; set; }

@@ -14,17 +14,17 @@ namespace SmartHome.Models
         {
             return new SensorLog()
             {
-                SensorId = sensorMeasure.sensorId.ToString(),
-                Time = sensorMeasure.dateTime
+                SensorId = sensorMeasure.sensor_Id.ToString(),
+                Time = DateTime.Now
             };
         }
 
         public SensorLog() { }
 
-        public SensorLog(TemperatureSensorMeasureDto sensorMeasure)
+        public SensorLog(SensorMeasureDto sensorMeasure)
         {
             var sensorLog = FromSensorMeasureBackend(sensorMeasure);
-            sensorLog.Value = sensorMeasure.temperature;
+            sensorLog.Value = (double)sensorMeasure.value;
             sensorLog.CopyTo(this);
         }
         //public SensorLog(HumiditySensorMeasureDto sensorMeasure)

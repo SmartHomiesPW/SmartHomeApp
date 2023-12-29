@@ -73,34 +73,46 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": false }} ]";
+            string body = $"[ {{ \"lightId\": {int.Parse(lightSwitch.Id)}, \"isOn\": 0 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
-            var postResponse = await _restClient.PostAsync(request);
-
-            if (postResponse != null && postResponse.IsSuccessful)
+            try
             {
-                lightSwitch.Status = DeviceStatus.Off;
-            }
+                var putResponse = await _restClient.PutAsync(request);
 
-            return postResponse.IsSuccessful;
+                if (putResponse != null && putResponse.IsSuccessful)
+                {
+                    lightSwitch.Status = DeviceStatus.Off;
+                }
+
+                return putResponse.IsSuccessful;
+            } catch
+            {
+                return false;
+            }
         }
 
         public async Task<bool> LightTurnOn(LightSwitch lightSwitch)
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": true }} ]";
+            string body = $"[ {{ \"lightId\": {int.Parse(lightSwitch.Id)}, \"isOn\": 1 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
-            var postResponse = await _restClient.PostAsync(request);
-
-            if (postResponse != null && postResponse.IsSuccessful)
+            try
             {
-                lightSwitch.Status = DeviceStatus.On;
-            }
+                var putResponse = await _restClient.PutAsync(request);
 
-            return postResponse.IsSuccessful;
+                if (putResponse != null && putResponse.IsSuccessful)
+                {
+                    lightSwitch.Status = DeviceStatus.On;
+                }
+
+                return putResponse.IsSuccessful;
+            } catch
+            {
+                return false;
+            }
         }
     }
 }
