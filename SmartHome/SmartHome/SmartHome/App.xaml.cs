@@ -7,6 +7,7 @@ using SmartHome.Infrastructure;
 using SmartHome.Infrastructure.AppState;
 using SmartHome.PageModels;
 using SmartHome.Services;
+using SmartHome.Services.AlarmService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System.IO;

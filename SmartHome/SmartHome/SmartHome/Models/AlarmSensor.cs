@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using SmartHome.Models.BackendModels;
 using System;
 using System.Threading.Tasks;
 
@@ -17,7 +18,20 @@ namespace SmartHome.Models
         public DeviceStatus Status { get => _status; set => SetProperty(ref _status, value); }
         public string Name { get => _name; set => SetProperty(ref _name, value); }
         public bool MovementDetected { get => _movementDetected; set => SetProperty(ref _movementDetected, value); }
-
         public Func<object, Task<bool>> Command { get; set; }
+
+        public static AlarmSensor FromAlarmSensorBackend(AlarmSensorBackend sensor, Func<object, Task<bool>> command)
+        {
+            return new AlarmSensor()
+            {
+                Id = sensor.alarm_Sensor_Id,
+                BoardId = sensor.alarm_Id,
+                Status = DeviceStatus.On,
+                Name = sensor.name,
+                MovementDetected = (sensor.movement_Detected == 1),
+                Command = command
+            };
+        }
+
     }
 }
