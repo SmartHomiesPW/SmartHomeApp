@@ -76,7 +76,6 @@ namespace SmartHome.Services.AlarmService
             try
             {
                 var putResponse = await _restClient.PutAsync(request);
-
                 if (putResponse != null && putResponse.IsSuccessful)
                 {
                     alarmSensor.Status = DeviceStatus.Off;
