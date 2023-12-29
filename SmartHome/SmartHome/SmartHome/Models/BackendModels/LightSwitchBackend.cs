@@ -2,7 +2,10 @@
 {
     public class LightSwitchBackend
     {
-        public bool isOn { get; set; }
-        public int lightId { get; set; }
+        public string switchable_Light_Id { get; set; }
+        public string system_Id { get; set; }
+        public string name { get; set; }
+        public string details { get; set; }
+        public int value { get; set; }
     }
 }

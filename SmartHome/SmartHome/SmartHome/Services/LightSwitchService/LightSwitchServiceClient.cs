@@ -41,11 +41,11 @@ namespace SmartHome.Services.LightSwitchService
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
             List<LightSwitchBackend> lightSwitchesBackend = new List<LightSwitchBackend>();
+            lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
             try
             {
                 //var response = await _restClient.GetAsync(new RestRequest(baseLightSwitchString));
 
-                lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
             }
             catch { }
 
