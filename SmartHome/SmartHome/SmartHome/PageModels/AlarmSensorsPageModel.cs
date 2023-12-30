@@ -2,7 +2,6 @@
 using MvvmHelpers;
 using SmartHome.Models;
 using SmartHome.Services;
-using SmartHome.Services.AlarmService;
 using System;
 using System.Collections.Generic;
 using System.Text;

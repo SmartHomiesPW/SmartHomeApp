@@ -16,8 +16,9 @@ namespace SmartHome.Services.LightSwitchService
 
         public LightSwitchServiceClient(IAppState appState)
         {
-            // https://localhost:5239/ for local backend connection
-            // need to disable UseHttpsRedirection(); there first
+            // set 'baseUrl' in 'appsettings.json' to
+            // http://10.0.2.2:5239/api/system for local backend connection
+            // need to disable UseHttpsRedirection(); in the local backend instance first to work
 
             var sensorServiceUri = appState.Configuration["endpoints:baseUrl"];
 
@@ -44,8 +45,6 @@ namespace SmartHome.Services.LightSwitchService
             try
             {
                 lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
-                //var response = await _restClient.GetAsync(new RestRequest(baseLightSwitchString));
-
             }
             catch { }
 
@@ -73,7 +72,7 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {int.Parse(lightSwitch.Id)}, \"isOn\": 0 }} ]";
+            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": 0 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
@@ -86,7 +85,8 @@ namespace SmartHome.Services.LightSwitchService
                 }
 
                 return putResponse.IsSuccessful;
-            } catch
+            }
+            catch
             {
                 return false;
             }
@@ -96,7 +96,7 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {int.Parse(lightSwitch.Id)}, \"isOn\": 1 }} ]";
+            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": 1 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
@@ -109,7 +109,8 @@ namespace SmartHome.Services.LightSwitchService
                 }
 
                 return putResponse.IsSuccessful;
-            } catch
+            }
+            catch
             {
                 return false;
             }

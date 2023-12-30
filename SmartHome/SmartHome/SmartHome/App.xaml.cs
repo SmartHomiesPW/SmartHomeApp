@@ -30,16 +30,16 @@ namespace SmartHome
 
 #if FAKES
             FreshIOC.Container.Register<IAuthenticationService, FakeAuthenticationService>();
-            FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
-            FreshIOC.Container.Register<ILightSwitchService, LightSwitchServiceClient>();
-            FreshIOC.Container.Register<IAlarmService, AlarmServiceClient>();
+            FreshIOC.Container.Register<ISensorService, FakeSensorService>();
+            FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
+            FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
 #else
             FreshIOC.Container.Register<IAuthenticationService, FakeAuthenticationService>();
             FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
             FreshIOC.Container.Register<ILightSwitchService, LightSwitchServiceClient>();
-            FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
+            FreshIOC.Container.Register<IAlarmService, AlarmServiceClient>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();     
             

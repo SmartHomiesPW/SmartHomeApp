@@ -10,5 +10,8 @@ namespace SmartHome.Services
 
         Task<bool> AlarmSensorTurnOn(AlarmSensor alarmSensor);
         Task<bool> AlarmSensorTurnOff(AlarmSensor alarmSensor);
+
+        Task<bool> AlarmSensorTurnOnAll();
+        Task<bool> AlarmSensorTurnOffAll();
     }
 }

@@ -17,8 +17,9 @@ namespace SmartHome.Services.SensorService
 
         public SensorServiceClient(IAppState appState)
         {
-            // https://localhost:5239/ for local backend connection
-            // need to disable UseHttpsRedirection(); there first
+            // set 'baseUrl' in 'appsettings.json' to
+            // http://10.0.2.2:5239/api/system for local backend connection
+            // need to disable UseHttpsRedirection(); in the local backend instance first to work
 
             var sensorServiceUri = appState.Configuration["endpoints:baseUrl"];
 
@@ -28,44 +29,6 @@ namespace SmartHome.Services.SensorService
                 MaxTimeout = 1000,
             };
             _restClient = new RestClient(_restClientOptions);
-        }
-
-        public async Task<ObservableCollection<SensorLog>> GetSensorLogs(Sensor sensor)
-        {
-            var baseSensorString = "1/board/1/devices/sensors/";
-            baseSensorString += sensor.SensorType.ToString().ToLower() + "/states";
-            // doesn't work, missing backend endpoints
-            var result = new List<SensorLog>();
-            switch (sensor.SensorType)
-            {
-                case SensorType.Temperature:
-                    //var response = await _restClient.GetAsync(new RestRequest(baseSensorString));
-                    try
-                    {
-                        var tempSensorLogs = await _restClient.GetJsonAsync<List<SensorMeasureDto>>(baseSensorString);
-                        foreach (var temperatureLog in tempSensorLogs)
-                        {
-                            result.Add(new SensorLog(temperatureLog));
-                        }
-                    } catch { }
-                    break;
-                case SensorType.Humidity:
-                    var humSensorLogs = await _restClient.GetJsonAsync<List<SensorMeasureDto>>(baseSensorString);
-                    foreach (var humidityLog in humSensorLogs)
-                    {
-                        result.Add(new SensorLog(humidityLog));
-                    }
-                    break;
-                case SensorType.Sunlight:
-                    var sunSensorLogs = await _restClient.GetJsonAsync<List<SensorMeasureDto>>(baseSensorString);
-                    foreach (var sunlightLog in sunSensorLogs)
-                    {
-                        result.Add(new SensorLog(sunlightLog));
-                    }
-                    break;
-            }
-
-            return await Task.FromResult(new ObservableCollection<SensorLog>(result));
         }
 
         public async Task<List<Sensor>> GetSensors()
@@ -86,55 +49,31 @@ namespace SmartHome.Services.SensorService
             try
             {
                 temperatureSensors = await _restClient.GetJsonAsync<List<TemperatureSensorBackend>>(baseSensorString + "temperature/states");
-            }
-            catch { }
-            try
-            {
                 humiditySensors = await _restClient.GetJsonAsync<List<HumiditySensorBackend>>(baseSensorString + "humidity/states");
-            }
-            catch { }
-            try
-            {
                 sunlightSensors = await _restClient.GetJsonAsync<List<SunlightSensorBackend>>(baseSensorString + "sunlight/states");
-            }catch { }
-            
-            _isGetSensorsInProgress = false;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                _isGetSensorsInProgress = false;
+            }
 
             var result = new List<Sensor>();
             foreach (var temperatureSensor in temperatureSensors)
             {
-                var sensor = new Sensor(temperatureSensor);
-                sensor.SensorValue = (double)temperatureSensor.value;
-                result.Add(sensor);
+                result.Add(new Sensor(temperatureSensor));
             }
             foreach (var humiditySensor in humiditySensors)
             {
-                var sensor = new Sensor(humiditySensor);
-                sensor.SensorValue = (double)humiditySensor.value;
-                result.Add(sensor);
+                result.Add(new Sensor(humiditySensor));
             }
             foreach (var sunlightSensor in sunlightSensors)
             {
-                var sensor = new Sensor(sunlightSensor);
-                sensor.SensorValue = (double) sunlightSensor.value;
-                result.Add(sensor);
+                result.Add(new Sensor(sunlightSensor));
             }
-
-            //var result = new List<Sensor>
-            //{
-            //    new Sensor()
-            //    {
-            //        Id = "9293",
-            //        SensorType = SensorType.Temperature,
-            //        Status = DeviceStatus.On,
-            //        Name = "Missing Name",
-            //    }
-            //};
-
-            //foreach (var sensor in result)
-            //{
-            //    sensor.Logs = await GetSensorLogs(sensor);
-            //}
 
             return await Task.FromResult(result);
         }

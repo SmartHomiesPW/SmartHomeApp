@@ -37,7 +37,7 @@ namespace SmartHome.Behaviors
         private void OnSensorPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is Sensor
-                && (e.PropertyName == nameof(Sensor.Status) || e.PropertyName == nameof(Sensor.Logs)))
+                && (e.PropertyName == nameof(Sensor.Status) || e.PropertyName == nameof(Sensor.SensorValue)))
             {
                 UpdateLabel(sender as Sensor);
             }

@@ -26,7 +26,7 @@ namespace SmartHome.Models
             {
                 Id = sensor.alarm_Sensor_Id,
                 BoardId = sensor.alarm_Id,
-                Status = DeviceStatus.On,
+                Status = (sensor.is_On == 1) ? DeviceStatus.On : DeviceStatus.Off,
                 Name = sensor.name,
                 MovementDetected = (sensor.movement_Detected == 1),
                 Command = command

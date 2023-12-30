@@ -19,27 +19,12 @@ namespace SmartHome.Models
 
         public DeviceStatus Status { get => _status; set => SetProperty(ref _status, value); }
         public string Name { get => _name; set => SetProperty(ref _name, value); }
-
-        public ObservableCollection<SensorLog> Logs { get; set; }
-
-        public double? SensorValue
-        {
-            //get
-            //{
-            //    if (Logs.Count > 0)
-            //    {
-            //        Logs.OrderByDescending(o => o.Time).ToList();
-            //        return Logs[0].Value;
-            //    }
-
-            //    return null;
-            //}
-            get;
-            set;
-        }
+        public double SensorValue { get; set; }
 
         public Func<object, Task<bool>> Command { get; set; }
 
+
+        // Converting from backend DTOs
         public static Sensor FromSensorBackend(SensorBackend sensor)
         {
             return new Sensor()
@@ -48,6 +33,7 @@ namespace SmartHome.Models
                 BoardId = sensor.system_Id,
                 Status = DeviceStatus.On,
                 Name = sensor.name,
+                SensorValue = (double)sensor.value,
                 SensorType = SensorType.Unknown,
             };
         }
@@ -75,14 +61,6 @@ namespace SmartHome.Models
             appSensor.CopyTo(this);
         }
 
-        public Sensor(SensorLog sensorLog)
-        {
-            Id = sensorLog.SensorId;
-            SensorType = SensorType.Temperature;
-            Name = "Missing Name";
-            Logs = new ObservableCollection<SensorLog> { sensorLog };
-        }
-
         public void CopyTo(Sensor sensor)
         {
             sensor.Id = this.Id;
@@ -91,9 +69,6 @@ namespace SmartHome.Models
             sensor.Status = this.Status;
             sensor.Name = this.Name;
             sensor.Command = this.Command;
-            sensor.Logs = (this.Logs != null)
-                ? new ObservableCollection<SensorLog>(this.Logs)
-                : new ObservableCollection<SensorLog>();
         }
     }
 }
