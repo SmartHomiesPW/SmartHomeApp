@@ -70,7 +70,7 @@ namespace SmartHome.Services.AlarmService
         public async Task<bool> AlarmSensorTurnOff(AlarmSensor alarmSensor)
         {
             var baseLightSwitchString = $"1/board/1/devices/alarm/{alarmSensor.BoardId}/sensors";
-            string body = $"[ {{ \"alarmSensorId\": {alarmSensor.Id}, \"alarmId\": {alarmSensor.BoardId}, \"isOn\": 0, \"movementDetected\": 0 }} ]";
+            string body = $"{{ \"alarmSensorId\": \"{alarmSensor.Id}\", \"alarmId\": \"{alarmSensor.BoardId}\", \"isOn\": 0, \"movementDetected\": 0 }}";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
@@ -93,7 +93,7 @@ namespace SmartHome.Services.AlarmService
         public async Task<bool> AlarmSensorTurnOn(AlarmSensor alarmSensor)
         {
             var baseLightSwitchString = $"1/board/1/devices/alarm/{alarmSensor.BoardId}/sensors";
-            string body = $"[ {{ \"alarmSensorId\": {alarmSensor.Id}, \"alarmId\": {alarmSensor.BoardId}, \"isOn\": 1, \"movementDetected\": 0 }} ]";
+            string body = $"{{ \"alarmSensorId\": \"{alarmSensor.Id}\", \"alarmId\": \"{alarmSensor.BoardId}\", \"isOn\": 1, \"movementDetected\": 0 }}";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
