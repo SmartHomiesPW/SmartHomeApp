@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="SmartHome.Pages.AlarmPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+             xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+             xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+             xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+             xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
+             x:Name="AlarmView"
+             Title="Alarm"
+             x:DataType="pageModels:AlarmPageModel">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="AlarmSensorDataTemplate">
+            <viewCells:AlarmSensorViewCell />
+        </DataTemplate>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView x:Name="AlarmSensors"
+                            ItemTemplate="{StaticResource AlarmSensorDataTemplate}"
+                            ItemsSource="{Binding Devices}"
+                            SelectedItem="{Binding SelectedDevice}"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                            SelectionMode="Single" />
+
+            <Grid BackgroundColor="{StaticResource BarBackgroundColor}"
+                  HeightRequest="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
+                       HorizontalOptions="CenterAndExpand"
+                       Style="{StaticResource LabelPrimary}"
+                       Text="ALL ON"
+                       TextColor="{StaticResource NavigationBarTextColor}"
+                       VerticalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AllAlarmSensorsOnCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Column="1"
+                       HorizontalOptions="CenterAndExpand"
+                       Style="{StaticResource LabelPrimary}"
+                       Text="ALL OFF"
+                       TextColor="{StaticResource NavigationBarTextColor}"
+                       VerticalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AllAlarmSensorsOffCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

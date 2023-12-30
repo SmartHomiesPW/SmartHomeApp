@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHome.Fakes
 {
-    internal class FakeAlarmService : IAlarmService
+    public class FakeAlarmService : IAlarmService
     {
         public List<AlarmSensor> AlarmSensors { get; set; } = new List<AlarmSensor>();
 

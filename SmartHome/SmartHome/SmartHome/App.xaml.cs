@@ -67,6 +67,8 @@ namespace SmartHome
             _mainNavigation.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights", isMainPage: false);
             _mainNavigation.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors", isMainPage: false);
             _mainNavigation.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
+            _mainNavigation.AddPage<AlarmPageModel>("AlarmPageModel", "Alarm");
+
             MainPage = _mainNavigation;
 
             //var devicesPage = FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>();
