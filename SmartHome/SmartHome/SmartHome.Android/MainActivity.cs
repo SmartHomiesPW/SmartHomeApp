@@ -2,6 +2,9 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using SmartHome.Models;
+using System.Drawing;
+using static SmartHomeAlarmNotification;
 
 namespace SmartHome.Droid
 {
@@ -21,6 +24,16 @@ namespace SmartHome.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public static void SendAlarmNotification(AlarmSensor alarmSensor)
+        {
+            var data = new NotificationData()
+            {
+                Text = alarmSensor.Name + "has detected movement",
+                Icon = Resource.Drawable.notification_bg_normal
+            };
+            SmartHomeAlarmNotification.SendAlarmNotification(data, this);
         }
     }
 }

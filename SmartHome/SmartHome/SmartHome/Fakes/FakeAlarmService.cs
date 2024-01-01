@@ -40,7 +40,7 @@ namespace SmartHome.Fakes
                     Status = DeviceStatus.Off,
                     Command = alarmSensorCommand,
                 },
-                                new AlarmSensor()
+                new AlarmSensor()
                 {
                     Id= "83",
                     BoardId = "1",
@@ -48,7 +48,7 @@ namespace SmartHome.Fakes
                     Status = DeviceStatus.Off,
                     Command = alarmSensorCommand,
                 },
-                                                new AlarmSensor()
+                new AlarmSensor()
                 {
                     Id= "43",
                     BoardId = "2",
@@ -60,9 +60,22 @@ namespace SmartHome.Fakes
             };
 
             AlarmSensors = alarmSensorList;
+
+
             return await Task.FromResult(alarmSensorList);
         }
 
+        // This won't work without a Firebase server
+        //private void ManageAlarmNotifications()
+        //{
+        //    foreach (var alarmSensor in AlarmSensors)
+        //    {
+        //        if (alarmSensor.MovementDetected)
+        //        {
+        //            MainActivity.
+        //        }
+        //    }
+        //}
 
         public async Task<bool> AlarmSensorTurnOn(AlarmSensor alarmSensor)
         {
