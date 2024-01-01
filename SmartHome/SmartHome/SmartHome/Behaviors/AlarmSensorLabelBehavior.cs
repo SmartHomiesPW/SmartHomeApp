@@ -1,11 +1,12 @@
-﻿using SmartHome.Models;
+﻿using SmartHome.Converters;
+using SmartHome.Models;
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace SmartHome.Behaviors
 {
-    public class AlarmSensorLabelBehaviour : Behavior<Label>
+    public class AlarmSensorLabelBehavior : Behavior<Label>
     {
         private Label _associatedLabel = null;
 
