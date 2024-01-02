@@ -43,9 +43,9 @@ namespace SmartHome
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();     
             
-            var appState = FreshIOC.Container.Resolve<IAppState>();
-            var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
-            authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
+            //var appState = FreshIOC.Container.Resolve<IAppState>();
+            //var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
+            //authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
 #endif
             var appState = FreshIOC.Container.Resolve<IAppState>();
             var authService = FreshIOC.Container.Resolve<IAuthenticationService>();

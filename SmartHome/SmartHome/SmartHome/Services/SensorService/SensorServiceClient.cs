@@ -25,7 +25,7 @@ namespace SmartHome.Services.SensorService
 
             _restClientOptions = new RestClientOptions(sensorServiceUri)
             {
-                ThrowOnAnyError = true,
+                ThrowOnAnyError = false,
                 MaxTimeout = 1000,
             };
             _restClient = new RestClient(_restClientOptions);
@@ -48,13 +48,16 @@ namespace SmartHome.Services.SensorService
 
             try
             {
-                temperatureSensors = await _restClient.GetJsonAsync<List<TemperatureSensorBackend>>(baseSensorString + "temperature/states");
-                humiditySensors = await _restClient.GetJsonAsync<List<HumiditySensorBackend>>(baseSensorString + "humidity/states");
-                sunlightSensors = await _restClient.GetJsonAsync<List<SunlightSensorBackend>>(baseSensorString + "sunlight/states");
+                var temperatureRestResponse = await _restClient.ExecuteGetAsync<List<TemperatureSensorBackend>>(new RestRequest(baseSensorString + "temperature/states"));
+                temperatureSensors = temperatureRestResponse.Data ?? temperatureSensors;
+                var humidityRestResponse = await _restClient.ExecuteGetAsync<List<HumiditySensorBackend>>(new RestRequest(baseSensorString + "humidity/states"));
+                humiditySensors = humidityRestResponse.Data ?? humiditySensors;
+                var sunlightRestResponse = await _restClient.ExecuteGetAsync<List<SunlightSensorBackend>>(new RestRequest(baseSensorString + "sunlight/states"));
+                sunlightSensors = sunlightRestResponse.Data ?? sunlightSensors;
             }
             catch
             {
-                return null;
+                return new List<Sensor>();
             }
             finally
             {

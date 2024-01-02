@@ -44,9 +44,13 @@ namespace SmartHome.Services.LightSwitchService
             List<LightSwitchBackend> lightSwitchesBackend = new List<LightSwitchBackend>();
             try
             {
-                lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
+                var lightsRestResponse = await _restClient.ExecuteGetAsync<List<LightSwitchBackend>>(new RestRequest(baseLightSwitchString));
+                lightSwitchesBackend = lightsRestResponse.Data ?? lightSwitchesBackend;
             }
-            catch { }
+            catch
+            {
+                return new List<LightSwitch>();
+            }
 
             Func<object, Task<bool>> lightSwitchCommand = new Func<object, Task<bool>>(async (param) =>
             {
@@ -77,7 +81,7 @@ namespace SmartHome.Services.LightSwitchService
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
             {
-                var putResponse = await _restClient.PutAsync(request);
+                var putResponse = await _restClient.ExecutePutAsync(request);
 
                 if (putResponse != null && putResponse.IsSuccessful)
                 {
@@ -101,7 +105,7 @@ namespace SmartHome.Services.LightSwitchService
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
             {
-                var putResponse = await _restClient.PutAsync(request);
+                var putResponse = await _restClient.ExecutePutAsync(request);
 
                 if (putResponse != null && putResponse.IsSuccessful)
                 {
