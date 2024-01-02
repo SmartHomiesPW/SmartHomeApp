@@ -12,6 +12,7 @@
       RowSpacing="0">
     <Grid.Resources>
         <converters:BoardDevicesNumberConverter x:Key="BoardDevicesNumberConverter" />
+        <converters:BoardViewCellDeviceIconsConverter x:Key="BoardDeviceIconsConverter" />
         <!--<behaviors:BoardViewCellDeviceIconsLabelBehavior x:Key="BoardViewCellBehavior" />-->
     </Grid.Resources>
     <Grid.RowDefinitions>
@@ -53,11 +54,8 @@
                 <Label Grid.Row="1"
                        HorizontalOptions="Center"
                        Style="{StaticResource BoardViewCellDeviceIconsLabel}"
-                       VerticalOptions="Start">
-                    <Label.Behaviors>
-                        <behaviors:BoardViewCellDeviceIconsLabelBehavior />
-                    </Label.Behaviors>
-                </Label>
+                       Text="{Binding ., Converter={StaticResource BoardDeviceIconsConverter}}"
+                       VerticalOptions="Start" />
             </Grid>
         </Grid>
     </SwipeView>

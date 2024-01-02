@@ -5,7 +5,6 @@ using SmartHome.Models.BackendModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using static SmartHome.Models.BackendModels.SensorLogsBackend;
 
 namespace SmartHome.Services.SensorService
 {

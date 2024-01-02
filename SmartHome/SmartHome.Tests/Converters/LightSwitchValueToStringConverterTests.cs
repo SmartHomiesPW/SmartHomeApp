@@ -11,12 +11,6 @@ namespace SmartHome.Tests.Converters
     {
         private LightSwitchValueToStringConverter _converter = new LightSwitchValueToStringConverter();
 
-        //[TestInitialize]
-        //public void Init()
-        //{
-        //    _converter = new LightSwitchValueToStringConverter();
-        //}
-
         [TestMethod]
         public void ReturnOnWhenStatusIsOn()
         {
