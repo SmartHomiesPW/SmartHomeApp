@@ -43,15 +43,16 @@ namespace SmartHome.Services.AlarmService
 
             _isGetAlarmSensorsInProgress = true;
 
-            var baseLightSwitchString = $"1/board/1/devices/alarm/1/sensors";
+            var getAlarmSensorString = $"1/board/1/devices/alarm/1/sensors";
             List<AlarmSensorBackend> alarmSensorsBackend = new List<AlarmSensorBackend>();
             try
             {
-                alarmSensorsBackend = await _restClient.GetJsonAsync<List<AlarmSensorBackend>>(baseLightSwitchString);
+                var response = await _restClient.ExecuteGetAsync<List<AlarmSensorBackend>>(new RestRequest(getAlarmSensorString));
+                alarmSensorsBackend = response.Data ?? alarmSensorsBackend;
             }
             catch
             {
-                return null;
+                return new List<AlarmSensor>();
             }
 
             Func<object, Task<bool>> alarmSensorCommand = new Func<object, Task<bool>>(async (param) =>
@@ -82,7 +83,8 @@ namespace SmartHome.Services.AlarmService
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
             {
-                var putResponse = await _restClient.PutAsync(request);
+                var putResponse = await _restClient.ExecutePutAsync(request);
+
                 if (putResponse != null && putResponse.IsSuccessful)
                 {
                     UpdateLocalAlarmSensorState_TurnOff(alarmSensor);
@@ -104,7 +106,7 @@ namespace SmartHome.Services.AlarmService
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
             {
-                var putResponse = await _restClient.PutAsync(request);
+                var putResponse = await _restClient.ExecutePutAsync(request);
 
                 if (putResponse != null && putResponse.IsSuccessful)
                 {
@@ -127,7 +129,7 @@ namespace SmartHome.Services.AlarmService
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
             {
-                var putResponse = await _restClient.PutAsync(request);
+                var putResponse = await _restClient.ExecutePutAsync(request);
 
                 if (putResponse != null && putResponse.IsSuccessful)
                 {
@@ -153,7 +155,7 @@ namespace SmartHome.Services.AlarmService
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
             {
-                var putResponse = await _restClient.PutAsync(request);
+                var putResponse = await _restClient.ExecutePutAsync(request);
 
                 if (putResponse != null && putResponse.IsSuccessful)
                 {
