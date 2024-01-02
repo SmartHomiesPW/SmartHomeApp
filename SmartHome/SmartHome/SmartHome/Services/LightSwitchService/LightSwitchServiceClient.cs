@@ -16,8 +16,9 @@ namespace SmartHome.Services.LightSwitchService
 
         public LightSwitchServiceClient(IAppState appState)
         {
-            // https://localhost:5239/ for local backend connection
-            // need to disable UseHttpsRedirection(); there first
+            // set 'baseUrl' in 'appsettings.json' to
+            // http://10.0.2.2:5239/api/system for local backend connection
+            // need to disable UseHttpsRedirection(); in the local backend instance first to work
 
             var sensorServiceUri = appState.Configuration["endpoints:baseUrl"];
 
@@ -43,11 +44,13 @@ namespace SmartHome.Services.LightSwitchService
             List<LightSwitchBackend> lightSwitchesBackend = new List<LightSwitchBackend>();
             try
             {
-                //var response = await _restClient.GetAsync(new RestRequest(baseLightSwitchString));
-
-                lightSwitchesBackend = await _restClient.GetJsonAsync<List<LightSwitchBackend>>(baseLightSwitchString);
+                var lightsRestResponse = await _restClient.ExecuteGetAsync<List<LightSwitchBackend>>(new RestRequest(baseLightSwitchString));
+                lightSwitchesBackend = lightsRestResponse.Data ?? lightSwitchesBackend;
             }
-            catch { }
+            catch
+            {
+                return new List<LightSwitch>();
+            }
 
             Func<object, Task<bool>> lightSwitchCommand = new Func<object, Task<bool>>(async (param) =>
             {
@@ -73,34 +76,48 @@ namespace SmartHome.Services.LightSwitchService
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": false }} ]";
+            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": 0 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
-            var postResponse = await _restClient.PostAsync(request);
-
-            if (postResponse != null && postResponse.IsSuccessful)
+            try
             {
-                lightSwitch.Status = DeviceStatus.Off;
-            }
+                var putResponse = await _restClient.ExecutePutAsync(request);
 
-            return postResponse.IsSuccessful;
+                if (putResponse != null && putResponse.IsSuccessful)
+                {
+                    lightSwitch.Status = DeviceStatus.Off;
+                }
+
+                return putResponse.IsSuccessful;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task<bool> LightTurnOn(LightSwitch lightSwitch)
         {
             // the '1's should be taken from the user data. Hardcoded for now
             var baseLightSwitchString = "1/board/1/devices/lights/states";
-            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": true }} ]";
+            string body = $"[ {{ \"lightId\": {lightSwitch.Id}, \"isOn\": 1 }} ]";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
-            var postResponse = await _restClient.PostAsync(request);
-
-            if (postResponse != null && postResponse.IsSuccessful)
+            try
             {
-                lightSwitch.Status = DeviceStatus.On;
-            }
+                var putResponse = await _restClient.ExecutePutAsync(request);
 
-            return postResponse.IsSuccessful;
+                if (putResponse != null && putResponse.IsSuccessful)
+                {
+                    lightSwitch.Status = DeviceStatus.On;
+                }
+
+                return putResponse.IsSuccessful;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

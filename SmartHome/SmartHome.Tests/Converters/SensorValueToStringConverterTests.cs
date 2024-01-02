@@ -12,29 +12,14 @@ namespace SmartHome.Tests.Converters
     {
         private SensorValueToStringConverter _converter = new SensorValueToStringConverter();
 
-        //[TestInitialize]
-        //public void Init()
-        //{
-        //    _converter = new SensorValueToStringConverter();
-        //}
-
         [DataTestMethod]
         [DataRow(33, "33 °C")]
         public void ReturnDegreesCelsiusWhenSensorIsTemperature(double value, string result)
         {
-            var sensorLogs = new ObservableCollection<SensorLog>() {
-                                    new SensorLog
-                                    {
-                                        SensorId = "1",
-                                        Value = value,
-                                        Time = DateTime.Now
-                                    },
-                    };
-
             var sensor = new Sensor()
             {
                 SensorType = SensorType.Temperature,
-                Logs = sensorLogs
+                SensorValue = value
             };
 
             string sensorValue = (string)_converter.Convert(sensor, typeof(string), "-", CultureInfo.CurrentCulture);
@@ -45,19 +30,10 @@ namespace SmartHome.Tests.Converters
         [DataRow(70, "70 %")]
         public void ReturnPercentWhenSensorIsHumidity(double value, string result)
         {
-            var sensorLogs = new ObservableCollection<SensorLog>() {
-                                    new SensorLog
-                                    {
-                                        SensorId = "1",
-                                        Value = value,
-                                        Time = DateTime.Now
-                                    },
-                    };
-
             var sensor = new Sensor()
             {
                 SensorType = SensorType.Humidity,
-                Logs = sensorLogs
+                SensorValue = value
             };
 
             string sensorValue = (string)_converter.Convert(sensor, typeof(string), "-", CultureInfo.CurrentCulture);
@@ -69,19 +45,10 @@ namespace SmartHome.Tests.Converters
         [DataRow(23, "23 %")]
         public void ReturnPercentWhenSensorIsLight(double value, string result)
         {
-            var sensorLogs = new ObservableCollection<SensorLog>() {
-                                    new SensorLog
-                                    {
-                                        SensorId = "1",
-                                        Value = value,
-                                        Time = DateTime.Now
-                                    },
-                    };
-
             var sensor = new Sensor()
             {
                 SensorType = SensorType.Sunlight,
-                Logs = sensorLogs
+                SensorValue = value
             };
 
             string sensorValue = (string)_converter.Convert(sensor, typeof(string), "-", CultureInfo.CurrentCulture);

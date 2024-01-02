@@ -7,6 +7,7 @@ using SmartHome.Infrastructure;
 using SmartHome.Infrastructure.AppState;
 using SmartHome.PageModels;
 using SmartHome.Services;
+using SmartHome.Services.AlarmService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System.IO;
@@ -38,13 +39,13 @@ namespace SmartHome
             FreshIOC.Container.Register<IAuthenticationService, FakeAuthenticationService>();
             FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
             FreshIOC.Container.Register<ILightSwitchService, LightSwitchServiceClient>();
-            FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
+            FreshIOC.Container.Register<IAlarmService, AlarmServiceClient>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();     
             
-            var appState = FreshIOC.Container.Resolve<IAppState>();
-            var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
-            authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
+            //var appState = FreshIOC.Container.Resolve<IAppState>();
+            //var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
+            //authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
 #endif
             var appState = FreshIOC.Container.Resolve<IAppState>();
             var authService = FreshIOC.Container.Resolve<IAuthenticationService>();

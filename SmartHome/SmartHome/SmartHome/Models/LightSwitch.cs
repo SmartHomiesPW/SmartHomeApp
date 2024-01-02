@@ -24,10 +24,10 @@ namespace SmartHome.Models
         {
             return new LightSwitch()
             {
-                Id = lightSwitch.lightId.ToString(),
+                Id = lightSwitch.switchable_Light_Id,
                 BoardId = "1",
-                Status = lightSwitch.isOn ? DeviceStatus.On : DeviceStatus.Off,
-                Name = "Missing Name",
+                Status = (lightSwitch.value == 1) ? DeviceStatus.On : DeviceStatus.Off,
+                Name = lightSwitch.name,
                 Command = command
             };
         }

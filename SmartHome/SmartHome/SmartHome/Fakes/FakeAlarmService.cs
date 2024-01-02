@@ -77,7 +77,6 @@ namespace SmartHome.Fakes
 
             return await Task.FromResult(true);
         }
-
         public async Task<bool> AlarmSensorTurnOnAll()
         {
             foreach (AlarmSensor alarmSensor in AlarmSensors)
