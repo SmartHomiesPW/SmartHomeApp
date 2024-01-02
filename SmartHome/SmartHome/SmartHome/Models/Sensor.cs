@@ -69,6 +69,7 @@ namespace SmartHome.Models
             sensor.Status = this.Status;
             sensor.Name = this.Name;
             sensor.Command = this.Command;
+            sensor.SensorValue = this.SensorValue;
         }
     }
 }

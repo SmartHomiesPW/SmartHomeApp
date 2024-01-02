@@ -24,11 +24,11 @@
         <Grid Padding="0,0,20,0"
               BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="{StaticResource ViewCellIconFieldWidth}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="120" />
+                <RowDefinition Height="{StaticResource ViewCellHeight}" />
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0"
@@ -39,10 +39,11 @@
                    VerticalOptions="Center" />
 
             <Grid Grid.Row="0"
-                  Grid.Column="1">
+                  Grid.Column="1"
+                  RowSpacing="{StaticResource ViewCellRowSpacing}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0"
                        HorizontalOptions="Start"

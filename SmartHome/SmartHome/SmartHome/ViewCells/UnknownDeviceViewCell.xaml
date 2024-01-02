@@ -1,15 +1,14 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid x:Class="SmartHome.ViewCells.UnknownDeviceViewCell"
+      xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
-      xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
-      xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
       xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+      xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+      xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+      xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
       x:Name="UnknownDeviceViewCellView"
-      x:Class="SmartHome.ViewCells.UnknownDeviceViewCell"
       x:DataType="models:IBoardDevice">
-    <Grid.Resources>
-    </Grid.Resources>
+    <Grid.Resources />
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
         <RowDefinition Height="1" />
@@ -20,11 +19,11 @@
         <Grid Padding="0,0,20,0"
               BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="{StaticResource ViewCellIconFieldWidth}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="120" />
+                <RowDefinition Height="{StaticResource ViewCellHeight}" />
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0"
@@ -32,11 +31,12 @@
                    Text="X" />
 
             <Grid Grid.Row="0"
-                  Grid.Column="1">
+                  Grid.Column="1"
+                  RowSpacing="{StaticResource ViewCellRowSpacing}">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0"
                        Text="{Binding Name}" />
