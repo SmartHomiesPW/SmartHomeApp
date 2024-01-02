@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace SmartHome.PageModels
 {
-    public class AlarmSensorsPageModel : BasePageModel
+    public class AlarmPageModel : BasePageModel
     {
         private IAlarmService _alarmSensorsService;
         private IBoardDevice _selectedDevice = null;
@@ -33,21 +33,11 @@ namespace SmartHome.PageModels
         }
 
         public ICommand SelectionChangedCommand { get; }
+        public ICommand AllAlarmSensorsOnCommand { get; }
+        public ICommand AllAlarmSensorsOffCommand { get; }
 
-        protected override void ViewIsAppearing(object sender, EventArgs e)
-        {
-            base.ViewIsAppearing(sender, e);
 
-            UpdateDevices();
-        }
-
-        private async void UpdateDevices()
-        {
-            var devices = await _alarmSensorsService.GetAlarmSensors();
-            Devices.ReplaceRange(devices);
-        }
-
-        public AlarmSensorsPageModel(IAlarmService alarmSensorsService)
+        public AlarmPageModel(IAlarmService alarmSensorsService)
         {
             _alarmSensorsService = alarmSensorsService;
 
@@ -60,6 +50,29 @@ namespace SmartHome.PageModels
                 }
                 task.SetResult(true);
             });
+
+            AllAlarmSensorsOnCommand = new FreshAwaitCommand(async (param, task) =>
+            {
+                await _alarmSensorsService.AlarmSensorTurnOnAll();
+                task.SetResult(true);
+            });
+            AllAlarmSensorsOffCommand = new FreshAwaitCommand(async (param, task) =>
+            {
+                await _alarmSensorsService.AlarmSensorTurnOffAll();
+                task.SetResult(true);
+            });
+        }
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+
+            UpdateDevices();
+        }
+
+        private async void UpdateDevices()
+        {
+            var devices = await _alarmSensorsService.GetAlarmSensors();
+            Devices.ReplaceRange(devices);
         }
     }
 }

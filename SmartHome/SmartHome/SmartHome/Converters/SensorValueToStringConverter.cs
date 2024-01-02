@@ -11,21 +11,16 @@ namespace SmartHome.Converters
         {
             Sensor sensor = (Sensor)value;
 
-            if (sensor.SensorValue == null)
-            {
-                return string.Empty;
-            }
-
             switch (sensor.SensorType)
             {
                 case SensorType.Temperature:
-                    return sensor.SensorValue?.ToString() + " °C";
+                    return sensor.SensorValue.ToString() + " °C";
                 case SensorType.Humidity:
-                    return sensor.SensorValue?.ToString() + " %";
+                    return sensor.SensorValue.ToString() + " %";
                 case SensorType.Sunlight:
-                    return sensor.SensorValue?.ToString() + " %";
+                    return sensor.SensorValue.ToString() + " %";
                 default:
-                    return sensor.SensorValue?.ToString();
+                    return sensor.SensorValue.ToString();
             }
         }
 

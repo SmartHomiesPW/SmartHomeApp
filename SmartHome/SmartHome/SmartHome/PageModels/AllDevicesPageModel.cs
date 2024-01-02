@@ -2,7 +2,6 @@
 using MvvmHelpers;
 using SmartHome.Models;
 using SmartHome.Services;
-using SmartHome.Services.AlarmService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System;
@@ -50,17 +49,21 @@ namespace SmartHome.PageModels
 
         private async Task<List<IBoardDevice>> GetDevices()
         {
-            var sensors = await _sensorService.GetSensors();
-            var lightSwitches = await _lightSwitchService.GetLightSwitches();
-            var alarmSensors = await _alarmService.GetAlarmSensors();
-            var cameras = await _cameraService.GetCameras();
-
             List<IBoardDevice> devices = new List<IBoardDevice>();
 
-            devices.AddRange(sensors);
-            devices.AddRange(lightSwitches);
-            devices.AddRange(alarmSensors);
-            devices.AddRange(cameras);
+            devices.AddRange(await _sensorService.GetSensors());
+            devices.AddRange(await _lightSwitchService.GetLightSwitches());
+            devices.AddRange(await _alarmService.GetAlarmSensors());
+            devices.AddRange(await _cameraService.GetCameras());
+
+            //var sensors = await _sensorService.GetSensors();
+            //var lightSwitches = await _lightSwitchService.GetLightSwitches();
+            //var alarmSensors = await _alarmService.GetAlarmSensors();
+            //var cameras = await _cameraService.GetCameras();
+            //devices.AddRange(sensors);
+            //devices.AddRange(lightSwitches);
+            //devices.AddRange(alarmSensors);
+            //devices.AddRange(cameras);
 
             return devices;
         }

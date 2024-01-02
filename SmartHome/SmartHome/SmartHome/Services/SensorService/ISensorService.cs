@@ -8,6 +8,5 @@ namespace SmartHome.Services.SensorService
     public interface ISensorService
     {
         Task<List<Sensor>> GetSensors();
-        Task<ObservableCollection<SensorLog>> GetSensorLogs(Sensor sensor);
     }
 }

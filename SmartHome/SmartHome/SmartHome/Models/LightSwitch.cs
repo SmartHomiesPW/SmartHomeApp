@@ -26,7 +26,7 @@ namespace SmartHome.Models
             {
                 Id = lightSwitch.switchable_Light_Id,
                 BoardId = "1",
-                Status = lightSwitch.value==1 ? DeviceStatus.On : DeviceStatus.Off,
+                Status = (lightSwitch.value == 1) ? DeviceStatus.On : DeviceStatus.Off,
                 Name = lightSwitch.name,
                 Command = command
             };

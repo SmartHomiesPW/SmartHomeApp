@@ -9,60 +9,6 @@ namespace SmartHome.Fakes
 {
     class FakeSensorService : ISensorService
     {
-        public async Task<ObservableCollection<SensorLog>> GetSensorLogs(Sensor sensor)
-        {
-            ObservableCollection<SensorLog> sensorLogs = null;
-
-            switch (sensor.Id)
-            {
-                case "1":
-                    sensorLogs = new ObservableCollection<SensorLog>() {
-                                    new SensorLog
-                                    {
-                                        SensorId = "1",
-                                        Value = 25,
-                                        Time = DateTime.Now
-                                    },
-                                    new SensorLog
-                                    {
-                                        SensorId = "1",
-                                        Value = 25,
-                                        Time = DateTime.Now.AddMinutes(-3)
-                                    }
-                    };
-                    break;
-                case "2":
-                    sensorLogs = new ObservableCollection<SensorLog>() {
-                                    new SensorLog
-                                    {
-                                        SensorId = "2",
-                                        Value = 70,
-                                        Time = DateTime.Now
-                                    },
-                                    new SensorLog
-                                    {
-                                        SensorId = "2",
-                                        Value = 69,
-                                        Time = DateTime.Now.AddMinutes(-3)
-                                    }
-                    };
-                    break;
-                case "3":
-                    sensorLogs = new ObservableCollection<SensorLog>() {
-                                    new SensorLog
-                                    {
-                                        SensorId = "3",
-                                        Value = 99,
-                                        Time = DateTime.Now
-                                    },
-                    };
-                    break;
-                default:
-                    break;
-            };
-
-            return await Task.FromResult(sensorLogs);
-        }
 
         public async Task<List<Sensor>> GetSensors()
         {
@@ -80,6 +26,7 @@ namespace SmartHome.Fakes
                     Status = DeviceStatus.On,
                     Name = "TestTemperatureSensor",
                     Command = sensorCommand,
+                    SensorValue = 25,
                 },
                 new Sensor()
                 {
@@ -89,8 +36,9 @@ namespace SmartHome.Fakes
                     Status = DeviceStatus.On,
                     Name = "TestHumiditySensor",
                     Command = sensorCommand,
+                    SensorValue= 70,
                 },
-                            new Sensor()
+                new Sensor()
                 {
                     Id = "3",
                     BoardId = "1",
@@ -98,12 +46,9 @@ namespace SmartHome.Fakes
                     Status = DeviceStatus.On,
                     Name = "TestSunlightSensor",
                     Command = sensorCommand,
-                },};
-
-            foreach (var sensor in sensorList)
-            {
-                sensor.Logs = await GetSensorLogs(sensor);
-            }
+                    SensorValue = 99,
+                },
+            };
 
             return await Task.FromResult(sensorList);
         }

@@ -1,5 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+
+    <!--  Constants  -->
+    <sys:Int32 x:Key="ViewCellHeight">110</sys:Int32>
+    <sys:Int32 x:Key="ViewCellIconFieldWidth">100</sys:Int32>
+    <sys:Double x:Key="ViewCellRowSpacing">15</sys:Double>
 
     <!--  Colors  -->
     <Color x:Key="Primary">#238927</Color>
@@ -14,6 +20,8 @@
     <Color x:Key="DeviceOnBackgroundColor">AliceBlue</Color>
     <Color x:Key="DeviceOffBackgroundColor">LightGray</Color>
     <Color x:Key="AlarmMovementBackgroundColor">OrangeRed</Color>
+
+    <SolidColorBrush x:Key="UserInitialsCircleBackgroundColor">Silver</SolidColorBrush>
 
     <!--  Element Styles  -->
 
@@ -91,6 +99,13 @@
         <Setter Property="UnselectedTabColor" Value="{StaticResource PrimaryDark}" />
         <Setter Property="BarTextColor" Value="{StaticResource NavigationBarTextColor}" />
         <Setter Property="BackgroundColor" Value="{StaticResource AppBackgroundColor}" />
+    </Style>
+
+    <Style x:Key="UserInitialsCircle"
+           TargetType="Ellipse">
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="Fill" Value="{StaticResource UserInitialsCircleBackgroundColor}" />
     </Style>
 
 </ResourceDictionary>
