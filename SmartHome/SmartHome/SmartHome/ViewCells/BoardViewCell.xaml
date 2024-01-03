@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid x:Class="SmartHome.ViewCells.AlarmSensorViewCell"
+<Grid x:Class="SmartHome.ViewCells.BoardViewCell"
       xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       xmlns:behaviors="clr-namespace:SmartHome.Behaviors;assembly=SmartHome"
@@ -7,12 +7,13 @@
       xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
       xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
       xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
-      x:Name="AlarmSensorViewCellView"
-      x:DataType="models:AlarmSensor"
+      x:Name="BoardViewCellView"
+      x:DataType="models:Board"
       RowSpacing="0">
     <Grid.Resources>
-        <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
-        <behaviors:AlarmSensorLabelBehavior x:Key="AlarmSensorsStatusBehavior" />
+        <converters:BoardDevicesNumberConverter x:Key="BoardDevicesNumberConverter" />
+        <converters:BoardViewCellDeviceIconsConverter x:Key="BoardDeviceIconsConverter" />
+        <!--<behaviors:BoardViewCellDeviceIconsLabelBehavior x:Key="BoardViewCellBehavior" />-->
     </Grid.Resources>
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -24,42 +25,37 @@
         <Grid Padding="0,0,20,0"
               BackgroundColor="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource ViewCellIconFieldWidth}" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource ViewCellHeight}" />
+                <RowDefinition Height="120" />
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0"
                    Grid.Column="0"
                    HorizontalOptions="Center"
-                   Style="{StaticResource LabelDeviceType}"
-                   Text="{Binding ., Converter={StaticResource DeviceTypeToAsciiConverter}}"
+                   Style="{StaticResource SidePanelLabelPrimary}"
+                   Text="{Binding Name}"
                    VerticalOptions="Center" />
 
             <Grid Grid.Row="0"
-                  Grid.Column="1"
-                  RowSpacing="{StaticResource ViewCellRowSpacing}">
+                  Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-
                 <Label Grid.Row="0"
-                       HorizontalOptions="Start"
-                       Style="{StaticResource LabelSecondary}"
-                       Text="{Binding Name}"
-                       VerticalOptions="Center" />
+                       HorizontalOptions="Center"
+                       Style="{StaticResource SidePanelLabelSecondary}"
+                       Text="{Binding ., Converter={StaticResource BoardDevicesNumberConverter}}"
+                       VerticalOptions="End" />
 
                 <Label Grid.Row="1"
-                       HorizontalOptions="End"
-                       Style="{StaticResource LabelPrimary}"
-                       VerticalOptions="Center">
-                    <Label.Behaviors>
-                        <behaviors:AlarmSensorLabelBehavior />
-                    </Label.Behaviors>
-                </Label>
+                       HorizontalOptions="Center"
+                       Style="{StaticResource BoardViewCellDeviceIconsLabel}"
+                       Text="{Binding ., Converter={StaticResource BoardDeviceIconsConverter}}"
+                       VerticalOptions="Start" />
             </Grid>
         </Grid>
     </SwipeView>

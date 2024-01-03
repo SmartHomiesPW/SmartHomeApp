@@ -73,6 +73,15 @@
         <Setter Property="LineBreakMode" Value="TailTruncation" />
     </Style>
 
+    <Style x:Key="BoardViewCellDeviceIconsLabel"
+           TargetType="Label">
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontFamily" Value="Roboto" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="LineBreakMode" Value="CharacterWrap" />
+        <Setter Property="MaxLines" Value="2" />
+    </Style>
+
     <Style ApplyToDerivedTypes="True"
            TargetType="Grid">
         <Setter Property="VerticalOptions" Value="Center" />

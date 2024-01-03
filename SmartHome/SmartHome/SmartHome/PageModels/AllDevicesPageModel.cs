@@ -1,5 +1,6 @@
 ﻿using FreshMvvm;
 using MvvmHelpers;
+using MvvmHelpers.Commands;
 using SmartHome.Models;
 using SmartHome.Services;
 using SmartHome.Services.LightSwitchService;
@@ -38,7 +39,11 @@ namespace SmartHome.PageModels
             }
         }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing { get => _isRefreshing; set { SetProperty(ref _isRefreshing, value); } }
+
         public ICommand SelectionChangedCommand { get; }
+        public ICommand RefreshCommand { get; }
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -70,8 +75,10 @@ namespace SmartHome.PageModels
 
         private async void UpdateDevices()
         {
+            IsRefreshing = true;
             var devices = await GetDevices();
             Devices.ReplaceRange(devices);
+            IsRefreshing = false;
         }
 
         public AllDevicesPageModel(
@@ -94,6 +101,8 @@ namespace SmartHome.PageModels
                 }
                 task.SetResult(true);
             });
+
+            RefreshCommand = new Command(UpdateDevices);
         }
     }
 }

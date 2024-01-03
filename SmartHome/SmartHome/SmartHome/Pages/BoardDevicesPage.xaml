@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage x:Class="SmartHome.Pages.AllDevicesPage"
+<ContentPage x:Class="SmartHome.Pages.BoardDevicesPage"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
@@ -7,9 +7,9 @@
              xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
              xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
              xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
-             x:Name="AllDevicesView"
-             Title="All Devices"
-             x:DataType="pageModels:AllDevicesPageModel">
+             x:Name="BoardDevicesView"
+             Title="{Binding Board.Name}"
+             x:DataType="pageModels:BoardDevicesPageModel">
     <ContentPage.Resources>
         <DataTemplate x:Key="UnknownDeviceDataTemplate">
             <viewCells:UnknownDeviceViewCell />

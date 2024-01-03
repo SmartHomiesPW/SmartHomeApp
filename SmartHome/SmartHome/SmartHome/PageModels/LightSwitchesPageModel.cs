@@ -4,6 +4,7 @@ using SmartHome.Models;
 using SmartHome.Services.LightSwitchService;
 using System;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace SmartHome.PageModels
 {
@@ -30,7 +31,13 @@ namespace SmartHome.PageModels
                 SetProperty(ref _selectedDevice, value);
             }
         }
+
+        private bool _isRefreshing;
+        public bool IsRefreshing { get => _isRefreshing; set { SetProperty(ref _isRefreshing, value); } }
+
         public ICommand SelectionChangedCommand { get; }
+        public ICommand RefreshCommand { get; }
+
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -41,8 +48,10 @@ namespace SmartHome.PageModels
 
         private async void UpdateDevices()
         {
+            IsRefreshing = true;
             var devices = await _lightSwitchService.GetLightSwitches();
             Devices.ReplaceRange(devices);
+            IsRefreshing = false;
         }
 
         public LightSwitchesPageModel(ILightSwitchService lightSwitchService)
@@ -58,6 +67,7 @@ namespace SmartHome.PageModels
                 }
                 task.SetResult(true);
             });
+            RefreshCommand = new Command(UpdateDevices);
         }
     }
 }

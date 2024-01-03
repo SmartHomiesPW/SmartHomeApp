@@ -11,13 +11,9 @@ namespace SmartHome.Infrastructure
     {
         private SideMenuPage _menuPage;
         private Dictionary<string, SideMenuFieldModel> _pages = new Dictionary<string, SideMenuFieldModel>();
-        //public Dictionary<string, SideMenuFieldModel> Pages { get => _pages; set => SetProperty(ref _pageNames, value); }
-
-        //private readonly Dictionary<string, IconModel> _pageIcons = new Dictionary<string, IconModel>();
 
         public CustomFreshMasterDetailNavigationContainer(string navigationServiceName) : base(navigationServiceName)
         {
-            //On<iOS>().SetApplyShadow(true);
             MasterBehavior = MasterBehavior.Popover;
         }
 
@@ -25,7 +21,6 @@ namespace SmartHome.Infrastructure
         {
             _menuPage = (SideMenuPage)FreshPageModelResolver.ResolvePageModel<SideMenuPageModel>();
 
-            //_menuPage.Title = menuPageTitle;
             var _menuPageModel = (SideMenuPageModel)_menuPage.BindingContext;
             NavigationPage navigationPage = new NavigationPage(_menuPage)
             {
