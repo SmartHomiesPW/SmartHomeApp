@@ -17,12 +17,15 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView x:Name="AlarmSensors"
-                            ItemTemplate="{StaticResource AlarmSensorDataTemplate}"
-                            ItemsSource="{Binding Devices}"
-                            SelectedItem="{Binding SelectedDevice}"
-                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                            SelectionMode="Single" />
+            <RefreshView Command="{Binding RefreshCommand}"
+                         IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView x:Name="AlarmSensors"
+                                ItemTemplate="{StaticResource AlarmSensorDataTemplate}"
+                                ItemsSource="{Binding Devices}"
+                                SelectedItem="{Binding SelectedDevice}"
+                                SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                                SelectionMode="Single" />
+            </RefreshView>
 
             <Grid BackgroundColor="{StaticResource BarBackgroundColor}"
                   HeightRequest="100">

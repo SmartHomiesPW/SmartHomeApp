@@ -16,13 +16,14 @@
         </DataTemplate>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <RefreshView Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
             <CollectionView x:Name="AlarmSensors"
                             ItemTemplate="{StaticResource AlarmSensorDataTemplate}"
                             ItemsSource="{Binding Devices}"
                             SelectedItem="{Binding SelectedDevice}"
                             SelectionChangedCommand="{Binding SelectionChangedCommand}"
                             SelectionMode="Single" />
-        </StackLayout>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

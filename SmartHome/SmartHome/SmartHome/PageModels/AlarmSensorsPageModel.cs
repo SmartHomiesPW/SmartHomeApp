@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace SmartHome.PageModels
 {
@@ -32,7 +33,12 @@ namespace SmartHome.PageModels
             }
         }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing { get => _isRefreshing; set { SetProperty(ref _isRefreshing, value); } }
+
         public ICommand SelectionChangedCommand { get; }
+        public ICommand RefreshCommand { get; }
+
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
@@ -43,8 +49,10 @@ namespace SmartHome.PageModels
 
         private async void UpdateDevices()
         {
+            IsRefreshing = true;
             var devices = await _alarmSensorsService.GetAlarmSensors();
             Devices.ReplaceRange(devices);
+            IsRefreshing = false;
         }
 
         public AlarmSensorsPageModel(IAlarmService alarmSensorsService)
@@ -60,6 +68,8 @@ namespace SmartHome.PageModels
                 }
                 task.SetResult(true);
             });
+
+            RefreshCommand = new Command(UpdateDevices);
         }
     }
 }

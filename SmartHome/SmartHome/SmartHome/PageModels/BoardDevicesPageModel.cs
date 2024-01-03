@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace SmartHome.PageModels
 {
@@ -42,7 +43,12 @@ namespace SmartHome.PageModels
 
         public Board Board { get => _board; set => SetProperty(ref _board, value); }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing { get => _isRefreshing; set { SetProperty(ref _isRefreshing, value); } }
+
         public ICommand SelectionChangedCommand { get; }
+        public ICommand RefreshCommand { get; }
+
 
         public override void Init(object initData)
         {
@@ -80,8 +86,10 @@ namespace SmartHome.PageModels
 
         private async void UpdateDevices()
         {
+            IsRefreshing = true;
             var devices = await GetDevices();
             Devices.ReplaceRange(devices);
+            IsRefreshing = false;
         }
 
         public BoardDevicesPageModel(
@@ -104,6 +112,8 @@ namespace SmartHome.PageModels
                 }
                 task.SetResult(true);
             });
+
+            RefreshCommand = new Command(UpdateDevices);
         }
     }
 }

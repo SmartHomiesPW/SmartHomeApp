@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="SmartHome.Pages.AllDevicesPage"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
-    xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
-    xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
-    xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
-    xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
-    x:Name="AllDevicesView"
-    Title="All Devices"
-    x:DataType="pageModels:AllDevicesPageModel">
+<ContentPage x:Class="SmartHome.Pages.AllDevicesPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+             xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+             xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+             xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+             xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
+             x:Name="AllDevicesView"
+             Title="All Devices"
+             x:DataType="pageModels:AllDevicesPageModel">
     <ContentPage.Resources>
         <DataTemplate x:Key="UnknownDeviceDataTemplate">
             <viewCells:UnknownDeviceViewCell />
@@ -27,25 +26,23 @@
         <DataTemplate x:Key="CameraDataTemplate">
             <viewCells:CameraViewCell />
         </DataTemplate>
-        <converters:DeviceTypeDataTemplateSelector
-            x:Key="DeviceTypeDataTemplateSelector"
-            CameraTemplate="{StaticResource CameraDataTemplate}"
-            AlarmSensorTemplate="{StaticResource AlarmSensorDataTemplate}"
-            LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
-            SensorTemplate="{StaticResource SensorDataTemplate}"
-            UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}" />
+        <converters:DeviceTypeDataTemplateSelector x:Key="DeviceTypeDataTemplateSelector"
+                                                   AlarmSensorTemplate="{StaticResource AlarmSensorDataTemplate}"
+                                                   CameraTemplate="{StaticResource CameraDataTemplate}"
+                                                   LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
+                                                   SensorTemplate="{StaticResource SensorDataTemplate}"
+                                                   UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <CollectionView
-                x:Name="Devices"
-                ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}"
-                ItemsSource="{Binding Devices}"
-                SelectedItem="{Binding SelectedDevice}"
-                SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                SelectionMode="Single" />
-        </StackLayout>
-
+        <RefreshView Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView x:Name="Devices"
+                            ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}"
+                            ItemsSource="{Binding Devices}"
+                            SelectedItem="{Binding SelectedDevice}"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                            SelectionMode="Single" />
+        </RefreshView>
     </ContentPage.Content>
 
 </ContentPage>
