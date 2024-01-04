@@ -38,7 +38,7 @@ namespace SmartHome.Services.AuthenticationService
             var postRegister = $"register";
             try
             {
-                string body = $"{{ \"email\": \"{email}\", \"password\": \"{password}\", \"user_Id\":\"2\" }}";
+                string body = $"{{ \"email\": \"{email}\", \"password\": \"{password}\" }}";
                 var request = new RestRequest(postRegister).AddBody(body);
                 var response = await _restClient.ExecutePostAsync<User>(request);
                 return response.Data ?? new User();
