@@ -5,8 +5,8 @@ namespace SmartHome.Services
 {
     public interface IAuthenticationService
     {
-        Task<User> Register(string username, string password, string email, string name = "", string surname = "");
-        Task<User> LogIn(string username, string password);
+        Task<User> Register(string email, string password);
+        Task<User> LogIn(string email, string password);
         Task<bool> LogOut();
     }
 }

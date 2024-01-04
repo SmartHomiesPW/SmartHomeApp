@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="SmartHome.Pages.LoginPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartHome.Converters;assembly=SmartHome"
+             xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
+             xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
+             xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
+             xmlns:viewCells="clr-namespace:SmartHome.ViewCells;assembly=SmartHome"
+             x:Name="LoginView"
+             Title="Log In"
+             x:DataType="pageModels:LoginPageModel">
+    <ContentPage.Content>
+        <Grid Padding="20,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.3*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="1"
+                         VerticalOptions="Start">
+                <Entry Placeholder="E-Mail"
+                       Text="{Binding Email}"
+                       VerticalOptions="CenterAndExpand" />
+                <Entry Placeholder="Password"
+                       Text="{Binding Password}" />
+                <Button Command="{Binding LogInButtonTapped}"
+                        Text="Log In" />
+                <Label HorizontalOptions="Center"
+                       IsVisible="{Binding LoginFailed}"
+                       Text="There has been an error during login. Try again"
+                       TextColor="{StaticResource AlarmMovementBackgroundColor}" />
+            </StackLayout>
+
+            <StackLayout Grid.Row="3"
+                         VerticalOptions="CenterAndExpand">
+                <Label HorizontalOptions="Center"
+                       Text="Don't have an account? Register instead" />
+                <Button Command="{Binding GoToRegistrationButtonTapped}"
+                        Text="Register" />
+            </StackLayout>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

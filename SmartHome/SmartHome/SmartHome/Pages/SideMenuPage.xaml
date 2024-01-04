@@ -11,73 +11,92 @@
              x:DataType="pageModels:SideMenuPageModel">
     <ContentPage.Content>
         <Grid Padding="20,10,20,0"
-              VerticalOptions="StartAndExpand">
+              VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!--  UserData  -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0"
+                  VerticalOptions="Start">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                <Ellipse Grid.Column="0"
-                         HorizontalOptions="Center"
-                         Style="{StaticResource UserInitialsCircle}"
-                         VerticalOptions="Center" />
+                <!--  UserData  -->
+                <Grid Grid.Row="0">
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0"
-                       HorizontalOptions="Center"
-                       Style="{StaticResource SidePanelLabelPrimary}"
-                       Text="{Binding AppState.UserData.Initials}"
-                       VerticalOptions="Center" />
+                    Funky circle for when we'll ever implement name and surname in the User DTO
+                    <Ellipse Grid.Column="0"
+                             HorizontalOptions="Center"
+                             Style="{StaticResource UserInitialsCircle}"
+                             VerticalOptions="Center" />
 
-                <Label Grid.Column="1"
-                       Padding="10,0,0,0"
-                       Style="{StaticResource LabelPrimary}"
-                       Text="{Binding AppState.UserData.Username}"
-                       VerticalOptions="Center" />
+                    <Label Grid.Column="0"
+                           HorizontalOptions="Center"
+                           Style="{StaticResource SidePanelLabelPrimary}"
+                           Text="{Binding AppState.UserData.Initials}"
+                           VerticalOptions="Center" />-->
+
+                    <Label Style="{StaticResource LabelPrimary}"
+                           Text="{Binding AppState.UserData.Email}"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      Padding="0,10,0,10"
+                      VerticalOptions="Center">
+                    <BoxView Style="{StaticResource Separator}" />
+                </Grid>
+
+
+                <StackLayout Grid.Row="2"
+                             BindableLayout.ItemsSource="{Binding PageFields}"
+                             Spacing="5">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="infrastructure:SideMenuFieldModel">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Command, Mode=OneTime}"
+                                                          CommandParameter="{Binding Title}" />
+                                </Grid.GestureRecognizers>
+                                <Label HeightRequest="35"
+                                       HorizontalOptions="StartAndExpand"
+                                       Style="{StaticResource SidePanelLabelPrimary}"
+                                       Text="{Binding DisplayText}"
+                                       VerticalOptions="Center">
+                                    <Label.Triggers>
+                                        <DataTrigger Binding="{Binding IsMainPage, Mode=OneTime}"
+                                                     TargetType="Label"
+                                                     Value="False">
+                                            <Setter Property="Style" Value="{StaticResource SidePanelLabelSecondary}" />
+                                            <Setter Property="HeightRequest" Value="25" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
             </Grid>
 
-            <Grid Grid.Row="1"
-                  Padding="0,10,0,10"
-                  VerticalOptions="Center">
-                <BoxView Style="{StaticResource Separator}" />
-            </Grid>
-
-
-            <StackLayout Grid.Row="2"
-                         BindableLayout.ItemsSource="{Binding PageFields}"
-                         Spacing="5">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="infrastructure:SideMenuFieldModel">
-                        <Grid>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Command, Mode=OneTime}"
-                                                      CommandParameter="{Binding Title}" />
-                            </Grid.GestureRecognizers>
-                            <Label HeightRequest="35"
-                                   HorizontalOptions="StartAndExpand"
-                                   Style="{StaticResource SidePanelLabelPrimary}"
-                                   Text="{Binding DisplayText}"
-                                   VerticalOptions="Center">
-                                <Label.Triggers>
-                                    <DataTrigger Binding="{Binding IsMainPage, Mode=OneTime}"
-                                                 TargetType="Label"
-                                                 Value="False">
-                                        <Setter Property="Style" Value="{StaticResource SidePanelLabelSecondary}" />
-                                        <Setter Property="HeightRequest" Value="25" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                        </Grid>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
+            <Label Grid.Row="2"
+                   Padding="0,0,0,30"
+                   Style="{StaticResource SidePanelLabelPrimary}"
+                   Text="Log Out"
+                   VerticalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
         </Grid>
+
     </ContentPage.Content>
 </ContentPage>
