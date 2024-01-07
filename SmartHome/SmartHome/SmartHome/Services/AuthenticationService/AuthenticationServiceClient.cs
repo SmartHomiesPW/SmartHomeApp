@@ -2,9 +2,7 @@
 using SmartHome.Infrastructure.AppState;
 using SmartHome.Models;
 using SmartHome.Models.BackendModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SmartHome.Services.AuthenticationService
@@ -33,15 +31,24 @@ namespace SmartHome.Services.AuthenticationService
             };
             _restClient = new RestClient(_restClientOptions);
         }
-        public async Task<User> Register(string email, string password)
+        public async Task<User> Register(string email, string password, string firstName = "", string lastName = "")
         {
             var postRegister = $"register";
             try
             {
-                string body = $"{{ \"email\": \"{email}\", \"password\": \"{password}\" }}";
+                string emailAndPasswordText = $"\"email\": \"{email}\", \"password\": \"{password}\"";
+                string firstNameText = firstName?.Length > 0 ? $",\"firstName\": \"{firstName}\"" : "";
+                string lastNameText = lastName?.Length > 0 ? $",\"lastName\": \"{lastName}\"" : "";
+                string body = '{' + emailAndPasswordText + firstNameText + lastNameText + '}';
                 var request = new RestRequest(postRegister).AddBody(body);
-                var response = await _restClient.ExecutePostAsync<User>(request);
-                return response.Data ?? new User();
+                var response = await _restClient.ExecutePostAsync<UserBackend>(request);
+                if (response != null && response.IsSuccessful && response.Data != null)
+                {
+                    var user = new User(response.Data);
+                    _appState.UserData = user;
+                    return user;
+                }
+                return new User();
             }
             catch
             {
@@ -54,11 +61,16 @@ namespace SmartHome.Services.AuthenticationService
             var postLogin = $"login";
             try
             {
-
                 string body = $"{{ \"email\": \"{email}\", \"password\": \"{password}\" }}";
                 var request = new RestRequest(postLogin).AddBody(body);
-                var response = await _restClient.ExecutePostAsync<User>(request);
-                return response.Data ?? new User();
+                var response = await _restClient.ExecutePostAsync<UserBackend>(request);
+                if (response != null && response.IsSuccessful && response.Data != null)
+                {
+                    var user = new User(response.Data);
+                    _appState.UserData = user;
+                    return user;
+                }
+                return new User();
             }
             catch
             {

@@ -23,7 +23,7 @@ namespace SmartHome.Fakes
             _appState.UserData = _user = null;
         }
 
-        public Task<User> Register(string email, string password)
+        public Task<User> Register(string email, string password, string firstName = "", string lastName = "")
         {
             if (email == null || email?.Length == 0)
             {

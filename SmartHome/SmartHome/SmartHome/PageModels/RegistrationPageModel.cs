@@ -2,8 +2,6 @@
 using SmartHome.Models;
 using SmartHome.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace SmartHome.PageModels
@@ -32,6 +30,7 @@ namespace SmartHome.PageModels
                 User user = await _authenticationService.Register(Email, Password);
                 if (user.Email != null)
                 {
+                    await CoreMethods.PopPageModel();
                     ((App)App.Current).SwitchToMainPage();
                 }
                 else
