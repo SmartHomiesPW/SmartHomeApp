@@ -28,12 +28,11 @@
 
                 <!--  UserData  -->
                 <Grid Grid.Row="0">
-                    <!--<Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    Funky circle for when we'll ever implement name and surname in the User DTO
                     <Ellipse Grid.Column="0"
                              HorizontalOptions="Center"
                              Style="{StaticResource UserInitialsCircle}"
@@ -41,11 +40,14 @@
 
                     <Label Grid.Column="0"
                            HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
                            Style="{StaticResource SidePanelLabelPrimary}"
                            Text="{Binding AppState.UserData.Initials}"
-                           VerticalOptions="Center" />-->
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center" />
 
-                    <Label Style="{StaticResource LabelPrimary}"
+                    <Label Grid.Column="1"
+                           Style="{StaticResource LabelPrimary}"
                            Text="{Binding AppState.UserData.Email}"
                            VerticalOptions="Center" />
                 </Grid>

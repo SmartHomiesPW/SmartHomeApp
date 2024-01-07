@@ -12,12 +12,18 @@ namespace SmartHome.PageModels
 
         private string _email;
         private string _password;
+        private string _firstName;
+        private string _lastName;
         private bool _registrationFailed = false;
+        private bool _missingRequiredFields = false;
 
         public string Email { get => _email; set => SetProperty(ref _email, value); }
         public string Password { get => _password; set => SetProperty(ref _password, value); }
+        public string FirstName { get => _firstName; set => SetProperty(ref _firstName, value); }
+        public string LastName { get => _lastName; set => SetProperty(ref _lastName, value); }
 
         public bool RegistrationFailed { get => _registrationFailed; set => SetProperty(ref _registrationFailed, value); }
+        public bool MissingRequiredFields { get => _missingRequiredFields; set => SetProperty(ref _missingRequiredFields, value); }
 
         public ICommand RegisterButtonTapped { get; set; }
 
@@ -27,7 +33,17 @@ namespace SmartHome.PageModels
 
             RegisterButtonTapped = new FreshAwaitCommand(async (obj) =>
             {
-                User user = await _authenticationService.Register(Email, Password);
+                if (string.IsNullOrEmpty(Email)
+                || string.IsNullOrEmpty(Password)
+                || string.IsNullOrEmpty(FirstName) && string.IsNullOrEmpty(LastName))
+                {
+                    MissingRequiredFields = true;
+                    RegistrationFailed = false;
+                    obj.SetResult(true);
+                    return;
+                }
+
+                User user = await _authenticationService.Register(Email, Password, FirstName, LastName);
                 if (user.Email != null)
                 {
                     await CoreMethods.PopPageModel();
@@ -35,6 +51,7 @@ namespace SmartHome.PageModels
                 }
                 else
                 {
+                    MissingRequiredFields = false;
                     RegistrationFailed = true;
                 }
                 obj.SetResult(true);
@@ -46,6 +63,7 @@ namespace SmartHome.PageModels
             base.ViewIsAppearing(sender, e);
 
             RegistrationFailed = false;
+            MissingRequiredFields = false;
         }
     }
 }

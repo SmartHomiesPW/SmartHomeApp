@@ -18,8 +18,8 @@ namespace SmartHome.Models
         {
             get
             {
-                char first = FirstName?.Length > 0 ? FirstName[0] : ' ';
-                char second = LastName?.Length > 0 ? LastName[0] : ' ';
+                char first = !string.IsNullOrEmpty(FirstName) ? FirstName[0] : ' ';
+                char second = !string.IsNullOrEmpty(LastName) ? LastName[0] : ' ';
                 return $"{first}{second}".ToUpper();
             }
         }

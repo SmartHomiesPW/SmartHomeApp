@@ -23,9 +23,18 @@
                    VerticalOptions="CenterAndExpand" />
             <Entry Placeholder="Password"
                    Text="{Binding Password}" />
+            <Entry Placeholder="Name"
+                   Text="{Binding FirstName}" />
+            <Entry Placeholder="Surname"
+                   Text="{Binding LastName}" />
             <Button Command="{Binding RegisterButtonTapped}"
                     Text="Register" />
         </StackLayout>
+        <Label Grid.Row="2"
+               HorizontalOptions="Center"
+               IsVisible="{Binding MissingRequiredFields}"
+               Text="Please fill out the E-mail and Password fields, and at least one of the following: Name, Surname"
+               TextColor="{StaticResource AlarmMovementBackgroundColor}" />
         <Label Grid.Row="2"
                HorizontalOptions="Center"
                IsVisible="{Binding RegistrationFailed}"

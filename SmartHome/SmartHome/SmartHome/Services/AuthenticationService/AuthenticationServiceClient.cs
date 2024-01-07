@@ -37,8 +37,8 @@ namespace SmartHome.Services.AuthenticationService
             try
             {
                 string emailAndPasswordText = $"\"email\": \"{email}\", \"password\": \"{password}\"";
-                string firstNameText = firstName?.Length > 0 ? $",\"firstName\": \"{firstName}\"" : "";
-                string lastNameText = lastName?.Length > 0 ? $",\"lastName\": \"{lastName}\"" : "";
+                string firstNameText = !string.IsNullOrEmpty(firstName) ? $",\"firstName\": \"{firstName}\"" : "";
+                string lastNameText = !string.IsNullOrEmpty(lastName) ? $",\"lastName\": \"{lastName}\"" : "";
                 string body = '{' + emailAndPasswordText + firstNameText + lastNameText + '}';
                 var request = new RestRequest(postRegister).AddBody(body);
                 var response = await _restClient.ExecutePostAsync<UserBackend>(request);
