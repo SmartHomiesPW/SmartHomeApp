@@ -12,12 +12,12 @@
     <Color x:Key="PrimaryDark">#285729</Color>
     <Color x:Key="BarBackgroundColor">#238927</Color>
 
-    <Color x:Key="AppBackgroundColor">AliceBlue</Color>
+    <Color x:Key="AppBackgroundColor">WhiteSmoke</Color>
     <Color x:Key="NavigationBarColor">#238927</Color>
     <Color x:Key="NavigationBarTextColor">White</Color>
     <Color x:Key="NormalTextColor">Black</Color>
 
-    <Color x:Key="DeviceOnBackgroundColor">AliceBlue</Color>
+    <Color x:Key="DeviceOnBackgroundColor">WhiteSmoke</Color>
     <Color x:Key="DeviceOffBackgroundColor">LightGray</Color>
     <Color x:Key="AlarmMovementBackgroundColor">OrangeRed</Color>
 

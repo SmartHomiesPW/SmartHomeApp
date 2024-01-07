@@ -24,7 +24,7 @@ namespace SmartHome.Infrastructure
             var _menuPageModel = (SideMenuPageModel)_menuPage.BindingContext;
             NavigationPage navigationPage = new NavigationPage(_menuPage)
             {
-                Title = _menuPageModel.AppState.UserData.Username,
+                Title = "Menu Page",
             };
             if (!string.IsNullOrEmpty(menuIcon))
             {

@@ -124,7 +124,7 @@ namespace SmartHome.Services.AlarmService
         public async Task<bool> AlarmSensorTurnOnAll()
         {
             var baseLightSwitchString = $"1/board/1/devices/alarm/state";
-            string body = $"{{ \"isActive\": 1 }}";
+            string body = $"{{ \"isActive\": 1, \"Alarm_Id\": \"1\" }}";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
@@ -150,7 +150,7 @@ namespace SmartHome.Services.AlarmService
         public async Task<bool> AlarmSensorTurnOffAll()
         {
             var baseLightSwitchString = $"1/board/1/devices/alarm/state";
-            string body = $"{{ \"isActive\": 0 }}";
+            string body = $"{{ \"isActive\": 0, \"Alarm_Id\": \"1\" }}";
 
             var request = new RestRequest(baseLightSwitchString).AddJsonBody(body);
             try
@@ -161,7 +161,7 @@ namespace SmartHome.Services.AlarmService
                 {
                     foreach (AlarmSensor alarmSensor in AlarmSensors)
                     {
-                        UpdateLocalAlarmSensorState_TurnOn(alarmSensor);
+                        UpdateLocalAlarmSensorState_TurnOff(alarmSensor);
                     }
                 }
 

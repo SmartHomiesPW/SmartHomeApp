@@ -1,4 +1,4 @@
-﻿#define FAKES
+﻿//#define FAKES
 
 using FreshMvvm;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +8,7 @@ using SmartHome.Infrastructure.AppState;
 using SmartHome.PageModels;
 using SmartHome.Services;
 using SmartHome.Services.AlarmService;
+using SmartHome.Services.AuthenticationService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System.IO;
@@ -19,7 +20,7 @@ namespace SmartHome
     public partial class App : Application
     {
         private CustomFreshMasterDetailNavigationContainer _mainNavigation;
-        private FreshNavigationContainer _devicesNavigation;
+        private FreshNavigationContainer _loginNavigation;
 
         public App()
         {
@@ -36,69 +37,84 @@ namespace SmartHome
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
 #else
-            FreshIOC.Container.Register<IAuthenticationService, FakeAuthenticationService>();
+            FreshIOC.Container.Register<IAuthenticationService, AuthenticationServiceClient>();
             FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
             FreshIOC.Container.Register<ILightSwitchService, LightSwitchServiceClient>();
             FreshIOC.Container.Register<IAlarmService, AlarmServiceClient>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
-            FreshIOC.Container.Register<IBoardService, FakeBoardService>();     
-            
+            FreshIOC.Container.Register<IBoardService, FakeBoardService>();
+
             //var appState = FreshIOC.Container.Resolve<IAppState>();
             //var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
             //authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
 #endif
-            var appState = FreshIOC.Container.Resolve<IAppState>();
-            var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
-            authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
+            //var appState = FreshIOC.Container.Resolve<IAppState>();
+            //var authService = FreshIOC.Container.Resolve<IAuthenticationService>();
+            //authService.LogIn("", "").ContinueWith(async (user) => { appState.UserData = await user; });
 
 
-            //_mainNavigation = InitializeMainAppNavigation();
+            MainPage = InitializeLogInAppNavigation();
+            InitializeMainAppNavigation();
             //FreshIOC.Container.Register<IFreshNavigationService>(_mainNavigation, NavigationStacks.MainAppStack);
             //_mainNavigation.AddPage<AllDevicesPageModel>("DevicesPageModel", "");
 
-            var navigationContainer = new CustomFreshMasterDetailNavigationContainer(NavigationStacks.MainAppStack);
-            _mainNavigation = navigationContainer;
-            _mainNavigation.Init(appState.UserData.Username);
+            //var navigationContainer = new CustomFreshMasterDetailNavigationContainer(NavigationStacks.MainAppStack);
+            //_mainNavigation = navigationContainer;
+            //_mainNavigation.Init(appState.UserData.Email);
 
-            //_mainNavigation.Master = FreshPageModelResolver.ResolvePageModel<SideMenuPageModel>();
-            //_mainNavigation.Detail = new NavigationPage(FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>("AllDevicesPageModel"));
-            _mainNavigation.AddPage<AllDevicesPageModel>("AllDevicesPageModel", "All Devices");
-            _mainNavigation.AddPage<SensorsPageModel>("SensorsPageModel", "🌡️ Sensors", isMainPage: false);
-            _mainNavigation.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights", isMainPage: false);
-            _mainNavigation.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors", isMainPage: false);
-            _mainNavigation.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
-            _mainNavigation.AddPage<BoardChoicePageModel>("BoardChoicePageModel", "Boards");
-            _mainNavigation.AddPage<AlarmPageModel>("AlarmPageModel", "Alarm");
+            ////_mainNavigation.Master = FreshPageModelResolver.ResolvePageModel<SideMenuPageModel>();
+            ////_mainNavigation.Detail = new NavigationPage(FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>("AllDevicesPageModel"));
+            //_mainNavigation.AddPage<AllDevicesPageModel>("AllDevicesPageModel", "All Devices");
+            //_mainNavigation.AddPage<SensorsPageModel>("SensorsPageModel", "🌡️ Sensors", isMainPage: false);
+            //_mainNavigation.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights", isMainPage: false);
+            //_mainNavigation.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors", isMainPage: false);
+            //_mainNavigation.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
+            //_mainNavigation.AddPage<BoardChoicePageModel>("BoardChoicePageModel", "Boards");
+            //_mainNavigation.AddPage<AlarmPageModel>("AlarmPageModel", "Alarm");
 
-            MainPage = _mainNavigation;
+            //MainPage = _mainNavigation;
+        }
 
-            //var devicesPage = FreshPageModelResolver.ResolvePageModel<AllDevicesPageModel>();
-            //_devicesNavigation = new FreshNavigationContainer(devicesPage);
+        private FreshNavigationContainer InitializeLogInAppNavigation()
+        {
+            FreshIOC.Container.Unregister<IFreshNavigationService>(NavigationStacks.LogInStack);
 
-            //var tabbedNavigation = new FreshTabbedNavigationContainer();
-            //tabbedNavigation.AddTab<AllDevicesPageModel>("All Devices", null);
-            //tabbedNavigation.AddTab<SensorsPageModel>("Sensors", "🌡💧☀️");
-            //tabbedNavigation.AddTab<LightSwitchesPageModel>("Light Switches", null);
-            //tabbedNavigation.AddTab<AlarmSensorsPageModel>("Alarm Sensors", null);
-            //tabbedNavigation.AddTab<CamerasPageModel>("Cameras", null);
+            var loginPage = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
+            var loginPageStack = new FreshNavigationContainer(loginPage, NavigationStacks.LogInStack);
 
-            ////_devicesNavigation = new FreshNavigationContainer(devicesPage, NavigationStacks.MainAppStack);
-            ////FreshIOC.Container.Unregister<IFreshNavigationService>(NavigationStacks.MainAppStack);
-            ////FreshIOC.Container.Register<IFreshNavigationService>(_devicesNavigation, NavigationStacks.MainAppStack);
-            //MainPage = tabbedNavigation;
+            _loginNavigation = loginPageStack;
+            FreshIOC.Container.Register<IFreshNavigationService>(loginPageStack, NavigationStacks.LogInStack);
 
-            //MainPage = FreshPageModelResolver.ResolvePageModel<DevicesPageModel>();
+            return loginPageStack;
         }
 
         private CustomFreshMasterDetailNavigationContainer InitializeMainAppNavigation()
         {
-            var masterNavigation = new CustomFreshMasterDetailNavigationContainer(NavigationStacks.MainAppStack);
-            masterNavigation.Init("Nigger");
-            return masterNavigation;
+            FreshIOC.Container.Unregister<IFreshNavigationService>(NavigationStacks.MainAppStack);
 
-            //var mainPage = FreshPageModelResolver.ResolvePageModel<DevicesPageModel>(); // will have to be changed when adding login
-            //var mainPageStack = new FreshNavigationContainer(mainPage, NavigationStacks.MainAppStack);
-            //return mainPageStack;
+            var navigationContainer = new CustomFreshMasterDetailNavigationContainer(NavigationStacks.MainAppStack);
+            navigationContainer.Init("Menu");
+            navigationContainer.AddPage<AllDevicesPageModel>("AllDevicesPageModel", "All Devices");
+            navigationContainer.AddPage<SensorsPageModel>("SensorsPageModel", "🌡️ Sensors", isMainPage: false);
+            navigationContainer.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights", isMainPage: false);
+            navigationContainer.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors", isMainPage: false);
+            navigationContainer.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
+            navigationContainer.AddPage<BoardChoicePageModel>("BoardChoicePageModel", "Boards");
+            navigationContainer.AddPage<AlarmPageModel>("AlarmPageModel", "Alarm");
+
+            _mainNavigation = navigationContainer;
+            FreshIOC.Container.Register<IFreshNavigationService>(navigationContainer, NavigationStacks.MainAppStack);
+
+            return navigationContainer;
+        }
+
+        public void SwitchToMainPage()
+        {
+            MainPage = _mainNavigation;
+        }
+        public void SwitchToLoginPage()
+        {
+            MainPage = _loginNavigation;
         }
 
         private void InitializeConfiguration()
