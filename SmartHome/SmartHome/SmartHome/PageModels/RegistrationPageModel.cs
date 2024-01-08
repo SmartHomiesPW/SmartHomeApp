@@ -62,6 +62,11 @@ namespace SmartHome.PageModels
         {
             base.ViewIsAppearing(sender, e);
 
+            Email = string.Empty;
+            Password = string.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+
             RegistrationFailed = false;
             MissingRequiredFields = false;
         }

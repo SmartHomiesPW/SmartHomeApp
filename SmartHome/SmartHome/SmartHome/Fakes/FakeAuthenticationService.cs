@@ -34,6 +34,8 @@ namespace SmartHome.Fakes
             {
                 Id = "1234567890",
                 Email = email,
+                FirstName = firstName,
+                LastName = lastName,
             };
             _appState.UserData = _user;
             return Task.FromResult(_user);
@@ -50,6 +52,8 @@ namespace SmartHome.Fakes
             {
                 Id = "1234567890",
                 Email = "johnsmith@johnsmith.com",
+                FirstName = "John",
+                LastName = "Smith",
             };
             _appState.UserData = _user;
             return Task.FromResult(_user);

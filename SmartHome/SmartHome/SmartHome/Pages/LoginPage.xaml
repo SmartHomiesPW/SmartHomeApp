@@ -23,7 +23,8 @@
                 <Entry Placeholder="E-Mail"
                        Text="{Binding Email}"
                        VerticalOptions="CenterAndExpand" />
-                <Entry Placeholder="Password"
+                <Entry IsPassword="True"
+                       Placeholder="Password"
                        Text="{Binding Password}" />
                 <Button Command="{Binding LogInButtonTapped}"
                         Text="Log In" />

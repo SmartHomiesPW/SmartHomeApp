@@ -2,10 +2,7 @@
 using SmartHome.Models;
 using SmartHome.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace SmartHome.PageModels
 {
@@ -52,6 +49,9 @@ namespace SmartHome.PageModels
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
+
+            Email = string.Empty;
+            Password = string.Empty;
 
             LoginFailed = false;
         }
