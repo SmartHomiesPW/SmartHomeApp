@@ -23,9 +23,9 @@
                    VerticalOptions="CenterAndExpand" />
             <Entry Placeholder="Password"
                    Text="{Binding Password}" />
-            <Entry Placeholder="Name"
+            <Entry Placeholder="First name"
                    Text="{Binding FirstName}" />
-            <Entry Placeholder="Surname"
+            <Entry Placeholder="Last name"
                    Text="{Binding LastName}" />
             <Button Command="{Binding RegisterButtonTapped}"
                     Text="Register" />
