@@ -7,5 +7,6 @@
         LightSwitch,
         AlarmSensor,
         Camera,
+        DoorLock,
     }
 }

@@ -7,6 +7,7 @@ using SmartHome.Infrastructure;
 using SmartHome.Infrastructure.AppState;
 using SmartHome.PageModels;
 using SmartHome.Services;
+using SmartHome.Services.DoorLockService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System.IO;
@@ -34,6 +35,7 @@ namespace SmartHome
             FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
+            FreshIOC.Container.Register<IDoorLockService, DoorLockServiceClient>();
 #else
             FreshIOC.Container.Register<IAuthenticationService, AuthenticationServiceClient>();
             FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
@@ -71,6 +73,7 @@ namespace SmartHome
             navigationContainer.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights", isMainPage: false);
             navigationContainer.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors", isMainPage: false);
             navigationContainer.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
+            navigationContainer.AddPage<DoorLockPageModel>("DoorLockPageModel", "🔒 Door Locks", isMainPage: false);
             navigationContainer.AddPage<BoardChoicePageModel>("BoardChoicePageModel", "Boards");
             navigationContainer.AddPage<AlarmPageModel>("AlarmPageModel", "Alarm");
 
