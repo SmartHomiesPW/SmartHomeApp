@@ -1,4 +1,4 @@
-﻿#define FAKES
+﻿// #define FAKES
 
 using FreshMvvm;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +7,8 @@ using SmartHome.Infrastructure;
 using SmartHome.Infrastructure.AppState;
 using SmartHome.PageModels;
 using SmartHome.Services;
+using SmartHome.Services.AlarmService;
+using SmartHome.Services.AuthenticationService;
 using SmartHome.Services.DoorLockService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
@@ -43,6 +45,7 @@ namespace SmartHome
             FreshIOC.Container.Register<IAlarmService, AlarmServiceClient>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
+            FreshIOC.Container.Register<IDoorLockService, DoorLockServiceClient>();
 #endif
 
             MainPage = InitializeLogInAppNavigation();
