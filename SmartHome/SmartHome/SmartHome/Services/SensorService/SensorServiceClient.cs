@@ -2,6 +2,7 @@
 using SmartHome.Infrastructure.AppState;
 using SmartHome.Models;
 using SmartHome.Models.BackendModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -24,8 +25,9 @@ namespace SmartHome.Services.SensorService
 
             _restClientOptions = new RestClientOptions(sensorServiceUri)
             {
+                RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,
                 ThrowOnAnyError = false,
-                MaxTimeout = 1000,
+                MaxTimeout = 5000,
             };
             _restClient = new RestClient(_restClientOptions);
         }
@@ -63,18 +65,22 @@ namespace SmartHome.Services.SensorService
                 _isGetSensorsInProgress = false;
             }
 
+            Func<object, Task<bool>> sensorCommand = new Func<object, Task<bool>>(async (param) =>
+            {
+                return await Task.FromResult(true);
+            });
             var result = new List<Sensor>();
             foreach (var temperatureSensor in temperatureSensors)
             {
-                result.Add(new Sensor(temperatureSensor));
+                result.Add(new Sensor(temperatureSensor, sensorCommand));
             }
             foreach (var humiditySensor in humiditySensors)
             {
-                result.Add(new Sensor(humiditySensor));
+                result.Add(new Sensor(humiditySensor, sensorCommand));
             }
             foreach (var sunlightSensor in sunlightSensors)
             {
-                result.Add(new Sensor(sunlightSensor));
+                result.Add(new Sensor(sunlightSensor, sensorCommand));
             }
 
             return await Task.FromResult(result);
