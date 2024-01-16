@@ -18,6 +18,7 @@ namespace SmartHome.PageModels
         private ILightSwitchService _lightSwitchService;
         private IAlarmService _alarmService;
         private ICameraService _cameraService;
+        private IDoorLockService _doorLockService;
 
         private IBoardDevice _selectedDevice = null;
         private ObservableRangeCollection<IBoardDevice> _devices = new ObservableRangeCollection<IBoardDevice>();
@@ -59,6 +60,7 @@ namespace SmartHome.PageModels
             devices.AddRange(await _sensorService.GetSensors());
             devices.AddRange(await _lightSwitchService.GetLightSwitches());
             devices.AddRange(await _alarmService.GetAlarmSensors());
+            devices.AddRange(await _doorLockService.GetDoorLocks());
             devices.AddRange(await _cameraService.GetCameras());
 
             //var sensors = await _sensorService.GetSensors();
@@ -85,12 +87,14 @@ namespace SmartHome.PageModels
             ISensorService sensorService,
             ILightSwitchService lightSwitchService,
             IAlarmService alarmService,
-            ICameraService cameraService)
+            ICameraService cameraService,
+            IDoorLockService doorLockService)
         {
             _sensorService = sensorService;
             _lightSwitchService = lightSwitchService;
             _alarmService = alarmService;
             _cameraService = cameraService;
+            _doorLockService = doorLockService;
 
             SelectionChangedCommand = new FreshAwaitCommand(async (param, task) =>
             {
