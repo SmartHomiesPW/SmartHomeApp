@@ -40,24 +40,27 @@ namespace SmartHome.Models
 
         public Sensor() { }
 
-        public Sensor(TemperatureSensorBackend sensor)
+        public Sensor(TemperatureSensorBackend sensor, Func<object, Task<bool>> command)
         {
             var appSensor = Sensor.FromSensorBackend(sensor);
             appSensor.SensorType = SensorType.Temperature;
+            appSensor.Command = command;
             appSensor.CopyTo(this);
         }
 
-        public Sensor(HumiditySensorBackend sensor)
+        public Sensor(HumiditySensorBackend sensor, Func<object, Task<bool>> command)
         {
             var appSensor = Sensor.FromSensorBackend(sensor);
             appSensor.SensorType = SensorType.Humidity;
+            appSensor.Command = command;
             appSensor.CopyTo(this);
         }
 
-        public Sensor(SunlightSensorBackend sensor)
+        public Sensor(SunlightSensorBackend sensor, Func<object, Task<bool>> command)
         {
             var appSensor = Sensor.FromSensorBackend(sensor);
             appSensor.SensorType = SensorType.Sunlight;
+            appSensor.Command = command;
             appSensor.CopyTo(this);
         }
 
