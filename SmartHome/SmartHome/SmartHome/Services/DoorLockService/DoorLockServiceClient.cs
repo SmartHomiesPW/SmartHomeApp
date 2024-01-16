@@ -36,7 +36,7 @@ namespace SmartHome.Services.DoorLockService
         public async Task<bool> DoorLockSetOff(DoorLock doorLock)
         {
             // the '1's should be taken from the user data. Hardcoded for now
-            var baseLightSwitchString = "1/board/1/devices/door-lock/set/0";
+            var baseLightSwitchString = $"1/board/1/devices/door-locks/set/{doorLock.Id}/0";
             try
             {
                 var doorLockRestResponse = await _restClient.ExecutePutAsync(new RestRequest(baseLightSwitchString));
@@ -55,7 +55,7 @@ namespace SmartHome.Services.DoorLockService
         public async Task<bool> DoorLockSetOn(DoorLock doorLock)
         {
             // the '1's should be taken from the user data. Hardcoded for now
-            var baseLightSwitchString = "1/board/1/devices/door-lock/set/1";
+            var baseLightSwitchString = $"1/board/1/devices/door-locks/set/{doorLock.Id}/1";
             try
             {
                 var doorLockRestResponse = await _restClient.ExecutePutAsync(new RestRequest(baseLightSwitchString));
@@ -81,7 +81,7 @@ namespace SmartHome.Services.DoorLockService
             _isGetLightSwitchesInProgress = true;
 
             // the '1's should be taken from the user data. Hardcoded for now
-            var baseLightSwitchString = "1/board/1/devices/door-lock/states";
+            var baseLightSwitchString = "1/board/1/devices/door-locks/states";
             List<DoorLockBackend> doorLocksBackend = new List<DoorLockBackend>();
             try
             {
