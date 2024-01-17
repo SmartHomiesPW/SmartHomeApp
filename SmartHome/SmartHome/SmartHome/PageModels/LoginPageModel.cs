@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
 using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.AuthenticationService;
 using System;
 using System.Windows.Input;
 

@@ -23,12 +23,16 @@
         <DataTemplate x:Key="AlarmSensorDataTemplate">
             <viewCells:AlarmSensorViewCell />
         </DataTemplate>
+        <DataTemplate x:Key="DoorLockDataTemplate">
+            <viewCells:DoorLockViewCell />
+        </DataTemplate>
         <DataTemplate x:Key="CameraDataTemplate">
             <viewCells:CameraViewCell />
         </DataTemplate>
         <converters:DeviceTypeDataTemplateSelector x:Key="DeviceTypeDataTemplateSelector"
                                                    AlarmSensorTemplate="{StaticResource AlarmSensorDataTemplate}"
                                                    CameraTemplate="{StaticResource CameraDataTemplate}"
+                                                   DoorLockTemplate="{StaticResource DoorLockDataTemplate}"
                                                    LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
                                                    SensorTemplate="{StaticResource SensorDataTemplate}"
                                                    UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}" />

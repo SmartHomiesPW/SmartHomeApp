@@ -1,7 +1,7 @@
 ﻿using FreshMvvm;
 using MvvmHelpers;
 using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.CameraService;
 using System;
 using System.Windows.Input;
 

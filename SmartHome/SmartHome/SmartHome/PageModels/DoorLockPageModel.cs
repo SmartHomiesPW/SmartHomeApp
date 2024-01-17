@@ -1,7 +1,7 @@
 ﻿using FreshMvvm;
 using MvvmHelpers;
 using SmartHome.Models;
-using SmartHome.Services.LightSwitchService;
+using SmartHome.Services.DoorLockService;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;

@@ -1,4 +1,4 @@
-﻿// #define FAKES
+﻿#define FAKES
 
 using FreshMvvm;
 using Microsoft.Extensions.Configuration;
@@ -6,9 +6,10 @@ using SmartHome.Fakes;
 using SmartHome.Infrastructure;
 using SmartHome.Infrastructure.AppState;
 using SmartHome.PageModels;
-using SmartHome.Services;
 using SmartHome.Services.AlarmService;
 using SmartHome.Services.AuthenticationService;
+using SmartHome.Services.BoardService;
+using SmartHome.Services.CameraService;
 using SmartHome.Services.DoorLockService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
@@ -35,17 +36,17 @@ namespace SmartHome
             FreshIOC.Container.Register<ISensorService, FakeSensorService>();
             FreshIOC.Container.Register<ILightSwitchService, FakeLightSwitchService>();
             FreshIOC.Container.Register<IAlarmService, FakeAlarmService>();
+            FreshIOC.Container.Register<IDoorLockService, FakeDoorLockService>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
-            FreshIOC.Container.Register<IDoorLockService, DoorLockServiceClient>();
 #else
             FreshIOC.Container.Register<IAuthenticationService, AuthenticationServiceClient>();
             FreshIOC.Container.Register<ISensorService, SensorServiceClient>();
             FreshIOC.Container.Register<ILightSwitchService, LightSwitchServiceClient>();
             FreshIOC.Container.Register<IAlarmService, AlarmServiceClient>();
+            FreshIOC.Container.Register<IDoorLockService, DoorLockServiceClient>();
             FreshIOC.Container.Register<ICameraService, FakeCameraService>();
             FreshIOC.Container.Register<IBoardService, FakeBoardService>();
-            FreshIOC.Container.Register<IDoorLockService, DoorLockServiceClient>();
 #endif
 
             MainPage = InitializeLogInAppNavigation();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SmartHome.Services
+namespace SmartHome.Services.BoardService
 {
     public interface IBoardService
     {

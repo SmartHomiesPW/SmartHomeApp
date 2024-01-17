@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SmartHome.Services.LightSwitchService
+namespace SmartHome.Services.DoorLockService
 {
     public interface IDoorLockService
     {

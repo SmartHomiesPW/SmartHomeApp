@@ -1,8 +1,6 @@
 ﻿using SmartHome.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace SmartHome.Behaviors
@@ -27,12 +25,12 @@ namespace SmartHome.Behaviors
         {
             if (sender is Label label && label.BindingContext is DoorLock doorLock)
             {
-                doorLock.PropertyChanged += OnAlarmSensorPropertyChanged;
+                doorLock.PropertyChanged += OnDoorLockPropertyChanged;
                 UpdateLabel(doorLock);
             }
         }
 
-        private void OnAlarmSensorPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnDoorLockPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is DoorLock && e.PropertyName == nameof(DoorLock.Status))
             {
@@ -47,7 +45,7 @@ namespace SmartHome.Behaviors
 
             if (_associatedLabel == null) return;
 
-            _associatedLabel.Text = doorLock.Status.ToString();
+            _associatedLabel.Text = doorLock.DoorStatus.ToString();
             object backgroundColor = Color.Transparent;
             if (doorLock.Status == DeviceStatus.On)
                 Application.Current.Resources.TryGetValue("DeviceOnBackgroundColor", out backgroundColor);

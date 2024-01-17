@@ -1,7 +1,7 @@
 ﻿using SmartHome.Models;
 using System.Threading.Tasks;
 
-namespace SmartHome.Services
+namespace SmartHome.Services.AuthenticationService
 {
     public interface IAuthenticationService
     {
