@@ -2,7 +2,6 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmartHome.Models;
 using SmartHome.Models.BackendModels;
-using System.Collections.ObjectModel;
 
 namespace SmartHome.Tests.Models
 {
@@ -20,7 +19,12 @@ namespace SmartHome.Tests.Models
                 name = "Temperature sensor"
             };
 
-            var sensor = new Sensor(temperatureSensorBackendDTO);
+            Func<object, Task<bool>> sensorCommand = new Func<object, Task<bool>>(async (param) =>
+            {
+                return await Task.FromResult(true);
+            });
+
+            var sensor = new Sensor(temperatureSensorBackendDTO, sensorCommand);
 
             sensor.SensorValue.Should().Be(1);
             sensor.Name.Should().Be(temperatureSensorBackendDTO.name);
@@ -39,7 +43,12 @@ namespace SmartHome.Tests.Models
                 name = "Humidity sensor"
             };
 
-            var sensor = new Sensor(humiditySensorBackendDTO);
+            Func<object, Task<bool>> sensorCommand = new Func<object, Task<bool>>(async (param) =>
+            {
+                return await Task.FromResult(true);
+            });
+
+            var sensor = new Sensor(humiditySensorBackendDTO, sensorCommand);
 
             sensor.SensorValue.Should().Be(sensorValue);
             sensor.Name.Should().Be(humiditySensorBackendDTO.name);
@@ -58,7 +67,12 @@ namespace SmartHome.Tests.Models
                 name = "Sunlight sensor"
             };
 
-            var sensor = new Sensor(sunlightSensorBackendDTO);
+            Func<object, Task<bool>> sensorCommand = new Func<object, Task<bool>>(async (param) =>
+            {
+                return await Task.FromResult(true);
+            });
+
+            var sensor = new Sensor(sunlightSensorBackendDTO, sensorCommand);
 
             sensor.SensorValue.Should().Be(sensorValue);
             sensor.Name.Should().Be(sunlightSensorBackendDTO.name);
