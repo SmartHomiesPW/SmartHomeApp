@@ -2,10 +2,8 @@
 using MvvmHelpers;
 using SmartHome.Infrastructure;
 using SmartHome.Infrastructure.AppState;
-using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.AuthenticationService;
 using System.Windows.Input;
-using Xamarin.Essentials;
 
 namespace SmartHome.PageModels
 {

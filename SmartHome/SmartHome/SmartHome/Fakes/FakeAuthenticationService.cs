@@ -1,6 +1,6 @@
 ﻿using SmartHome.Infrastructure.AppState;
 using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.AuthenticationService;
 using System.Threading.Tasks;
 
 namespace SmartHome.Fakes

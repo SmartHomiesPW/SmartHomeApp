@@ -2,7 +2,6 @@
 using SmartHome.Models.BackendModels;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace SmartHome.Models
 {
@@ -16,6 +15,7 @@ namespace SmartHome.Models
         public BoardDeviceType DeviceType { get => BoardDeviceType.DoorLock; }
 
         public DeviceStatus Status { get => _status; set => SetProperty(ref _status, value); }
+        public DoorLockStatus DoorStatus { get => (Status == DeviceStatus.On) ? DoorLockStatus.Open : DoorLockStatus.Closed; }
         public string Name { get => _name; set => SetProperty(ref _name, value); }
 
         public Func<object, Task<bool>> Command { get; set; }
@@ -31,5 +31,7 @@ namespace SmartHome.Models
                 Command = command
             };
         }
+
+        public enum DoorLockStatus { Open, Closed }
     }
 }

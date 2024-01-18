@@ -11,7 +11,6 @@
       x:DataType="models:LightSwitch">
     <Grid.Resources>
         <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
-        <converters:LightSwitchValueToStringConverter x:Key="LightSwitchValueToStringConverter" />
         <behaviors:LightSwitchLabelBehavior x:Key="LightSwitchLabelBehavior" />
     </Grid.Resources>
     <Grid.RowDefinitions>

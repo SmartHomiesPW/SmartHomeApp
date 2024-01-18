@@ -1,5 +1,8 @@
 ﻿using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.AlarmService;
+using SmartHome.Services.BoardService;
+using SmartHome.Services.CameraService;
+using SmartHome.Services.DoorLockService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System.Collections.Generic;
@@ -13,6 +16,7 @@ namespace SmartHome.Fakes
         private ISensorService _sensorService { get; set; }
         private ILightSwitchService _lightSwitchService { get; set; }
         private IAlarmService _alarmService { get; set; }
+        private IDoorLockService _doorLockService { get; set; }
         private ICameraService _cameraService { get; set; }
 
         public Dictionary<string, Board> Boards { get; set; } = new Dictionary<string, Board>();
@@ -21,12 +25,14 @@ namespace SmartHome.Fakes
             ISensorService sensorService,
             ILightSwitchService lightSwitchService,
             IAlarmService alarmService,
+            IDoorLockService doorLockService,
             ICameraService cameraService
             )
         {
             _sensorService = sensorService;
             _lightSwitchService = lightSwitchService;
             _alarmService = alarmService;
+            _doorLockService = doorLockService;
             _cameraService = cameraService;
         }
 
@@ -39,6 +45,7 @@ namespace SmartHome.Fakes
             devices.AddRange(await _sensorService.GetSensors());
             devices.AddRange(await _lightSwitchService.GetLightSwitches());
             devices.AddRange(await _alarmService.GetAlarmSensors());
+            devices.AddRange(await _doorLockService.GetDoorLocks());
             devices.AddRange(await _cameraService.GetCameras());
 
             return await Task.FromResult(devices);

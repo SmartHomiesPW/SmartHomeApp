@@ -2,7 +2,9 @@
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.AlarmService;
+using SmartHome.Services.CameraService;
+using SmartHome.Services.DoorLockService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System;
@@ -17,8 +19,8 @@ namespace SmartHome.PageModels
         private ISensorService _sensorService;
         private ILightSwitchService _lightSwitchService;
         private IAlarmService _alarmService;
-        private ICameraService _cameraService;
         private IDoorLockService _doorLockService;
+        private ICameraService _cameraService;
 
         private IBoardDevice _selectedDevice = null;
         private ObservableRangeCollection<IBoardDevice> _devices = new ObservableRangeCollection<IBoardDevice>();
@@ -63,15 +65,6 @@ namespace SmartHome.PageModels
             devices.AddRange(await _doorLockService.GetDoorLocks());
             devices.AddRange(await _cameraService.GetCameras());
 
-            //var sensors = await _sensorService.GetSensors();
-            //var lightSwitches = await _lightSwitchService.GetLightSwitches();
-            //var alarmSensors = await _alarmService.GetAlarmSensors();
-            //var cameras = await _cameraService.GetCameras();
-            //devices.AddRange(sensors);
-            //devices.AddRange(lightSwitches);
-            //devices.AddRange(alarmSensors);
-            //devices.AddRange(cameras);
-
             return devices;
         }
 
@@ -87,14 +80,15 @@ namespace SmartHome.PageModels
             ISensorService sensorService,
             ILightSwitchService lightSwitchService,
             IAlarmService alarmService,
-            ICameraService cameraService,
-            IDoorLockService doorLockService)
+            IDoorLockService doorLockService,
+            ICameraService cameraService)
         {
             _sensorService = sensorService;
             _lightSwitchService = lightSwitchService;
             _alarmService = alarmService;
-            _cameraService = cameraService;
             _doorLockService = doorLockService;
+            _cameraService = cameraService;
+
 
             SelectionChangedCommand = new FreshAwaitCommand(async (param, task) =>
             {

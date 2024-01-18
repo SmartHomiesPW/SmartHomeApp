@@ -1,11 +1,10 @@
 ﻿using RestSharp;
 using SmartHome.Infrastructure.AppState;
-using SmartHome.Models.BackendModels;
 using SmartHome.Models;
+using SmartHome.Models.BackendModels;
 using SmartHome.Services.LightSwitchService;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SmartHome.Services.DoorLockService
