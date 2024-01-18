@@ -1,11 +1,12 @@
 ﻿using System;
+using System.IO;
 using Xamarin.UITest;
 
 namespace SmartHome.UITests
 {
     public class AppInitializer
     {
-        private const string ApkPath = "../../../SmartHome/SmartHome.Android/bin/Debug/com.companyname.smarthome.apk";
+        private const string ApkPath = "../../../SmartHome/SmartHome.Android/bin/Debug/com.smarthome.smarthome.apk";
         //private const string ApkPath = "G:\\Inżynierka\\wip\\SmartHome\\SmartHome\\SmartHome.Android\\bin\\UITests\\com.companyname.smarthome.apk";
 
         private static IApp _app = null;
@@ -31,7 +32,7 @@ namespace SmartHome.UITests
             if (platform == Platform.Android)
             {
                 App = ConfigureApp.Android
-                    .ApkFile(ApkPath)
+                    .InstalledApp("com.smarthome.smarthome")
                     .EnableLocalScreenshots()
                     .StartApp();
             }
