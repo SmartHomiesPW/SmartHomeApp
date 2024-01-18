@@ -20,6 +20,7 @@
     </Grid.RowDefinitions>
     <SwipeView x:Name="ImageSwipeView"
                Grid.Row="0"
+               AutomationId="{Binding Name}"
                BackgroundColor="Transparent">
         <Grid Padding="0,0,20,0"
               BackgroundColor="Transparent">

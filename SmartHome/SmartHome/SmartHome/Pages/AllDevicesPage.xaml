@@ -32,15 +32,16 @@
         <converters:DeviceTypeDataTemplateSelector x:Key="DeviceTypeDataTemplateSelector"
                                                    AlarmSensorTemplate="{StaticResource AlarmSensorDataTemplate}"
                                                    CameraTemplate="{StaticResource CameraDataTemplate}"
+                                                   DoorLockTemplate="{StaticResource DoorLockDataTemplate}"
                                                    LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
                                                    SensorTemplate="{StaticResource SensorDataTemplate}"
-                                                   DoorLockTemplate="{StaticResource DoorLockDataTemplate}"
                                                    UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <RefreshView Command="{Binding RefreshCommand}"
                      IsRefreshing="{Binding IsRefreshing}">
             <CollectionView x:Name="Devices"
+                            AutomationId="AllDevicesCollectionView"
                             ItemTemplate="{StaticResource DeviceTypeDataTemplateSelector}"
                             ItemsSource="{Binding Devices}"
                             SelectedItem="{Binding SelectedDevice}"
