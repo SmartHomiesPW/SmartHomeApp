@@ -31,6 +31,8 @@ namespace SmartHome.Converters
                     return "🚨";
                 case BoardDeviceType.Camera:
                     return "📹";
+                case BoardDeviceType.DoorLock:
+                    return "🚪";
                 default:
                     return "";
             }

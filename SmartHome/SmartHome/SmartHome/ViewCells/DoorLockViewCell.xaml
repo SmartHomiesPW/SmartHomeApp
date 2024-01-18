@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid x:Class="SmartHome.ViewCells.LightSwitchViewCell"
+<Grid x:Class="SmartHome.ViewCells.DoorLockViewCell"
       xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       xmlns:behaviors="clr-namespace:SmartHome.Behaviors;assembly=SmartHome"
@@ -7,11 +7,11 @@
       xmlns:models="clr-namespace:SmartHome.Models;assembly=SmartHome"
       xmlns:pageModels="clr-namespace:SmartHome.PageModels;assembly=SmartHome"
       xmlns:pages="clr-namespace:SmartHome.Pages;assembly=SmartHome"
-      x:Name="LightSwitchViewCellView"
-      x:DataType="models:LightSwitch">
+      x:Name="DoorLockViewCellView"
+      x:DataType="models:DoorLock">
     <Grid.Resources>
         <converters:DeviceTypeToAsciiConverter x:Key="DeviceTypeToAsciiConverter" />
-        <behaviors:LightSwitchLabelBehavior x:Key="LightSwitchLabelBehavior" />
+        <behaviors:DoorLockLabelBehavior x:Key="DoorLockLabelBehavior" />
     </Grid.Resources>
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -55,7 +55,7 @@
                        Style="{StaticResource LabelPrimary}"
                        VerticalOptions="Center">
                     <Label.Behaviors>
-                        <behaviors:LightSwitchLabelBehavior />
+                        <behaviors:DoorLockLabelBehavior />
                     </Label.Behaviors>
                 </Label>
             </Grid>

@@ -28,8 +28,9 @@ namespace SmartHome.Services.AlarmService
 
             _restClientOptions = new RestClientOptions(sensorServiceUri)
             {
+                RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,
                 ThrowOnAnyError = false,
-                MaxTimeout = 1000,
+                MaxTimeout = 5000,
             };
             _restClient = new RestClient(_restClientOptions);
         }

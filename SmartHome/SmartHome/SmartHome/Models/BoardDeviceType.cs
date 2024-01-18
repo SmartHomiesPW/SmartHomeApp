@@ -6,6 +6,7 @@
         Sensor,
         LightSwitch,
         AlarmSensor,
+        DoorLock,
         Camera,
     }
 }

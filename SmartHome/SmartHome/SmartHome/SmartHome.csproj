@@ -34,6 +34,12 @@
     <Compile Update="Pages\AllDevicesPage.xaml.cs">
       <DependentUpon>AllDevicesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\DoorLockPage.xaml.cs">
+      <DependentUpon>DoorLockPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewCells\DoorLockViewCell.xaml.cs">
+      <DependentUpon>DoorLockViewCell.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

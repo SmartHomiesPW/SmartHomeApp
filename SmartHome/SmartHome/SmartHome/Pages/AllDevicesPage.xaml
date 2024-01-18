@@ -23,6 +23,9 @@
         <DataTemplate x:Key="AlarmSensorDataTemplate">
             <viewCells:AlarmSensorViewCell />
         </DataTemplate>
+        <DataTemplate x:Key="DoorLockDataTemplate">
+            <viewCells:DoorLockViewCell />
+        </DataTemplate>
         <DataTemplate x:Key="CameraDataTemplate">
             <viewCells:CameraViewCell />
         </DataTemplate>
@@ -31,6 +34,7 @@
                                                    CameraTemplate="{StaticResource CameraDataTemplate}"
                                                    LightSwitchTemplate="{StaticResource LightSwitchDataTemplate}"
                                                    SensorTemplate="{StaticResource SensorDataTemplate}"
+                                                   DoorLockTemplate="{StaticResource DoorLockDataTemplate}"
                                                    UnknownDeviceTemplate="{StaticResource UnknownDeviceDataTemplate}" />
     </ContentPage.Resources>
     <ContentPage.Content>

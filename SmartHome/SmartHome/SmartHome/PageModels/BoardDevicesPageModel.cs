@@ -1,12 +1,13 @@
 ﻿using FreshMvvm;
 using MvvmHelpers;
 using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.AlarmService;
+using SmartHome.Services.CameraService;
+using SmartHome.Services.DoorLockService;
 using SmartHome.Services.LightSwitchService;
 using SmartHome.Services.SensorService;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -18,6 +19,7 @@ namespace SmartHome.PageModels
         private ISensorService _sensorService;
         private ILightSwitchService _lightSwitchService;
         private IAlarmService _alarmService;
+        private IDoorLockService _doorLockService;
         private ICameraService _cameraService;
         private Board _board;
 
@@ -72,6 +74,7 @@ namespace SmartHome.PageModels
             var sensors = await _sensorService.GetSensors();
             var lightSwitches = await _lightSwitchService.GetLightSwitches();
             var alarmSensors = await _alarmService.GetAlarmSensors();
+            var doorLocks = await _doorLockService.GetDoorLocks();
             var cameras = await _cameraService.GetCameras();
 
             List<IBoardDevice> devices = new List<IBoardDevice>();
@@ -79,6 +82,7 @@ namespace SmartHome.PageModels
             devices.AddRange(sensors);
             devices.AddRange(lightSwitches);
             devices.AddRange(alarmSensors);
+            devices.AddRange(doorLocks);
             devices.AddRange(cameras);
 
             return devices;
@@ -96,11 +100,13 @@ namespace SmartHome.PageModels
             ISensorService sensorService,
             ILightSwitchService lightSwitchService,
             IAlarmService alarmService,
+            IDoorLockService doorLockService,
             ICameraService cameraService)
         {
             _sensorService = sensorService;
             _lightSwitchService = lightSwitchService;
             _alarmService = alarmService;
+            _doorLockService = doorLockService;
             _cameraService = cameraService;
 
             SelectionChangedCommand = new FreshAwaitCommand(async (param, task) =>

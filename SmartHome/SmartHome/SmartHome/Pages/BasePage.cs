@@ -1,18 +1,16 @@
-﻿using Xamarin.Forms;
-
-namespace SmartHome.Pages
+﻿namespace SmartHome.Pages
 {
-    public class BasePage : ContentPage
-    {
-        public BasePage()
-        {
-        }
+    //public class BasePage : ContentPage
+    //{
+    //    public BasePage()
+    //    {
+    //    }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
+    //    protected override void OnAppearing()
+    //    {
+    //        base.OnAppearing();
 
-            var basePageModel = this.BindingContext as FreshMvvm.FreshBasePageModel;
-        }
-    }
+    //        var basePageModel = this.BindingContext as FreshMvvm.FreshBasePageModel;
+    //    }
+    //}
 }

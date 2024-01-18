@@ -1,12 +1,9 @@
 ﻿using FreshMvvm;
 using MvvmHelpers;
 using SmartHome.Models;
-using SmartHome.Services;
+using SmartHome.Services.BoardService;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace SmartHome.PageModels
 {
