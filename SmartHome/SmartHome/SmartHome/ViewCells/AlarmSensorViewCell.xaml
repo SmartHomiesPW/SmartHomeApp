@@ -54,6 +54,7 @@
                        VerticalOptions="Center" />
 
                 <Label Grid.Row="1"
+                       AutomationId="{Binding Name, StringFormat='{0}_Status'}"
                        HorizontalOptions="End"
                        Style="{StaticResource LabelPrimary}"
                        VerticalOptions="Center">
