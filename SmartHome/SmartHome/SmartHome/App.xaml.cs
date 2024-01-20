@@ -77,7 +77,7 @@ namespace SmartHome
             navigationContainer.AddPage<LightSwitchesPageModel>("LightsPageModel", "💡 Lights", isMainPage: false);
             navigationContainer.AddPage<AlarmSensorsPageModel>("AlarmSensorsPageModel", "🚨 Alarm Sensors", isMainPage: false);
             navigationContainer.AddPage<DoorLockPageModel>("DoorLockPageModel", "🔒 Door Locks", isMainPage: false);
-            navigationContainer.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
+            //navigationContainer.AddPage<CamerasPageModel>("CamerasPageModel", "📹 Cameras", isMainPage: false);
             navigationContainer.AddPage<BoardChoicePageModel>("BoardChoicePageModel", "Boards");
             navigationContainer.AddPage<AlarmPageModel>("AlarmPageModel", "Alarm");
 

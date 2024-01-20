@@ -10,28 +10,30 @@ namespace SmartHome.Fakes
     {
         public async Task<List<Camera>> GetCameras()
         {
-            Func<object, Task<bool>> cameraCommand = new Func<object, Task<bool>>(async (param) =>
-            {
-                return await Task.FromResult(true);
-            });
+            //Func<object, Task<bool>> cameraCommand = new Func<object, Task<bool>>(async (param) =>
+            //{
+            //    return await Task.FromResult(true);
+            //});
 
-            List<Camera> cameraList = new List<Camera> {
-                new Camera()
-                {
-                    Id = "9231",
-                    BoardId = "1",
-                    Status = DeviceStatus.On,
-                    Name = "TestMainHallCamera",
-                    Command = cameraCommand,
-                },
-                new Camera()
-                {
-                    Id = "32882",
-                    BoardId = "1",
-                    Status = DeviceStatus.Off,
-                    Name = "TestDoorCamera",
-                    Command = cameraCommand,
-                },};
+            //List<Camera> cameraList = new List<Camera> {
+            //    new Camera()
+            //    {
+            //        Id = "9231",
+            //        BoardId = "1",
+            //        Status = DeviceStatus.On,
+            //        Name = "TestMainHallCamera",
+            //        Command = cameraCommand,
+            //    },
+            //    new Camera()
+            //    {
+            //        Id = "32882",
+            //        BoardId = "1",
+            //        Status = DeviceStatus.Off,
+            //        Name = "TestDoorCamera",
+            //        Command = cameraCommand,
+            //    },};
+
+            List<Camera> cameraList = new List<Camera>();
 
             return await Task.FromResult(cameraList);
         }
