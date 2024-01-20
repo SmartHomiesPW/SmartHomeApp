@@ -8,8 +8,6 @@
     <IsPackable>false</IsPackable>
 
     <PlatformTarget>x64</PlatformTarget>
-
-    <Configurations>Debug;Release;UITests</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

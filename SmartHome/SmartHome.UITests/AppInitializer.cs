@@ -5,6 +5,9 @@ namespace SmartHome.UITests
 {
     public class AppInitializer
     {
+        // UI tests require Android Development Kit and Java Development Kit
+        // (you will be prompted to install them by Visual Studio, in case you miss them)
+
         // To correctly launch UI tests, you need to first define (uncomment) the FAKES
         // variable in App.xaml.cs. Next step is open the emulator and build and run the app
         // with the Release config. Don't close the emulator.
