@@ -9,7 +9,6 @@ namespace SmartHome.UITests
         {
             app.WaitForElement(marked, timeout: new TimeSpan(0, 2, 0));
             app.EnterText(marked, text);
-            //app.Screenshot("EnterText");
             app.PressEnter();
         }
 

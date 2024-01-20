@@ -17,6 +17,7 @@ namespace SmartHome.UITests
         [SetUp]
         public virtual void BeforeEachTest()
         {
+            // Logs into the app through the fake auth service to show the main screen
             AppInitializer.StartApp(Platform.Android);
             AppUITestExtentions.EnterText(App, "EmailEntry", "K");
             App.Tap(x => x.Marked("LoginButton"));

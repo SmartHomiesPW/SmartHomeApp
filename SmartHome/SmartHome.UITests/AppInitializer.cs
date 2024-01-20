@@ -1,13 +1,14 @@
 ﻿using System;
-using System.IO;
 using Xamarin.UITest;
 
 namespace SmartHome.UITests
 {
     public class AppInitializer
     {
-        private const string ApkPath = "../../../SmartHome/SmartHome.Android/bin/Debug/com.smarthome.smarthome.apk";
-        //private const string ApkPath = "G:\\Inżynierka\\wip\\SmartHome\\SmartHome\\SmartHome.Android\\bin\\UITests\\com.companyname.smarthome.apk";
+        // To correctly launch UI tests, you need to first define (uncomment) the FAKES
+        // variable in App.xaml.cs. Next step is open the emulator and build and run the app
+        // with the Release config. Don't close the emulator.
+        // Then you can launch the UI tests safely.
 
         private static IApp _app = null;
         private static Platform? _platform;

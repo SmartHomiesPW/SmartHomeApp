@@ -52,11 +52,12 @@
     <PackageReference Include="Xamarin.UITest" Version="3.2.9" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="AppUITestExtentions.cs" />
     <Compile Include="BaseTestFixture.cs" />
-    <Compile Include="Pages\AllDevicesPage.cs" />
     <Compile Include="Tests\AllDevicesPageTests.cs" />
     <Compile Include="AppInitializer.cs" />
   </ItemGroup>
