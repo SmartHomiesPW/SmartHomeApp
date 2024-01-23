@@ -1,4 +1,4 @@
-﻿#define FAKES
+﻿// #define FAKES
 
 using FreshMvvm;
 using Microsoft.Extensions.Configuration;
