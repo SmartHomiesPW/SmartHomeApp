@@ -31,6 +31,12 @@ namespace SmartHome
             FreshIOC.Container.Register<IAppState, AppState>().AsSingleton();
             InitializeConfiguration();
 
+
+            // Register services for dependency injection
+            // Choose which services to use. If FAKES is defined, mock services
+            // mock services will be used. Otherwise, services connecting
+            // to cloud (or whatever is specified in 'appsettings.json')
+            // will be used
 #if FAKES
             FreshIOC.Container.Register<IAuthenticationService, FakeAuthenticationService>();
             FreshIOC.Container.Register<ISensorService, FakeSensorService>();
@@ -66,6 +72,10 @@ namespace SmartHome
             return loginPageStack;
         }
 
+
+        /// <summary>
+        /// Initializes and returns the main application stack with its side panel.        
+        /// </summary>
         private CustomFreshMasterDetailNavigationContainer InitializeMainAppNavigation()
         {
             FreshIOC.Container.Unregister<IFreshNavigationService>(NavigationStacks.MainAppStack);
@@ -87,10 +97,17 @@ namespace SmartHome
             return navigationContainer;
         }
 
+        /// <summary>
+        /// Switches the navigation stack to the MainAppStack      
+        /// </summary>
         public void SwitchToMainPage()
         {
             MainPage = _mainNavigation;
         }
+
+        /// <summary>
+        /// Switches the navigation stack to the LoginStack      
+        /// </summary>
         public void SwitchToLoginPage()
         {
             MainPage = _loginNavigation;

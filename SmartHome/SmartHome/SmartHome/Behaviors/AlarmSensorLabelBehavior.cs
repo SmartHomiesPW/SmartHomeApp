@@ -1,5 +1,4 @@
-﻿using SmartHome.Converters;
-using SmartHome.Models;
+﻿using SmartHome.Models;
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
@@ -41,7 +40,7 @@ namespace SmartHome.Behaviors
 
         private void UpdateLabel(AlarmSensor alarmSensor)
         {
-            // (Grid)_associatedLabel.Parent.Parent is hardcoded to work specifically on AlarmSensorViewCell
+            // (Grid)_associatedLabel.Parent.Parent is hardcoded to work specifically on the viewcell
             // Might need to be redone in the future, if need arises
 
             if (_associatedLabel == null) return;

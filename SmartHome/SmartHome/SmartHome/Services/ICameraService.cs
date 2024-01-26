@@ -7,6 +7,9 @@ namespace SmartHome.Services.CameraService
 {
     public interface ICameraService
     {
+        // No counterpart on the backend and no real implementation in the app.
+        // Left for future reference
+
         Task<List<Camera>> GetCameras();
 
         Task<bool> CameraTurnOn(Camera camera);

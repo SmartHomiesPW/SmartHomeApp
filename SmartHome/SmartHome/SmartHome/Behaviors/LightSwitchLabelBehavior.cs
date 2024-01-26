@@ -1,8 +1,6 @@
 ﻿using SmartHome.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace SmartHome.Behaviors
@@ -42,7 +40,7 @@ namespace SmartHome.Behaviors
 
         private void UpdateLabel(LightSwitch lightSwitch)
         {
-            // (Grid)_associatedLabel.Parent.Parent is hardcoded to work specifically on AlarmSensorViewCell
+            // (Grid)_associatedLabel.Parent.Parent is hardcoded to work specifically on the viewcell
             // Might need to be redone in the future, if need arises
 
             if (_associatedLabel == null) return;
