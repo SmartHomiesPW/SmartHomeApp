@@ -19,6 +19,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0"
+                  AutomationId="SidePanelUserData"
                   VerticalOptions="Start">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />

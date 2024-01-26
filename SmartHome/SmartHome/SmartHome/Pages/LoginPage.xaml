@@ -20,13 +20,15 @@
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="1"
                          VerticalOptions="Start">
-                <Entry Placeholder="E-Mail"
+                <Entry AutomationId="EmailEntry"
+                       Placeholder="E-Mail"
                        Text="{Binding Email}"
                        VerticalOptions="CenterAndExpand" />
                 <Entry IsPassword="True"
                        Placeholder="Password"
                        Text="{Binding Password}" />
-                <Button Command="{Binding LogInButtonTapped}"
+                <Button AutomationId="LoginButton"
+                        Command="{Binding LogInButtonTapped}"
                         Text="Log In" />
                 <Label HorizontalOptions="Center"
                        IsVisible="{Binding LoginFailed}"

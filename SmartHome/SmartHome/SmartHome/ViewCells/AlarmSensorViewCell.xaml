@@ -20,6 +20,7 @@
     </Grid.RowDefinitions>
     <SwipeView x:Name="ImageSwipeView"
                Grid.Row="0"
+               AutomationId="{Binding Name}"
                BackgroundColor="Transparent">
         <Grid Padding="0,0,20,0"
               BackgroundColor="Transparent">
@@ -53,6 +54,7 @@
                        VerticalOptions="Center" />
 
                 <Label Grid.Row="1"
+                       AutomationId="{Binding Name, StringFormat='{0}_Status'}"
                        HorizontalOptions="End"
                        Style="{StaticResource LabelPrimary}"
                        VerticalOptions="Center">

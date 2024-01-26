@@ -2,7 +2,7 @@
 using SmartHome.Services.SensorService;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartHome.Fakes
@@ -26,7 +26,7 @@ namespace SmartHome.Fakes
                     Status = DeviceStatus.On,
                     Name = "TestTemperatureSensor",
                     Command = sensorCommand,
-                    SensorValue = 25,
+                    SensorValue = 25.392013,
                 },
                 new Sensor()
                 {
@@ -49,6 +49,8 @@ namespace SmartHome.Fakes
                     SensorValue = 99,
                 },
             };
+
+            sensorList = sensorList.OrderBy(x => x.SensorType).ToList();
 
             return await Task.FromResult(sensorList);
         }

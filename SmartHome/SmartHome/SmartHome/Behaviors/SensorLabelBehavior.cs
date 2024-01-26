@@ -45,7 +45,7 @@ namespace SmartHome.Behaviors
 
         private void UpdateLabel(Sensor sensor)
         {
-            // (Grid)_associatedLabel.Parent.Parent is hardcoded to work specifically on AlarmSensorViewCell
+            // (Grid)_associatedLabel.Parent.Parent is hardcoded to work specifically on the viewcell
             // Might need to be redone in the future, if need arises
 
             if (_associatedLabel == null) return;
