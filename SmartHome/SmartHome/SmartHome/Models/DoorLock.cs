@@ -15,7 +15,7 @@ namespace SmartHome.Models
         public BoardDeviceType DeviceType { get => BoardDeviceType.DoorLock; }
 
         public DeviceStatus Status { get => _status; set => SetProperty(ref _status, value); }
-        public DoorLockStatus DoorStatus { get => (Status == DeviceStatus.On) ? DoorLockStatus.Open : DoorLockStatus.Closed; }
+        public DoorLockStatus DoorStatus { get => (Status == DeviceStatus.On) ? DoorLockStatus.Locked : DoorLockStatus.Unlocked; }
         public string Name { get => _name; set => SetProperty(ref _name, value); }
 
         public Func<object, Task<bool>> Command { get; set; }
@@ -32,6 +32,6 @@ namespace SmartHome.Models
             };
         }
 
-        public enum DoorLockStatus { Open, Closed }
+        public enum DoorLockStatus { Unlocked, Locked }
     }
 }
